@@ -1,5 +1,5 @@
 {
-  "name": "potonow-admin",
+  "name": "@tusss-over-engineering/storage-dashboard",
   "module": "src/page.tsx",
   "type": "module",
   "scripts": {
