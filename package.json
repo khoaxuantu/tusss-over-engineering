@@ -1,8 +1,0 @@
-{
-  "name": "tusss-backend-playground",
-  "private": true,
-  "workspaces": [
-    "nest-playground/*",
-    "admin-panel/*"
-  ]
-}
