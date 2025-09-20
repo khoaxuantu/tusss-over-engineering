@@ -1,0 +1,14 @@
+model Admin {
+  id       Int    @id @default(autoincrement())
+  name     String
+  password String
+  roles    Role[]
+
+  @@map("admins")
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+  VIEWER
+}

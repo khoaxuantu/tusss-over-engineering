@@ -1,0 +1,11 @@
+import { CommonConfig } from "./types";
+
+export const defaultConfig: CommonConfig = {
+  db: {
+    name: process.env.DB_NAME ?? "tusss",
+    host: process.env.DB_HOST ?? "localhost",
+    user: process.env.DB_USER ?? "postgres",
+    password: process.env.DB_PWD ?? "postgres",
+    port: +(process.env.DB_PORT || "5432"),
+  },
+};
