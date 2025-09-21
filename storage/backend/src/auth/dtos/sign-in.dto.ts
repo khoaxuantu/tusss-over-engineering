@@ -1,4 +1,4 @@
-import { UserJwtPayload } from "@/shared/tokens/dtos/jwt.dto";
+import { UserIdentifier } from "@/shared/tokens/dtos/jwt.dto";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, IsNotEmpty, IsString } from "class-validator";
 
@@ -15,8 +15,8 @@ export class SignInRequest {
 }
 
 export class SignInResponse {
-  @ApiProperty({ type: UserJwtPayload })
-  session: UserJwtPayload = new UserJwtPayload();
+  @ApiProperty({ type: UserIdentifier })
+  session: UserIdentifier = new UserIdentifier();
 
   @ApiProperty()
   access_token: string = "";

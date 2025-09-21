@@ -1,4 +1,4 @@
-import { UserJwtPayload } from "@/shared/tokens/dtos/jwt.dto";
+import { UserIdentifier } from "@/shared/tokens/dtos/jwt.dto";
 import { TokenService } from "@/shared/tokens/services/token.service";
 import { UserRepository } from "@/users/repositories/user.repository";
 import { User } from "@/users/schemas/user.schema";
@@ -22,7 +22,7 @@ export class AuthService {
   }
 
   sign(user: User) {
-    const payload = UserJwtPayload.fromUser(user);
+    const payload = UserIdentifier.fromUser(user);
     const tokens = this.tokenService.jwt.signUser(payload);
 
     return { payload, tokens };

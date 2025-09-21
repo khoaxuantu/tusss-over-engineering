@@ -1,7 +1,7 @@
 import { TusssConfigService } from "@/configs/config.service";
 import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { UserJwtPayload } from "../dtos/jwt.dto";
+import { UserIdentifier } from "../dtos/jwt.dto";
 
 @Injectable()
 export class TusssJwtService {
@@ -10,8 +10,8 @@ export class TusssJwtService {
     private config: TusssConfigService,
   ) {}
 
-  signUser(instance: UserJwtPayload) {
-    const payload = UserJwtPayload.toPlain(instance);
+  signUser(instance: UserIdentifier) {
+    const payload = UserIdentifier.toPlain(instance);
     const secret = this.config.getOrThrow("auth.secret.default");
     const accessToken = this.jwt.sign(payload, {
       secret,

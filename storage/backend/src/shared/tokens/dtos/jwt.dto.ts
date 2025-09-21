@@ -4,18 +4,23 @@ import { UserExternalEnum } from "@/users/constants";
 import { User } from "@/users/schemas/user.schema";
 import { ApiProperty } from "@nestjs/swagger";
 import { instanceToPlain, plainToInstance } from "class-transformer";
+import { IsArray, IsNotEmpty, MinLength } from "class-validator";
 
-export class UserJwtPayload {
+export class UserIdentifier {
   @ApiProperty()
+  @IsNotEmpty()
   id: number = 0;
 
   @ApiProperty()
+  @IsNotEmpty()
   name: string = "";
 
   @ApiProperty({ enum: enumToArray(Role), enumName: UserExternalEnum.roles })
+  @IsArray()
+  @MinLength(1)
   roles: Role[] = [];
 
-  constructor(data?: UserJwtPayload) {
+  constructor(data?: UserIdentifier) {
     if (data) {
       this.id = data.id;
       this.name = data.name;
@@ -23,19 +28,19 @@ export class UserJwtPayload {
     }
   }
 
-  static create(data: Partial<UserJwtPayload> = {}) {
-    return plainToInstance(UserJwtPayload, data, { exposeDefaultValues: true });
+  static create(data: Partial<UserIdentifier> = {}) {
+    return plainToInstance(UserIdentifier, data, { exposeDefaultValues: true });
   }
 
   static fromUser(user: User) {
-    return new UserJwtPayload({
+    return new UserIdentifier({
       id: user.id,
       name: user.name,
       roles: user.roles,
     });
   }
 
-  static toPlain(payload: UserJwtPayload) {
-    return instanceToPlain(payload) as UserJwtPayload;
+  static toPlain(payload: UserIdentifier) {
+    return instanceToPlain(payload) as UserIdentifier;
   }
 }

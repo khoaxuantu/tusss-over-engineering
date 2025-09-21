@@ -1,3 +1,4 @@
+import { UserIdentifier } from "@/shared/tokens/dtos/jwt.dto";
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";
 import { Strategy } from "passport-local";
@@ -12,6 +13,6 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   async validate(username: string, password: string) {
     const admin = await this.auth.login(username, password);
     if (!admin) throw new UnauthorizedException();
-    return admin;
+    return UserIdentifier.fromUser(admin);
   }
 }
