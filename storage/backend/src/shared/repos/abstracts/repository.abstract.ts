@@ -38,17 +38,17 @@ export abstract class WriteRepository<T> {
   }
 
   async update(id: number, query: UpdateQuery): Promise<boolean> {
-    const res = await query.where("id", "is", id).executeTakeFirst();
+    const res = await query.where("id", "=", id).executeTakeFirst();
     return res.numUpdatedRows > 0;
   }
 
   async updateAndReturn(id: number, query: UpdateQuery): Promise<T | undefined> {
-    const res = await query.where("id", "is", id).returningAll().executeTakeFirst();
+    const res = await query.where("id", "=", id).returningAll().executeTakeFirst();
     return res as T | undefined;
   }
 
   async delete(id: number) {
-    const res = await this.deleteQuery.where("id", "is", id).executeTakeFirst();
+    const res = await this.deleteQuery.where("id", "=", id).executeTakeFirst();
     return res;
   }
 
@@ -64,7 +64,9 @@ export abstract class ReadRepository<T> {
   abstract get selectQuery(): SelectQuery;
 
   async findById(id: number): Promise<T | undefined> {
-    const res = (await this.selectQuery.where("id", "is", id).executeTakeFirst()) as T | undefined;
+    const res = (await this.selectQuery.where("id", "=", id).selectAll().executeTakeFirst()) as
+      | T
+      | undefined;
     return res;
   }
 }

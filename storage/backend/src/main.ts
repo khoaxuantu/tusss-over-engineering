@@ -1,8 +1,38 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { INestApplication, ValidationPipe } from "@nestjs/common";
+import { NestFactory } from "@nestjs/core";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import "dotenv/config";
+import { AppModule } from "./app.module";
+
+function setupOpenApi(app: INestApplication<any>) {
+  const config = new DocumentBuilder()
+    .setTitle("Tusss Storage")
+    .setDescription("The Tusss Storage (or Inventory) API descriptions.")
+    .setVersion("0.0.1")
+    .build();
+
+  SwaggerModule.setup("api", app, () => SwaggerModule.createDocument(app, config));
+}
+
+function setupFunctional(app: INestApplication<any>) {
+  app.useGlobalPipes(
+    new ValidationPipe({
+      enableDebugMessages: true,
+      whitelist: true,
+      stopAtFirstError: true,
+      transform: true,
+    }),
+  );
+}
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(process.env.PORT ?? 3000);
+
+  setupFunctional(app);
+  setupOpenApi(app);
+
+  await app.listen(process.env.PORT ?? 5000);
 }
+
+// eslint-disable-next-line
 bootstrap();

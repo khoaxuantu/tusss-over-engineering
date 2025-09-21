@@ -1,9 +1,12 @@
-import { Controller, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Post, UseGuards } from "@nestjs/common";
+import { SignInRequest } from "../dtos/sign-in.dto";
 import { LocalGuard } from "../guards/local.guard";
 
 @Controller("auth")
 export class AuthController {
   @Post("login")
   @UseGuards(LocalGuard)
-  login() {}
+  login(@Body() payload: SignInRequest) {
+    console.log(payload);
+  }
 }

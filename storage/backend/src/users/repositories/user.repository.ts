@@ -28,7 +28,7 @@ export class UserReadRepository extends ReadRepository<User> {
 
   async getPassword(name: string) {
     const raw = await this.selectQuery
-      .where("name", "is", name)
+      .where("name", "=", name)
       .select(["id", "password"])
       .executeTakeFirst();
     if (!raw) return undefined;
