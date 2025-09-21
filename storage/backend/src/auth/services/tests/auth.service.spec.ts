@@ -1,6 +1,6 @@
-import { AdminRepository } from "@/admins/repositories/admin.repository";
-import { Admin } from "@/admins/schemas/admin.schema";
 import { TokenService } from "@/shared/tokens/services/token.service";
+import { UserRepository } from "@/users/repositories/user.repository";
+import { User } from "@/users/schemas/user.schema";
 import { createMock } from "@golevelup/ts-jest";
 import { Test } from "@nestjs/testing";
 import { AuthService } from "../auth.service";
@@ -17,8 +17,8 @@ describe(AuthService.name, () => {
           useValue: createMock<TokenService>(),
         },
         {
-          provide: AdminRepository,
-          useValue: createMock<AdminRepository>(),
+          provide: UserRepository,
+          useValue: createMock<UserRepository>(),
         },
       ],
     }).compile();
@@ -59,7 +59,7 @@ describe(AuthService.name, () => {
         password: "fdsfs",
       });
       jest.spyOn(service["tokenService"].password, "check").mockResolvedValueOnce(true);
-      jest.spyOn(service["adminRepo"].read, "findById").mockResolvedValueOnce(Admin.create());
+      jest.spyOn(service["adminRepo"].read, "findById").mockResolvedValueOnce(User.create());
       const res = await subject();
       expect(res).toBeTruthy();
     });

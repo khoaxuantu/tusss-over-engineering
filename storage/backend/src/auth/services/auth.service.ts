@@ -1,11 +1,11 @@
-import { AdminRepository } from "@/admins/repositories/admin.repository";
 import { TokenService } from "@/shared/tokens/services/token.service";
+import { UserRepository } from "@/users/repositories/user.repository";
 import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class AuthService {
   constructor(
-    private adminRepo: AdminRepository,
+    private adminRepo: UserRepository,
     private tokenService: TokenService,
   ) {}
 

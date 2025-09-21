@@ -1,5 +1,5 @@
-import { Admin } from "@/admins/schemas/admin.schema";
 import { AuthService } from "@/auth/services/auth.service";
+import { User } from "@/users/schemas/user.schema";
 import { createMock } from "@golevelup/ts-jest";
 import { UnauthorizedException } from "@nestjs/common";
 import { Test } from "@nestjs/testing";
@@ -29,7 +29,7 @@ describe(LocalStrategy.name, () => {
   });
 
   it("should return admin when login successfully", async () => {
-    jest.spyOn(strategy["auth"], "login").mockResolvedValueOnce(Admin.create());
+    jest.spyOn(strategy["auth"], "login").mockResolvedValueOnce(User.create());
     const res = await strategy.validate("", "");
     expect(res).toBeDefined();
   });

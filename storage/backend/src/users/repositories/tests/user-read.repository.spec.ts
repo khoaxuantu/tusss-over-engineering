@@ -1,14 +1,14 @@
-import { Admin } from "@/admins/schemas/admin.schema";
 import { DbClientProvider } from "@/db/modules/constants";
 import { DbClient } from "@/db/modules/types";
 import { TusssDb } from "@/db/types/schemas.auto";
 import { ReadRepository } from "@/shared/repos/abstracts/repository.abstract";
+import { User } from "@/users/schemas/user.schema";
 import { createMock } from "@golevelup/ts-jest";
 import { Test } from "@nestjs/testing";
 import { SelectQueryBuilder } from "kysely";
-import { AdminReadRepository } from "../admin.repository";
+import { UserReadRepository } from "../user.repository";
 
-describe(AdminReadRepository.name, () => {
+describe(UserReadRepository.name, () => {
   const mockSelect = createMock<SelectQueryBuilder<TusssDb, keyof TusssDb, any>>({
     where: jest.fn().mockReturnThis(),
     select: jest.fn().mockReturnThis(),
@@ -16,12 +16,12 @@ describe(AdminReadRepository.name, () => {
   });
   const mockDbClient = createMock<DbClient>();
 
-  let repo: AdminReadRepository;
+  let repo: UserReadRepository;
 
   beforeAll(async () => {
     const module = await Test.createTestingModule({
       providers: [
-        AdminReadRepository,
+        UserReadRepository,
         {
           provide: DbClientProvider,
           useValue: mockDbClient,
@@ -29,7 +29,7 @@ describe(AdminReadRepository.name, () => {
       ],
     }).compile();
 
-    repo = module.get<AdminReadRepository>(AdminReadRepository);
+    repo = module.get<UserReadRepository>(UserReadRepository);
   });
 
   describe("selectQuery", () => {
@@ -47,7 +47,7 @@ describe(AdminReadRepository.name, () => {
     });
 
     it("should return admin when found", async () => {
-      jest.spyOn(ReadRepository.prototype, "findById").mockResolvedValueOnce(Admin.create());
+      jest.spyOn(ReadRepository.prototype, "findById").mockResolvedValueOnce(User.create());
       const res = await repo.findById(1);
       expect(res).toBeDefined();
     });

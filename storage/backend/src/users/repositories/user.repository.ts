@@ -1,14 +1,14 @@
 import { DbClientProvider, TableName } from "@/db/modules/constants";
 import type { DbClient } from "@/db/modules/types";
-import { AdminTable, TusssDb } from "@/db/types/schemas.auto";
+import { TusssDb, UserTable } from "@/db/types/schemas.auto";
 import { ReadRepository, WriteRepository } from "@/shared/repos/abstracts/repository.abstract";
 import { TokenService } from "@/shared/tokens/services/token.service";
 import { Inject, Injectable } from "@nestjs/common";
 import { Insertable, UpdateQueryBuilder, UpdateResult } from "kysely";
-import { Admin } from "../schemas/admin.schema";
+import { User } from "../schemas/user.schema";
 
 @Injectable()
-export class AdminReadRepository extends ReadRepository<Admin> {
+export class UserReadRepository extends ReadRepository<User> {
   constructor(
     @Inject(DbClientProvider)
     db: DbClient,
@@ -17,13 +17,13 @@ export class AdminReadRepository extends ReadRepository<Admin> {
   }
 
   override get selectQuery() {
-    return this.db.selectFrom("admins");
+    return this.db.selectFrom("users");
   }
 
-  override async findById(id: number): Promise<Admin | undefined> {
+  override async findById(id: number): Promise<User | undefined> {
     const raw = await super.findById(id);
     if (!raw) return undefined;
-    return Admin.create(raw);
+    return User.create(raw);
   }
 
   async getPassword(name: string) {
@@ -37,7 +37,7 @@ export class AdminReadRepository extends ReadRepository<Admin> {
 }
 
 @Injectable()
-export class AdminWriteRepository extends WriteRepository<Admin> {
+export class UserWriteRepository extends WriteRepository<User> {
   constructor(
     @Inject(DbClientProvider)
     db: DbClient,
@@ -47,24 +47,24 @@ export class AdminWriteRepository extends WriteRepository<Admin> {
   }
 
   get insertQuery() {
-    return this.db.insertInto(TableName.admins);
+    return this.db.insertInto(TableName.users);
   }
 
   get updateQuery() {
-    return this.db.updateTable(TableName.admins);
+    return this.db.updateTable(TableName.users);
   }
 
   get deleteQuery() {
-    return this.db.deleteFrom(TableName.admins);
+    return this.db.deleteFrom(TableName.users);
   }
 
-  override async insertOne(data: Insertable<AdminTable>): Promise<{ id: number } | undefined> {
+  override async insertOne(data: Insertable<UserTable>): Promise<{ id: number } | undefined> {
     data.password = await this.token.password.hash(data.password);
     const res = await super.insertOne(data);
     return res;
   }
 
-  override async insertMany(data: Insertable<AdminTable>[]): Promise<{ id: number }[]> {
+  override async insertMany(data: Insertable<UserTable>[]): Promise<{ id: number }[]> {
     for (const input of data) {
       input.password = await this.token.password.hash(input.password);
     }
@@ -74,18 +74,18 @@ export class AdminWriteRepository extends WriteRepository<Admin> {
 
   override async updateAndReturn(
     id: number,
-    query: UpdateQueryBuilder<TusssDb, "admins", "admins", UpdateResult>,
-  ): Promise<Admin | undefined> {
+    query: UpdateQueryBuilder<TusssDb, "users", "users", UpdateResult>,
+  ): Promise<User | undefined> {
     const raw = await super.updateAndReturn(id, query);
     if (!raw) return undefined;
-    return Admin.create(raw);
+    return User.create(raw);
   }
 }
 
 @Injectable()
-export class AdminRepository {
+export class UserRepository {
   constructor(
-    public readonly read: AdminReadRepository,
-    public readonly write: AdminWriteRepository,
+    public readonly read: UserReadRepository,
+    public readonly write: UserWriteRepository,
   ) {}
 }

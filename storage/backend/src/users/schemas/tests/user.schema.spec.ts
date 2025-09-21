@@ -1,9 +1,9 @@
-import { Admin } from "../admin.schema";
+import { User } from "../user.schema";
 
-describe(Admin.name, () => {
+describe(User.name, () => {
   describe("toPlain", () => {
     it("should return correct plain object", () => {
-      const doc = Admin.create();
+      const doc = User.create();
       const plain = doc.toPlain();
       expect(plain).toMatchObject(doc);
       expect(plain).not.toHaveProperty("password");

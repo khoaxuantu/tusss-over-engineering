@@ -2,11 +2,11 @@
 CREATE TYPE "public"."Role" AS ENUM ('ADMIN', 'EDITOR', 'VIEWER');
 
 -- CreateTable
-CREATE TABLE "public"."admins" (
+CREATE TABLE "public"."users" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "role" "public"."Role"[],
+    "roles" "public"."Role"[],
 
-    CONSTRAINT "admins_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
