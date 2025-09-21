@@ -5,6 +5,7 @@ import {
   DeleteResult,
   InsertObject,
   InsertQueryBuilder,
+  InsertResult,
   SelectQueryBuilder,
   UpdateQueryBuilder,
   UpdateResult,
@@ -14,10 +15,6 @@ type SelectQuery = SelectQueryBuilder<TusssDb, keyof TusssDb, any>;
 type InsertQuery = InsertQueryBuilder<TusssDb, keyof TusssDb, InsertResult>;
 type UpdateQuery = UpdateQueryBuilder<TusssDb, keyof TusssDb, keyof TusssDb, UpdateResult>;
 type DeleteQuery = DeleteQueryBuilder<TusssDb, keyof TusssDb, DeleteResult>;
-
-interface InsertResult {
-  id: number;
-}
 
 export abstract class WriteRepository<T> {
   constructor(readonly db: DbClient) {}
@@ -30,12 +27,12 @@ export abstract class WriteRepository<T> {
     return this.db.transaction();
   }
 
-  async insertOne(data: InsertObject<TusssDb, keyof TusssDb>): Promise<InsertResult | undefined> {
+  async insertOne(data: InsertObject<TusssDb, keyof TusssDb>) {
     const res = await this.insertQuery.values(data).returning("id").executeTakeFirst();
     return res;
   }
 
-  async insertMany(data: InsertObject<TusssDb, keyof TusssDb>[]): Promise<InsertResult[]> {
+  async insertMany(data: InsertObject<TusssDb, keyof TusssDb>[]) {
     const res = await this.insertQuery.values(data).returning("id").execute();
     return res;
   }

@@ -1,29 +1,33 @@
 import { Role } from "@/db/types/enums.auto";
 import { AdminTable } from "@/db/types/schemas.auto";
-import { instanceToPlain } from "class-transformer";
+import { Expose, instanceToPlain, plainToInstance } from "class-transformer";
 import { Selectable, Updateable } from "kysely";
 
-interface AdminRecord extends Selectable<AdminTable> {}
+interface AdminRecord extends Omit<Selectable<AdminTable>, "password"> {}
 
 export class Admin implements AdminRecord {
+  @Expose()
   id: number = 0;
+
+  @Expose()
   name: string = "";
-  password: string = "";
+
+  @Expose()
   roles: Role[] = [];
 
   constructor(data?: Admin) {
     if (data) {
       this.id = data.id;
       this.name = data.name;
-      this.password = data.password;
       this.roles = data.roles;
     }
   }
 
   static create(data?: Updateable<AdminTable>) {
-    const obj = new Admin();
-    Object.assign(obj, data);
-    return obj;
+    return plainToInstance(Admin, data || {}, {
+      excludeExtraneousValues: true,
+      exposeDefaultValues: true,
+    });
   }
 
   toPlain(): AdminRecord {
