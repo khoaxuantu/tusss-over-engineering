@@ -18,4 +18,11 @@ describe(PasswordService.name, () => {
     const matched = await service.check(testPwd, encrypted);
     expect(matched).toBeTruthy();
   });
+
+  test("empty password check", async () => {
+    const testPwd = "";
+    const encrypted = await service.hash("encryped");
+    const matched = await service.check(testPwd, encrypted);
+    expect(matched).toBeFalsy();
+  });
 });

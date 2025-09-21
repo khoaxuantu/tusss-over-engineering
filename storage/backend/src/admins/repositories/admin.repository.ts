@@ -25,6 +25,15 @@ export class AdminReadRepository extends ReadRepository<Admin> {
     if (!raw) return undefined;
     return Admin.create(raw);
   }
+
+  async getPassword(name: string) {
+    const raw = await this.selectQuery
+      .where("name", "is", name)
+      .select(["id", "password"])
+      .executeTakeFirst();
+    if (!raw) return undefined;
+    return raw;
+  }
 }
 
 @Injectable()

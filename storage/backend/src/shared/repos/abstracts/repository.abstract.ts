@@ -64,7 +64,7 @@ export abstract class ReadRepository<T> {
   abstract get selectQuery(): SelectQuery;
 
   async findById(id: number): Promise<T | undefined> {
-    const res = await this.selectQuery.where("id", "is", id).executeTakeFirst();
+    const res = (await this.selectQuery.where("id", "is", id).executeTakeFirst()) as T | undefined;
     return res;
   }
 }
