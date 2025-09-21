@@ -64,4 +64,15 @@ describe(AuthService.name, () => {
       expect(res).toBeTruthy();
     });
   });
+
+  describe("sign", () => {
+    it("should return enough data", () => {
+      jest.spyOn(service["tokenService"].jwt, "signUser").mockReturnValueOnce({
+        accessToken: "abnc",
+        refreshToken: "fdafsd",
+      });
+      const res = service.sign(User.create());
+      expect(res).toBeDefined();
+    });
+  });
 });
