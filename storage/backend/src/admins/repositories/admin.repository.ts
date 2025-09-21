@@ -1,9 +1,10 @@
 import { DbClientProvider, TableName } from "@/db/modules/constants";
 import type { DbClient } from "@/db/modules/types";
-import { TusssDb } from "@/db/types/schemas.auto";
+import { AdminTable, TusssDb } from "@/db/types/schemas.auto";
 import { ReadRepository, WriteRepository } from "@/shared/repos/abstracts/repository.abstract";
+import { TokenService } from "@/shared/tokens/services/token.service";
 import { Inject, Injectable } from "@nestjs/common";
-import { UpdateQueryBuilder, UpdateResult } from "kysely";
+import { Insertable, UpdateQueryBuilder, UpdateResult } from "kysely";
 import { Admin } from "../schemas/admin.schema";
 
 @Injectable()
@@ -31,6 +32,7 @@ export class AdminWriteRepository extends WriteRepository<Admin> {
   constructor(
     @Inject(DbClientProvider)
     db: DbClient,
+    private token: TokenService,
   ) {
     super(db);
   }
@@ -45,6 +47,20 @@ export class AdminWriteRepository extends WriteRepository<Admin> {
 
   get deleteQuery() {
     return this.db.deleteFrom(TableName.admins);
+  }
+
+  override async insertOne(data: Insertable<AdminTable>): Promise<{ id: number } | undefined> {
+    data.password = await this.token.password.hash(data.password);
+    const res = await super.insertOne(data);
+    return res;
+  }
+
+  override async insertMany(data: Insertable<AdminTable>[]): Promise<{ id: number }[]> {
+    for (const input of data) {
+      input.password = await this.token.password.hash(input.password);
+    }
+
+    return await super.insertMany(data);
   }
 
   override async updateAndReturn(
