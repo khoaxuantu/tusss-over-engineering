@@ -4,7 +4,7 @@ import { UserExternalEnum } from "@/users/constants";
 import { User } from "@/users/schemas/user.schema";
 import { ApiProperty } from "@nestjs/swagger";
 import { instanceToPlain, plainToInstance } from "class-transformer";
-import { IsArray, IsNotEmpty, MinLength } from "class-validator";
+import { ArrayMinSize, IsArray, IsNotEmpty } from "class-validator";
 
 export class UserIdentifier {
   @ApiProperty()
@@ -17,7 +17,7 @@ export class UserIdentifier {
 
   @ApiProperty({ enum: enumToArray(Role), enumName: UserExternalEnum.roles })
   @IsArray()
-  @MinLength(1)
+  @ArrayMinSize(1)
   roles: Role[] = [];
 
   constructor(data?: UserIdentifier) {

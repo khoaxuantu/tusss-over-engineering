@@ -9,9 +9,20 @@ function setupOpenApi(app: INestApplication<any>) {
     .setTitle("Tusss Storage")
     .setDescription("The Tusss Storage (or Inventory) API descriptions.")
     .setVersion("0.0.1")
+    .addBearerAuth()
     .build();
+  const document = SwaggerModule.createDocument(app, config);
 
-  SwaggerModule.setup("api", app, () => SwaggerModule.createDocument(app, config));
+  SwaggerModule.setup("api", app, document, {
+    swaggerOptions: {
+      persistAuthorization: true,
+      tagsSorter: "alpha",
+      operationsSorter: "alpha",
+      syntaxHighlight: {
+        theme: "nord",
+      },
+    },
+  });
 }
 
 function setupFunctional(app: INestApplication<any>) {
