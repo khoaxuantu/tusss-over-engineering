@@ -1,5 +1,6 @@
 import { INestApplication, ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
+import { FastifyAdapter } from "@nestjs/platform-fastify";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import "dotenv/config";
 import { AppModule } from "./app.module";
@@ -37,7 +38,25 @@ function setupFunctional(app: INestApplication<any>) {
 }
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const environment = process.env.NODE_ENV ?? "development";
+
+  const app = await NestFactory.create(
+    AppModule,
+    new FastifyAdapter({
+      logger:
+        environment == "development"
+          ? {
+              transport: {
+                target: "pino-pretty",
+                options: {
+                  translateTime: "SYS:standard",
+                  ignore: "pid,hostname",
+                },
+              },
+            }
+          : false,
+    }),
+  );
 
   setupFunctional(app);
   setupOpenApi(app);
