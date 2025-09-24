@@ -1,10 +1,10 @@
-model Admin {
+model UserTable {
   id       Int    @id @default(autoincrement())
   name     String
   password String
   roles    Role[]
 
-  @@map("admins")
+  @@map("users")
 }
 
 enum Role {

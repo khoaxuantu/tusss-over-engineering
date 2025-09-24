@@ -8,4 +8,13 @@ export const defaultConfig: CommonConfig = {
     password: process.env.DB_PWD ?? "postgres",
     port: +(process.env.DB_PORT || "5432"),
   },
+  auth: {
+    secret: {
+      default: process.env.AUTH_SECRET || "lmao",
+    },
+    jwt_expiry: {
+      login: "1h",
+      refresh: "30d",
+    },
+  },
 };

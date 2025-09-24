@@ -1,5 +1,5 @@
 export enum TableName {
-  admins = "admins",
+  users = "users",
 }
 
 export const DbClientProvider = "datasource.pg";

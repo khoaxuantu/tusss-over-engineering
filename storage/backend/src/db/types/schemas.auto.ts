@@ -6,12 +6,12 @@ export type Timestamp = ColumnType<Date, Date | string, Date | string>;
 
 import type { Role } from "./enums.auto";
 
-export type Admin = {
+export type UserTable = {
     id: Generated<number>;
     name: string;
     password: string;
     roles: Role[];
 };
 export type TusssDb = {
-    admins: Admin;
+    users: UserTable;
 };
