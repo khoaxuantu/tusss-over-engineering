@@ -39,24 +39,25 @@ function setupFunctional(app: INestApplication<any>) {
 
 async function bootstrap() {
   const environment = process.env.NODE_ENV ?? "development";
-
-  const app = await NestFactory.create(
-    AppModule,
-    new FastifyAdapter({
-      logger:
-        environment == "development"
-          ? {
-              transport: {
-                target: "pino-pretty",
-                options: {
-                  translateTime: "SYS:standard",
-                  ignore: "pid,hostname",
-                },
+  const fastify = new FastifyAdapter({
+    logger:
+      environment == "development"
+        ? {
+            transport: {
+              target: "pino-pretty",
+              options: {
+                translateTime: "SYS:standard",
+                ignore: "pid,hostname",
+                hideObject: true,
+                messageFormat:
+                  "{if reqId}[{reqId}]{end} {if req.url}[{req.method}][{req.url}]{end} {if responseTime}[{res.statusCode}][{responseTime}ms]{end} {msg}",
               },
-            }
-          : false,
-    }),
-  );
+            },
+          }
+        : false,
+  });
+
+  const app = await NestFactory.create(AppModule, fastify);
 
   setupFunctional(app);
   setupOpenApi(app);
