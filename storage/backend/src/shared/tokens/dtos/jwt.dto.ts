@@ -1,7 +1,7 @@
 import { Role } from "@/db/types/enums.auto";
 import { enumToArray } from "@/shared/helpers/enum.helper";
 import { UserExternalEnum } from "@/users/constants";
-import { User } from "@/users/schemas/user.schema";
+import { User } from "@/users/models/user.model";
 import { ApiProperty } from "@nestjs/swagger";
 import { Expose, instanceToPlain, plainToInstance } from "class-transformer";
 import { ArrayMinSize, IsArray, IsNotEmpty } from "class-validator";

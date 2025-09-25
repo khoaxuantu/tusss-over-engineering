@@ -5,7 +5,8 @@ import { ReadRepository, WriteRepository } from "@/shared/repos/abstracts/reposi
 import { TokenService } from "@/shared/tokens/services/token.service";
 import { Inject, Injectable } from "@nestjs/common";
 import { Insertable, UpdateQueryBuilder, UpdateResult } from "kysely";
-import { User } from "../schemas/user.schema";
+import { User } from "../models/user.model";
+import { UserUpdateObjBuilder } from "./builders/update-obj.builder";
 
 @Injectable()
 export class UserReadRepository extends ReadRepository<User> {
@@ -58,6 +59,10 @@ export class UserWriteRepository extends WriteRepository<User> {
     return this.db.deleteFrom(TableName.users);
   }
 
+  get updater() {
+    return new UserUpdateObjBuilder(this.token);
+  }
+
   override async insertOne(data: Insertable<UserTable>): Promise<{ id: number } | undefined> {
     data.password = await this.token.password.hash(data.password);
     const res = await super.insertOne(data);
@@ -75,8 +80,9 @@ export class UserWriteRepository extends WriteRepository<User> {
   override async updateAndReturn(
     id: number,
     query: UpdateQueryBuilder<TusssDb, "users", "users", UpdateResult>,
+    builder: UserUpdateObjBuilder,
   ): Promise<User | undefined> {
-    const raw = await super.updateAndReturn(id, query);
+    const raw = await super.updateAndReturn(id, query, builder);
     if (!raw) return undefined;
     return User.create(raw);
   }

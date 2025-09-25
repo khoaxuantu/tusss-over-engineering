@@ -2,7 +2,7 @@ import { DbClientProvider } from "@/db/modules/constants";
 import { DbClient } from "@/db/modules/types";
 import { TusssDb } from "@/db/types/schemas.auto";
 import { ReadRepository } from "@/shared/repos/abstracts/repository.abstract";
-import { User } from "@/users/schemas/user.schema";
+import { User } from "@/users/models/user.model";
 import { createMock } from "@golevelup/ts-jest";
 import { Test } from "@nestjs/testing";
 import { SelectQueryBuilder } from "kysely";

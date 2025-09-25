@@ -2,7 +2,7 @@ import { DbClientProvider } from "@/db/modules/constants";
 import { DbClient } from "@/db/modules/types";
 import { WriteRepository } from "@/shared/repos/abstracts/repository.abstract";
 import { TokenService } from "@/shared/tokens/services/token.service";
-import { User } from "@/users/schemas/user.schema";
+import { User } from "@/users/models/user.model";
 import { createMock } from "@golevelup/ts-jest";
 import { Test } from "@nestjs/testing";
 import { UserWriteRepository } from "../user.repository";

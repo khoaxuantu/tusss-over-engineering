@@ -10,6 +10,7 @@ import {
   UpdateQueryBuilder,
   UpdateResult,
 } from "kysely";
+import { UpdateObjBuilder } from "./updater.abstract";
 
 type SelectQuery = SelectQueryBuilder<TusssDb, keyof TusssDb, any>;
 type InsertQuery = InsertQueryBuilder<TusssDb, keyof TusssDb, InsertResult>;
@@ -22,6 +23,7 @@ export abstract class WriteRepository<T> {
   abstract get insertQuery(): InsertQuery;
   abstract get updateQuery(): UpdateQuery;
   abstract get deleteQuery(): DeleteQuery;
+  abstract get updater(): UpdateObjBuilder;
 
   get transaction() {
     return this.db.transaction();
@@ -37,13 +39,21 @@ export abstract class WriteRepository<T> {
     return res;
   }
 
-  async update(id: number, query: UpdateQuery): Promise<boolean> {
-    const res = await query.where("id", "=", id).executeTakeFirst();
+  async update(id: number, query: UpdateQuery, builder: UpdateObjBuilder): Promise<boolean> {
+    const res = await query.set(builder.build()).where("id", "=", id).executeTakeFirst();
     return res.numUpdatedRows > 0;
   }
 
-  async updateAndReturn(id: number, query: UpdateQuery): Promise<T | undefined> {
-    const res = await query.where("id", "=", id).returningAll().executeTakeFirst();
+  async updateAndReturn(
+    id: number,
+    query: UpdateQuery,
+    builder: UpdateObjBuilder,
+  ): Promise<T | undefined> {
+    const res = await query
+      .set(builder.build())
+      .where("id", "=", id)
+      .returningAll()
+      .executeTakeFirst();
     return res as T | undefined;
   }
 
