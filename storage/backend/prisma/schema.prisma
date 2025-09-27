@@ -9,4 +9,5 @@ generator kysely {
   fileName     = "schemas.auto.ts"
   enumFileName = "enums.auto.ts"
   dbTypeName   = "TusssDb"
+  camelCase    = true
 }

@@ -3,7 +3,7 @@ import { DecimalPrecision } from "@/shared/helpers/calc.helper";
 import { formatErrWithStack } from "@/shared/helpers/format.helper";
 import { Logger, Provider } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { Kysely, PostgresDialect } from "kysely";
+import { CamelCasePlugin, Kysely, PostgresDialect } from "kysely";
 import { Pool } from "pg";
 import { TusssDb } from "../types/schemas.auto";
 import { DbClientProvider } from "./constants";
@@ -28,6 +28,7 @@ export const DbProvider = {
     const dialect = new PostgresDialect({ pool });
     const db = new Kysely<TusssDb>({
       dialect,
+      plugins: [new CamelCasePlugin()],
       log(event) {
         if (event.level == "error") {
           logger.error(

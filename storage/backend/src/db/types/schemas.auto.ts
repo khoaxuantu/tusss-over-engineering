@@ -7,8 +7,8 @@ export type Timestamp = ColumnType<Date, Date | string, Date | string>;
 import type { SellerType, Role } from "./enums.auto";
 
 export type ItemsItemsTable = {
-    parent_id: number;
-    child_id: number;
+    parentId: number;
+    childId: number;
 };
 export type ItemTable = {
     id: Generated<number>;
@@ -17,13 +17,13 @@ export type ItemTable = {
     description: string | null;
     href: string | null;
     archived: boolean | null;
-    retailer_id: number;
-    brand_id: number;
+    retailerId: number;
+    brandId: number;
 };
 export type PurchaseLogTable = {
     date: Generated<Timestamp>;
-    buyer_id: number;
-    item_id: number;
+    buyerId: number;
+    itemId: number;
 };
 export type SellerTable = {
     id: Generated<number>;
@@ -33,29 +33,29 @@ export type SellerTable = {
     href: string | null;
 };
 export type UsersOwningItemsTable = {
-    created_at: Generated<Timestamp>;
-    user_id: number;
-    item_id: number;
+    createdAt: Generated<Timestamp>;
+    userId: number;
+    itemId: number;
 };
 export type UsersWatchingItemsTable = {
-    created_at: Generated<Timestamp>;
-    user_id: number;
-    item_id: number;
+    createdAt: Generated<Timestamp>;
+    userId: number;
+    itemId: number;
 };
 export type UserTable = {
     id: Generated<number>;
     name: string;
     password: string;
     roles: Role[];
-    created_at: Generated<Timestamp>;
-    updated_at: Generated<Timestamp>;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
 };
 export type TusssDb = {
     items: ItemTable;
-    items_items: ItemsItemsTable;
-    purchase_logs: PurchaseLogTable;
+    itemsItems: ItemsItemsTable;
+    purchaseLogs: PurchaseLogTable;
     sellers: SellerTable;
     users: UserTable;
-    users_owning_items: UsersOwningItemsTable;
-    users_watching_items: UsersWatchingItemsTable;
+    usersOwningItems: UsersOwningItemsTable;
+    usersWatchingItems: UsersWatchingItemsTable;
 };
