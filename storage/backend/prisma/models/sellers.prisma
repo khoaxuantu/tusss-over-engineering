@@ -1,0 +1,17 @@
+model SellerTable {
+  id       Int        @id @default(autoincrement())
+  name     String     @db.VarChar(255)
+  type     SellerType
+  location String?
+  href     String?
+
+  sold_items      ItemTable[] @relation(name: "retailer_items")
+  published_items ItemTable[] @relation(name: "brand_items")
+
+  @@map("sellers")
+}
+
+enum SellerType {
+  AUTH
+  RETAIL
+}

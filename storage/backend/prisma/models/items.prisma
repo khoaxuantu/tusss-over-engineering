@@ -1,0 +1,28 @@
+model ItemTable {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(255)
+  price       Int
+  description String?
+  href        String?
+  archived    Boolean?
+
+  retailer    SellerTable               @relation(name: "retailer_items", fields: [retailer_id], references: [id])
+  retailer_id Int
+  brand       SellerTable               @relation(name: "brand_items", fields: [brand_id], references: [id])
+  brand_id    Int
+  owner       UsersOwningItemsTable?
+  watchers    UsersWatchingItemsTable[]
+  purchases   PurchaseLogTable[]
+
+  @@index([name])
+  @@index([price])
+  @@map("items")
+}
+
+model ItemsItemsTable {
+  parent_id Int
+  child_id  Int
+
+  @@id([parent_id, child_id])
+  @@map("items_items")
+}
