@@ -34,11 +34,11 @@ interface MockInsertQueryProps extends Record<MockInsertQueryKeys, jest.Mock> {}
 interface MockDeleteQueryProps extends Record<MockDeleteQueryKeys, jest.Mock> {}
 
 export class MockSelectQuery implements MockSelectQueryProps {
-  where = jest.fn();
-  having = jest.fn();
-  distinct = jest.fn();
-  selectAll = jest.fn();
-  select = jest.fn();
+  where = jest.fn().mockReturnThis();
+  having = jest.fn().mockReturnThis();
+  distinct = jest.fn().mockReturnThis();
+  selectAll = jest.fn().mockReturnThis();
+  select = jest.fn().mockReturnThis();
   executeTakeFirst = jest.fn();
   execute = jest.fn();
 

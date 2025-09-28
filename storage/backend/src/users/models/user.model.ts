@@ -15,11 +15,19 @@ export class User implements UserRecord {
   @Expose()
   roles: Role[] = [];
 
+  @Expose()
+  createdAt: Date = new Date();
+
+  @Expose()
+  updatedAt: Date = new Date();
+
   constructor(data?: User) {
     if (data) {
       this.id = data.id;
       this.name = data.name;
       this.roles = data.roles;
+      this.createdAt = data.createdAt;
+      this.updatedAt = data.updatedAt;
     }
   }
 
