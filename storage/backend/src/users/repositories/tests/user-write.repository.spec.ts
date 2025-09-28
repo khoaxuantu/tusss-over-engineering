@@ -1,6 +1,5 @@
 import { DbClientProvider } from "@/db/modules/constants";
-import { DbClient } from "@/db/modules/types";
-import { WriteRepository } from "@/shared/repos/abstracts/repository.abstract";
+import { MockDbClient } from "@/db/tests/shared-contexts/db";
 import { TokenService } from "@/shared/tokens/services/token.service";
 import { User } from "@/users/models/user.model";
 import { createMock } from "@golevelup/ts-jest";
@@ -8,6 +7,8 @@ import { Test } from "@nestjs/testing";
 import { UserWriteRepository } from "../user.repository";
 
 describe(UserWriteRepository.name, () => {
+  const mockDbClient = new MockDbClient();
+
   let repo: UserWriteRepository;
 
   beforeAll(async () => {
@@ -16,7 +17,7 @@ describe(UserWriteRepository.name, () => {
         UserWriteRepository,
         {
           provide: DbClientProvider,
-          useValue: createMock<DbClient>(),
+          useValue: mockDbClient,
         },
         {
           provide: TokenService,
@@ -32,24 +33,6 @@ describe(UserWriteRepository.name, () => {
     repo = moduleRef.get(UserWriteRepository);
   });
 
-  describe("updateQuery", () => {
-    it("should be defined", () => {
-      expect(repo.updateQuery).toBeDefined();
-    });
-  });
-
-  describe("insertQuery", () => {
-    it("should be defined", () => {
-      expect(repo.insertQuery).toBeDefined();
-    });
-  });
-
-  describe("deleteQuery", () => {
-    it("should be defined", () => {
-      expect(repo.deleteQuery).toBeDefined();
-    });
-  });
-
   describe("insertOne", () => {
     it("should call hash password", async () => {
       const spyHash = jest.spyOn(repo["token"].password, "hash");
@@ -60,6 +43,9 @@ describe(UserWriteRepository.name, () => {
 
   describe("insertMany", () => {
     it("should hash passwords", async () => {
+      mockDbClient.mockInsertQueryOnce({
+        execute: jest.fn().mockResolvedValueOnce([]),
+      });
       const spyHash = jest.spyOn(repo["token"].password, "hash");
       spyHash.mockClear();
       const payload = { ...User.create(), password: "abc" };
@@ -70,14 +56,18 @@ describe(UserWriteRepository.name, () => {
 
   describe("updateAndReturn", () => {
     it("should return undefined when not found", async () => {
-      jest.spyOn(WriteRepository.prototype, "updateAndReturn").mockResolvedValueOnce(undefined);
-      const res = await repo.updateAndReturn(1, repo.updateQuery);
+      mockDbClient.mockUpdateQueryOnce({
+        executeTakeFirst: jest.fn().mockResolvedValueOnce(undefined),
+      });
+      const res = await repo.updateAndReturn(1, repo.updater);
       expect(res).toBeUndefined();
     });
 
     it("should be defined if found", async () => {
-      jest.spyOn(WriteRepository.prototype, "updateAndReturn").mockResolvedValueOnce(User.create());
-      const res = await repo.updateAndReturn(1, repo.updateQuery);
+      mockDbClient.mockUpdateQueryOnce({
+        executeTakeFirst: jest.fn().mockResolvedValueOnce(User.create()),
+      });
+      const res = await repo.updateAndReturn(1, repo.updater);
       expect(res).toBeDefined();
     });
   });

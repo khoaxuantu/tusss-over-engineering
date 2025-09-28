@@ -1,10 +1,11 @@
-import { DbClientProvider, TableName } from "@/db/modules/constants";
+import { DbClientProvider } from "@/db/modules/constants";
 import type { DbClient } from "@/db/modules/types";
-import { TusssDb, UserTable } from "@/db/types/schemas.auto";
+import { UserTable } from "@/db/types/schemas.auto";
 import { ReadRepository, WriteRepository } from "@/shared/repos/abstracts/repository.abstract";
+import { UpdateObjBuilder } from "@/shared/repos/abstracts/updater.abstract";
 import { TokenService } from "@/shared/tokens/services/token.service";
 import { Inject, Injectable } from "@nestjs/common";
-import { Insertable, UpdateQueryBuilder, UpdateResult } from "kysely";
+import { Insertable } from "kysely";
 import { User } from "../models/user.model";
 import { UserUpdateObjBuilder } from "./builders/update-obj.builder";
 
@@ -38,7 +39,7 @@ export class UserReadRepository extends ReadRepository<User> {
 }
 
 @Injectable()
-export class UserWriteRepository extends WriteRepository<User> {
+export class UserWriteRepository extends WriteRepository<User, "users"> {
   constructor(
     @Inject(DbClientProvider)
     db: DbClient,
@@ -47,44 +48,53 @@ export class UserWriteRepository extends WriteRepository<User> {
     super(db);
   }
 
-  get insertQuery() {
-    return this.db.insertInto(TableName.users);
-  }
-
-  get updateQuery() {
-    return this.db.updateTable(TableName.users);
-  }
-
-  get deleteQuery() {
-    return this.db.deleteFrom(TableName.users);
-  }
-
   get updater() {
     return new UserUpdateObjBuilder(this.token);
   }
 
   override async insertOne(data: Insertable<UserTable>): Promise<{ id: number } | undefined> {
     data.password = await this.token.password.hash(data.password);
-    const res = await super.insertOne(data);
+    const res = await this.db.insertInto("users").values(data).returning("id").executeTakeFirst();
     return res;
   }
 
-  override async insertMany(data: Insertable<UserTable>[]): Promise<{ id: number }[]> {
+  override async insertMany(data: Insertable<UserTable>[]) {
     for (const input of data) {
       input.password = await this.token.password.hash(input.password);
     }
 
-    return await super.insertMany(data);
+    const users = await this.db.insertInto("users").values(data).returning("id").execute();
+    return users.map((u) => u.id);
+  }
+
+  override async update(id: number, builder: UpdateObjBuilder): Promise<boolean> {
+    const data = builder.build();
+    const res = await this.db
+      .updateTable("users")
+      .set(data)
+      .where("id", "=", id)
+      .executeTakeFirst();
+    return res.numUpdatedRows > 0;
   }
 
   override async updateAndReturn(
     id: number,
-    query: UpdateQueryBuilder<TusssDb, "users", "users", UpdateResult>,
     builder: UserUpdateObjBuilder,
   ): Promise<User | undefined> {
-    const raw = await super.updateAndReturn(id, query, builder);
-    if (!raw) return undefined;
-    return User.create(raw);
+    const data = builder.build();
+    const res = await this.db
+      .updateTable("users")
+      .set(data)
+      .where("id", "=", id)
+      .returningAll()
+      .executeTakeFirst();
+    if (!res) return undefined;
+    return User.create(res);
+  }
+
+  override async delete(id: number): Promise<boolean> {
+    const res = await this.db.deleteFrom("users").where("id", "=", id).executeTakeFirst();
+    return res.numDeletedRows > 0;
   }
 }
 
