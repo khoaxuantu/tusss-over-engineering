@@ -1,15 +1,10 @@
-import { Test } from "@nestjs/testing";
 import { PasswordService } from "../password.service";
 
 describe(PasswordService.name, () => {
   let service: PasswordService;
 
   beforeAll(async () => {
-    const moduleRef = await Test.createTestingModule({
-      providers: [PasswordService],
-    }).compile();
-
-    service = moduleRef.get(PasswordService);
+    service = new PasswordService();
   });
 
   test("one encryption round", async () => {

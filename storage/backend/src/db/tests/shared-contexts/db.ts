@@ -1,9 +1,11 @@
 import { DbClient } from "@/db/modules/types";
 import {
   DeleteQueryBuilder,
+  DeleteResult,
   InsertQueryBuilder,
   SelectQueryBuilder,
   UpdateQueryBuilder,
+  UpdateResult,
 } from "kysely";
 
 type MockDbKeys = Extract<
@@ -52,7 +54,9 @@ export class MockUpdateQuery implements MockUpdateQueryProps {
   set = jest.fn().mockReturnThis();
   returningAll = jest.fn().mockReturnThis();
   returning = jest.fn().mockReturnThis();
-  executeTakeFirst = jest.fn();
+  executeTakeFirst = jest
+    .fn()
+    .mockResolvedValue({ numUpdatedRows: BigInt(0) } satisfies UpdateResult);
   execute = jest.fn();
 
   constructor(props?: Partial<MockUpdateQueryProps>) {
@@ -76,7 +80,9 @@ export class MockDeleteQuery implements MockDeleteQueryProps {
   where = jest.fn().mockReturnThis();
   returningAll = jest.fn().mockReturnThis();
   returning = jest.fn().mockReturnThis();
-  executeTakeFirst = jest.fn();
+  executeTakeFirst = jest
+    .fn()
+    .mockResolvedValue({ numDeletedRows: BigInt(0) } satisfies DeleteResult);
   execute = jest.fn();
 
   constructor(props?: Partial<MockDeleteQueryProps>) {
