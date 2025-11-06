@@ -9,7 +9,7 @@ describe(PasswordService.name, () => {
 
   test("one encryption round", async () => {
     const testPwd = "hfrohf$#$#$%%333";
-    const encrypted = await service.hash(testPwd);
+    const encrypted = await service.hash(testPwd, 2);
     const matched = await service.check(testPwd, encrypted);
     expect(matched).toBeTruthy();
   });

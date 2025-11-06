@@ -11,14 +11,12 @@ export class Seller implements SellerRecordModel {
   name: string;
   type: SellerType;
   href: string | null = null;
-  location: string | null = null;
 
   constructor(data?: Partial<SellerRecordModel>) {
     this.id = data?.id ?? 0;
     this.name = data?.name ?? "";
     this.type = data?.type ?? SellerType.AUTH;
     this.href = data?.href ?? null;
-    this.location = data?.location ?? null;
   }
 
   static create(data?: SellerRecordModel) {
@@ -31,14 +29,12 @@ export class SellerInsert implements SellerInsertModel {
   name: string;
   type: SellerType;
   href?: string | null;
-  location?: string | null;
 
   constructor(data?: Partial<SellerInsertModel>) {
     this.id = data?.id;
     this.name = data?.name || "";
     this.type = data?.type || SellerType.AUTH;
     this.href = data?.href;
-    this.location = data?.location;
   }
 
   static create(data?: SellerInsertModel) {

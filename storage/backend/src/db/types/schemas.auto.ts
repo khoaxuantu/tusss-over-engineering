@@ -6,6 +6,14 @@ export type Timestamp = ColumnType<Date, Date | string, Date | string>;
 
 import type { SellerType, Role } from "./enums.auto";
 
+export type CityTable = {
+    id: string;
+    name: string;
+};
+export type DistrictTable = {
+    id: string;
+    name: string;
+};
 export type ItemsItemsTable = {
     parentId: number;
     childId: number;
@@ -25,12 +33,23 @@ export type PurchaseLogTable = {
     buyerId: number;
     itemId: number;
 };
+export type SellerLocationTable = {
+    sellerId: number;
+    cityId: string;
+    districtId: string;
+};
 export type SellerTable = {
     id: Generated<number>;
     name: string;
     type: SellerType;
-    location: string | null;
     href: string | null;
+};
+export type TagTable = {
+    id: Generated<number>;
+    name: string;
+    description: string | null;
+    color: string | null;
+    createdAt: Generated<Timestamp>;
 };
 export type UsersOwningItemsTable = {
     createdAt: Generated<Timestamp>;
@@ -51,10 +70,14 @@ export type UserTable = {
     updatedAt: Generated<Timestamp>;
 };
 export type TusssDb = {
+    cities: CityTable;
+    districts: DistrictTable;
     items: ItemTable;
     itemsItems: ItemsItemsTable;
     purchaseLogs: PurchaseLogTable;
+    sellerLocations: SellerLocationTable;
     sellers: SellerTable;
+    tags: TagTable;
     users: UserTable;
     usersOwningItems: UsersOwningItemsTable;
     usersWatchingItems: UsersWatchingItemsTable;

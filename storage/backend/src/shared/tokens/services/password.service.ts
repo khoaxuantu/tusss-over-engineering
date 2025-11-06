@@ -5,18 +5,14 @@ const SaltRounds = 12;
 
 @Injectable()
 export class PasswordService {
-  constructor(private customSaltRounds?: number) {}
+  constructor() {}
 
-  get saltRounds() {
-    return this.customSaltRounds || SaltRounds;
+  hash(raw: string, saltRounds: number = SaltRounds) {
+    return bcrypt.hash(raw, saltRounds ?? SaltRounds);
   }
 
-  hash(raw: string) {
-    return bcrypt.hash(raw, this.saltRounds);
-  }
-
-  hashSync(raw: string) {
-    return bcrypt.hashSync(raw, this.saltRounds);
+  hashSync(raw: string, saltRounds: number = SaltRounds) {
+    return bcrypt.hashSync(raw, saltRounds);
   }
 
   check(raw: string, encrypted: string) {

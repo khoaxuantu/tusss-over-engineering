@@ -1,6 +1,6 @@
 import { SellerType } from "@/db/types/enums.auto";
+import { SellerUpdateModel } from "@/sellers/models/seller.model";
 import { UpdateObjBuilder } from "@/shared/repos/abstracts/updater.abstract";
-import { SellerUpdateModel } from "../../seller.model";
 
 export class SellerUpdateBuilder extends UpdateObjBuilder<SellerUpdateModel> {
   setName(name: string) {
@@ -17,12 +17,6 @@ export class SellerUpdateBuilder extends UpdateObjBuilder<SellerUpdateModel> {
 
   setHref(href: string) {
     this.data.href = href;
-    this.activate();
-    return this;
-  }
-
-  setLocation(location: string) {
-    this.data.location = location;
     this.activate();
     return this;
   }

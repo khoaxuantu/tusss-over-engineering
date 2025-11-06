@@ -16,7 +16,7 @@ describe(UserUpdateObjBuilder.name, () => {
         {
           provide: TokenService,
           useValue: createMock<TokenService>({
-            password: new PasswordService(2),
+            password: new PasswordService(),
           }),
         },
       ],
@@ -41,7 +41,7 @@ describe(UserUpdateObjBuilder.name, () => {
 
   describe("setPwd", () => {
     it("should set hashed password", async () => {
-      const builder = getBuilder().setPwd("abc");
+      const builder = getBuilder().setPwd("abc", 2);
       const product = builder.build();
       expect(product.password).toBeDefined();
       const checkPwd = await token.password.check("abc", product.password!);

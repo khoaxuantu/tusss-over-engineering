@@ -22,11 +22,4 @@ describe(SellerUpdateBuilder.name, () => {
       expect(builder.build().href).toEqual("test");
     });
   });
-
-  describe("setLocation", () => {
-    it("should update", () => {
-      const builder = new SellerUpdateBuilder().setLocation("test");
-      expect(builder.build().location).toEqual("test");
-    });
-  });
 });

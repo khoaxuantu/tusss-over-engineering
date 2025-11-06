@@ -1,8 +1,8 @@
 import { DbClientProvider } from "@/db/modules/constants";
 import { MockDbClient } from "@/db/tests/shared-contexts/db";
 import { Test } from "@nestjs/testing";
-import { Seller } from "../../seller.model";
 import { SellerReadRepository } from "../seller.repository";
+import { Seller } from "@/sellers/models/seller.model";
 
 describe(SellerReadRepository.name, () => {
   const dbClient = new MockDbClient();

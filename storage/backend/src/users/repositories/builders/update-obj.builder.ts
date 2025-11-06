@@ -21,9 +21,9 @@ export class UserUpdateObjBuilder extends UpdateObjBuilder<Updateable<UserTable>
     return this;
   }
 
-  setPwd(pwd: string) {
+  setPwd(pwd: string, saltRounds?: number) {
     this.activate();
-    this.data.password = this.token.password.hashSync(pwd);
+    this.data.password = this.token.password.hashSync(pwd, saltRounds);
     return this;
   }
 }
