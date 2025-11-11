@@ -24,12 +24,12 @@ CREATE TABLE "public"."districts" (
 );
 
 -- CreateTable
-CREATE TABLE "public"."seller_locations" (
+CREATE TABLE "public"."sellers_locations" (
     "seller_id" INTEGER NOT NULL,
     "city_id" VARCHAR(32) NOT NULL,
     "district_id" VARCHAR(32) NOT NULL,
 
-    CONSTRAINT "seller_locations_pkey" PRIMARY KEY ("seller_id","city_id","district_id")
+    CONSTRAINT "sellers_locations_pkey" PRIMARY KEY ("seller_id","city_id","district_id")
 );
 
 -- CreateTable
@@ -44,10 +44,10 @@ CREATE TABLE "public"."tags" (
 );
 
 -- AddForeignKey
-ALTER TABLE "public"."seller_locations" ADD CONSTRAINT "seller_locations_seller_id_fkey" FOREIGN KEY ("seller_id") REFERENCES "public"."sellers"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "public"."sellers_locations" ADD CONSTRAINT "sellers_locations_seller_id_fkey" FOREIGN KEY ("seller_id") REFERENCES "public"."sellers"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."seller_locations" ADD CONSTRAINT "seller_locations_city_id_fkey" FOREIGN KEY ("city_id") REFERENCES "public"."cities"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "public"."sellers_locations" ADD CONSTRAINT "sellers_locations_city_id_fkey" FOREIGN KEY ("city_id") REFERENCES "public"."cities"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."seller_locations" ADD CONSTRAINT "seller_locations_district_id_fkey" FOREIGN KEY ("district_id") REFERENCES "public"."districts"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "public"."sellers_locations" ADD CONSTRAINT "sellers_locations_district_id_fkey" FOREIGN KEY ("district_id") REFERENCES "public"."districts"("id") ON DELETE CASCADE ON UPDATE CASCADE;

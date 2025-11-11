@@ -75,8 +75,8 @@ export type TusssDb = {
     items: ItemTable;
     itemsItems: ItemsItemsTable;
     purchaseLogs: PurchaseLogTable;
-    sellerLocations: SellerLocationTable;
     sellers: SellerTable;
+    sellersLocations: SellerLocationTable;
     tags: TagTable;
     users: UserTable;
     usersOwningItems: UsersOwningItemsTable;

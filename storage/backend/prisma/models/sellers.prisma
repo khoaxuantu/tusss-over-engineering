@@ -25,5 +25,5 @@ model SellerLocationTable {
   district    DistrictTable @relation(fields: [district_id], references: [id], onDelete: Cascade)
 
   @@id([seller_id, city_id, district_id])
-  @@map("seller_locations")
+  @@map("sellers_locations")
 }

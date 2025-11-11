@@ -1,7 +1,7 @@
 import type { DbClient } from "@/db/modules/types";
 import { TusssDb } from "@/db/types/schemas.auto";
 import { InsertObject, SelectQueryBuilder } from "kysely";
-import { HasPrimaryKey } from "../types";
+import { HasPrimaryKey, Id } from "../types";
 import { UpdateObjBuilder } from "./updater.abstract";
 
 type SelectQuery = SelectQueryBuilder<TusssDb, keyof TusssDb, any>;
@@ -10,9 +10,9 @@ type SelectQuery = SelectQueryBuilder<TusssDb, keyof TusssDb, any>;
  * This interface provide a guideline to implement insertable repositories. It contains 2 actions,
  * inserting single record, and inserting multiple records.
  */
-export interface InsertPlugin<TBK extends keyof TusssDb> {
-  insertOne(data: InsertObject<TusssDb, TBK>): Promise<HasPrimaryKey | undefined>;
-  insertMany(data: InsertObject<TusssDb, TBK>[]): Promise<number[]>;
+export interface InsertPlugin<TBK extends keyof TusssDb, TID extends Id = number> {
+  insertOne(data: InsertObject<TusssDb, TBK>): Promise<HasPrimaryKey<TID> | undefined>;
+  insertMany(data: InsertObject<TusssDb, TBK>[]): Promise<TID[]>;
 }
 
 /**
@@ -23,9 +23,9 @@ export interface InsertPlugin<TBK extends keyof TusssDb> {
  * The interface would not provide an update multiple reocords method, since there might be a lot of
  * cases with different inputs that the method has to cover.
  */
-export interface UpdatePlugin<O> {
-  update(id: number, builder: UpdateObjBuilder): Promise<boolean>;
-  updateAndReturn(id: number, builder: UpdateObjBuilder): Promise<O | undefined>;
+export interface UpdatePlugin<O, TID extends Id = number> {
+  update(id: TID, builder: UpdateObjBuilder): Promise<boolean>;
+  updateAndReturn(id: TID, builder: UpdateObjBuilder): Promise<O | undefined>;
 }
 
 /**
@@ -35,8 +35,8 @@ export interface UpdatePlugin<O> {
  * Because many join tables may not contain the primary key, the interface is only suitable to
  * entity tables, whose records are identified by a primary key.
  */
-export interface DeletePlugin {
-  delete(id: number): Promise<boolean>;
+export interface DeletePlugin<TID extends Id = number> {
+  delete(id: TID): Promise<boolean>;
 }
 
 /**
@@ -45,15 +45,16 @@ export interface DeletePlugin {
  *
  * This interface provide a guideline to implement soft delete plugin in repositories.
  */
-export interface SoftDeletePlugin {
-  deleteSoft(id: number): Promise<boolean>;
+export interface SoftDeletePlugin<TID extends Id = number> {
+  deleteSoft(id: TID): Promise<boolean>;
 }
 
 export abstract class WriteRepository<
-    T extends HasPrimaryKey,
+    T extends HasPrimaryKey<TID>,
     TBK extends keyof TusssDb = keyof TusssDb,
+    TID extends Id = number,
   >
-  implements InsertPlugin<TBK>, UpdatePlugin<T>, DeletePlugin
+  implements InsertPlugin<TBK, TID>, UpdatePlugin<T, TID>, DeletePlugin<TID>
 {
   constructor(readonly db: DbClient) {}
 
@@ -63,19 +64,19 @@ export abstract class WriteRepository<
     return this.db.transaction();
   }
 
-  abstract insertOne(data: InsertObject<TusssDb, TBK>): Promise<HasPrimaryKey | undefined>;
-  abstract insertMany(data: InsertObject<TusssDb, TBK>[]): Promise<number[]>;
-  abstract update(id: number, builder: UpdateObjBuilder): Promise<boolean>;
-  abstract updateAndReturn(id: number, builder: UpdateObjBuilder): Promise<T | undefined>;
-  abstract delete(id: number): Promise<boolean>;
+  abstract insertOne(data: InsertObject<TusssDb, TBK>): Promise<HasPrimaryKey<TID> | undefined>;
+  abstract insertMany(data: InsertObject<TusssDb, TBK>[]): Promise<TID[]>;
+  abstract update(id: TID, builder: UpdateObjBuilder): Promise<boolean>;
+  abstract updateAndReturn(id: TID, builder: UpdateObjBuilder): Promise<T | undefined>;
+  abstract delete(id: TID): Promise<boolean>;
 }
 
-export abstract class ReadRepository<T extends HasPrimaryKey> {
+export abstract class ReadRepository<T extends HasPrimaryKey<TID>, TID extends Id = number> {
   constructor(readonly db: DbClient) {}
 
   abstract get selectQuery(): SelectQuery;
 
-  async findById(id: number): Promise<T | undefined> {
+  async findById(id: TID): Promise<T | undefined> {
     const res = (await this.selectQuery.where("id", "=", id).selectAll().executeTakeFirst()) as
       | T
       | undefined;
