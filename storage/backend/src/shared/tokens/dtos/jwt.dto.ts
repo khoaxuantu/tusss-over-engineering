@@ -17,7 +17,7 @@ export class UserIdentifier {
   @Expose()
   name: string = "";
 
-  @ApiProperty({ enum: enumToArray(Role), enumName: UserExternalEnum.roles })
+  @ApiProperty({ enum: enumToArray(Role), enumName: UserExternalEnum.roles, isArray: true })
   @IsArray()
   @ArrayMinSize(1)
   @Expose()

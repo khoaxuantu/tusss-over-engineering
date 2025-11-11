@@ -1,5 +1,5 @@
 import { Global, Module } from "@nestjs/common";
-import { CityRepository, CityWriteRepository } from "./city.repository";
+import { CityRepository, CityWriteRepository } from "./cities/city.repository";
 
 @Global()
 @Module({

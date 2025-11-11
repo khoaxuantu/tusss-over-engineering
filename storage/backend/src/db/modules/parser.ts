@@ -16,7 +16,7 @@ import { types as pgTypes } from "pg";
 export function setupDbParser() {
   pgTypes.setTypeParser(pgTypes.builtins.INT8, (val) => parseInt(val, 10));
   pgTypes.setTypeParser(pgTypes.builtins.NUMERIC, (val) => parseFloat(val));
-  pgTypes.setTypeParser(16472 as number, (val) => parsePgArray(val));
+  pgTypes.setTypeParser(21410 as number, (val) => parsePgArray(val));
 }
 
 export function parsePgArray(s: string): string[] {

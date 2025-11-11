@@ -1,7 +1,9 @@
 import { Module } from "@nestjs/common";
-import { LocationRepositoryModule } from "./repositories/location.repository.module";
+import { CityController } from "./cities/city.controller";
+import { LocationRepositoryModule } from "./location.repository.module";
 
 @Module({
   imports: [LocationRepositoryModule],
+  controllers: [CityController],
 })
 export class LocationsModule {}
