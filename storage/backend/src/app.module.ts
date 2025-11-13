@@ -1,5 +1,6 @@
 import { Module } from "@nestjs/common";
 import { APP_FILTER } from "@nestjs/core";
+import { CqrsModule } from "@nestjs/cqrs";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { AuthModule } from "./auth/auth.module";
@@ -10,7 +11,14 @@ import { CatchEverythingFilter } from "./shared/errors/catch-all.filter";
 import { UserModule } from "./users/user.module";
 
 @Module({
-  imports: [DatabaseModule, TusssConfigModule, UserModule, AuthModule, LocationsModule],
+  imports: [
+    DatabaseModule,
+    TusssConfigModule,
+    UserModule,
+    AuthModule,
+    LocationsModule,
+    CqrsModule.forRoot(),
+  ],
   controllers: [AppController],
   providers: [AppService, { provide: APP_FILTER, useClass: CatchEverythingFilter }],
 })

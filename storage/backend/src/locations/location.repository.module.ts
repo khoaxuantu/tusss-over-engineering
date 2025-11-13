@@ -1,9 +1,9 @@
 import { Global, Module } from "@nestjs/common";
-import { CityRepository, CityWriteRepository } from "./cities/city.repository";
+import { CityWriteRepository } from "./cities/city.repository";
 
 @Global()
 @Module({
-  providers: [CityWriteRepository, CityRepository],
-  exports: [CityRepository],
+  providers: [CityWriteRepository],
+  exports: [CityWriteRepository],
 })
 export class LocationRepositoryModule {}

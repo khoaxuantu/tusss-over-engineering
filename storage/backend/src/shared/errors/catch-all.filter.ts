@@ -1,3 +1,4 @@
+import { DbErrorAdapter } from "@/db/modules/exceptions";
 import {
   ArgumentsHost,
   Catch,
@@ -8,6 +9,7 @@ import {
   Logger,
 } from "@nestjs/common";
 import { HttpAdapterHost } from "@nestjs/core";
+import { DatabaseError } from "pg";
 import { formatErrWithStack } from "../helpers/format.helper";
 import { TusssRequest } from "../types/common";
 
@@ -31,7 +33,12 @@ export class CatchEverythingFilter implements ExceptionFilter {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const method = httpAdapter.getRequestMethod(req);
 
-    if (exception instanceof HttpException) {
+    if (exception instanceof DatabaseError) {
+      const err = DbErrorAdapter.toHttpException(exception);
+      httpStatus = err.getStatus();
+      resData = err.getResponse();
+      this.logger.error(`[${method} ${path}] DatabaseError: ${JSON.stringify(resData)}`);
+    } else if (exception instanceof HttpException) {
       httpStatus = exception.getStatus();
       resData = exception.getResponse();
       this.logger.error(`[${method} ${path}] HttpException: ${JSON.stringify(resData)}`);

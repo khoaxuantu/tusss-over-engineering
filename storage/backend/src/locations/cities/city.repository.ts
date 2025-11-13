@@ -25,8 +25,3 @@ export class CityWriteRepository implements InsertPlugin<"cities", string> {
     return res.map((r) => r.id);
   }
 }
-
-@Injectable()
-export class CityRepository {
-  constructor(public readonly write: CityWriteRepository) {}
-}
