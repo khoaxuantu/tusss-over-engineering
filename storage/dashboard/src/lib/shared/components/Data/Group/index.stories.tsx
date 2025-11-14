@@ -1,5 +1,5 @@
 import { List, ListItem } from "@mui/material";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 import DataGroup from ".";
 import DataBox from "../Box";
 

@@ -1,5 +1,5 @@
 import { TextField } from "@mui/material";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
 const meta: Meta<typeof TextField> = {
   title: "MUI/Form/Inputs/TextField",

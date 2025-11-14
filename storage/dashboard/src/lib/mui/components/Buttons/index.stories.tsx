@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
 const meta: Meta<typeof Button> = {
   title: "MUI/Button",
@@ -42,7 +42,7 @@ export const Primary: Story = {
     variant: "contained",
     color: "primary",
     children: "Primary",
-    size: "medimum",
+    size: "medium",
   },
 };
 

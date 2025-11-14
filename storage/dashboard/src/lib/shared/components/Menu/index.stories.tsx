@@ -1,5 +1,5 @@
 import { MenuItem } from "@mui/material";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 import Menu from ".";
 
 const meta: Meta<typeof Menu> = {
