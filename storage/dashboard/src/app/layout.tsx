@@ -1,7 +1,7 @@
-import { authProvider } from "@lib/auth/providers";
+import { RefineAuthProvider } from "@lib/auth/refine/provider";
 import { ThemeProvider } from "@lib/mui/theme";
+import { ResourceClientSideProvider } from "@lib/resource/client.provider";
 import { RESOURCE_IDENTIFIER } from "@lib/resource/constants";
-import { DataProviderClient } from "@lib/resource/providers/client";
 import { DevtoolsProvider } from "@lib/shared/components/Devtools";
 import { Refine } from "@refinedev/core";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
@@ -25,13 +25,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <RefineSnackbarProvider>
                   <Refine
                     routerProvider={RouterProvider}
-                    dataProvider={DataProviderClient}
-                    authProvider={authProvider}
+                    dataProvider={ResourceClientSideProvider}
+                    authProvider={RefineAuthProvider}
                     notificationProvider={useNotificationProvider}
                     options={{
                       syncWithLocation: true,
                       warnWhenUnsavedChanges: true,
-                      useNewQueryKeys: true,
                       title: {
                         text: "Tusss Project",
                       },

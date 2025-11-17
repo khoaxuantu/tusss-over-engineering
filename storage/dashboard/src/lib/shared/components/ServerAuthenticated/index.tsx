@@ -1,13 +1,13 @@
 "use server";
 
-import { AuthProviderServer } from "@lib/auth/providers";
+import { getSession } from "@lib/auth/actions/check";
 import { redirect } from "next/navigation";
 import React from "react";
 
 export async function ServerAuthenticated({ children }: { children: React.ReactNode }) {
-  const { authenticated } = await AuthProviderServer.check();
+  const session = await getSession();
 
-  if (!authenticated) redirect("/login");
+  if (!session.data) redirect("/login");
 
   return <>{children}</>;
 }

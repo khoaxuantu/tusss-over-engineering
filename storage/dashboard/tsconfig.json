@@ -1,11 +1,14 @@
 {
   "compilerOptions": {
     // Enable latest features
-    "lib": ["ESNext", "DOM"],
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
     "target": "ESNext",
     "module": "ESNext",
     "moduleDetection": "force",
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "allowJs": true,
     // Bundler mode
     "moduleResolution": "bundler",
@@ -21,8 +24,9 @@
     "noPropertyAccessFromIndexSignature": false,
     // More options
     "paths": {
-      "@*": ["./src/*"],
-      "react": ["../../node_modules/@types/react", "./node_modules/@types/react"]
+      "@*": [
+        "./src/*"
+      ]
     },
     "incremental": true,
     "isolatedModules": true,
@@ -34,6 +38,14 @@
       }
     ]
   },
-  "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"]
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ]
 }
