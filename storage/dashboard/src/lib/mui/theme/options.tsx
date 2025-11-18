@@ -10,7 +10,7 @@ export const themeOptions: ThemeOptions = {
     },
     secondary: {
       main: "#CE93D8", // Light Lavender
-      light: "#E1BEE7", // Lighter shaden
+      light: "#E1BEE7", // Lighter shade
       dark: "#BA68C8", // Deeper shade
     },
     text: {
@@ -59,7 +59,6 @@ export const themeOptions: ThemeOptions = {
     MuiTextField: {
       defaultProps: {
         variant: "outlined",
-        size: "small",
         slotProps: {
           inputLabel: {
             shrink: true,
@@ -78,6 +77,7 @@ export const themeOptions: ThemeOptions = {
       styleOverrides: {
         root: {
           boxShadow: "none",
+          borderRadius: 8,
         },
       },
     },
@@ -89,9 +89,6 @@ export const themeOptions: ThemeOptions = {
       },
     },
     MuiMenu: {
-      defaultProps: {
-        elevation: 0,
-      },
       styleOverrides: {
         paper: {
           marginTop: 8,
@@ -99,9 +96,14 @@ export const themeOptions: ThemeOptions = {
         },
       },
     },
+    MuiCard: {
+      defaultProps: {
+        elevation: 0,
+      },
+    },
   },
   shape: {
-    borderRadius: 8,
+    borderRadius: 6,
   },
   typography: {
     fontFamily: "system-ui",

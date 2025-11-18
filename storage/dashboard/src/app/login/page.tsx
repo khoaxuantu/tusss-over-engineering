@@ -1,13 +1,8 @@
-import { AuthPage } from "@refinedev/mui";
-
 export default async function Login() {
   return (
-    <AuthPage
-      type="login"
-      rememberMe={false}
-      forgotPasswordLink={false}
-      registerLink={false}
-      title="Tusss Refine Playground"
-    />
+    <h1>
+      This is login page
+      <div></div>
+    </h1>
   );
 }

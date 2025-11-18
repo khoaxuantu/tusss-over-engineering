@@ -33,12 +33,7 @@ export default function Menu(props: DropdownProps) {
       >
         {props.label}
       </Button>
-      <MuiMenu
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        {...props.menuProps}
-      >
+      <MuiMenu open={open} anchorEl={anchorEl} onClose={handleClose} {...props.menuProps}>
         {props.children}
       </MuiMenu>
     </>

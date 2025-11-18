@@ -1,14 +1,7 @@
-import { RefineAuthProvider } from "@lib/auth/refine/provider";
 import { ThemeProvider } from "@lib/mui/theme";
-import { ResourceClientSideProvider } from "@lib/resource/client.provider";
-import { RESOURCE_IDENTIFIER } from "@lib/resource/constants";
-import { DevtoolsProvider } from "@lib/shared/components/devtools";
-import { Refine } from "@refinedev/core";
-import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
-import { RefineSnackbarProvider, useNotificationProvider } from "@refinedev/mui";
-import RouterProvider from "@refinedev/nextjs-router";
+import { SnackbarProvider } from "@lib/shared/components/snackbar/provider";
 import { Metadata } from "next";
-import React, { Suspense } from "react";
+import React from "react";
 
 export const metadata: Metadata = {
   title: "Tusss Admin",
@@ -16,42 +9,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
         <ThemeProvider>
-          <Suspense>
-            <RefineKbarProvider>
-              <DevtoolsProvider>
-                <RefineSnackbarProvider>
-                  <Refine
-                    routerProvider={RouterProvider}
-                    dataProvider={ResourceClientSideProvider}
-                    authProvider={RefineAuthProvider}
-                    notificationProvider={useNotificationProvider}
-                    options={{
-                      syncWithLocation: true,
-                      warnWhenUnsavedChanges: true,
-                      title: {
-                        text: "Tusss Project",
-                      },
-                    }}
-                    resources={[
-                      {
-                        name: RESOURCE_IDENTIFIER.USER,
-                        list: "users",
-                        create: "users/create",
-                        edit: "users/edit/:id",
-                        show: "users/show/:id",
-                      },
-                    ]}
-                  >
-                    {children}
-                    <RefineKbar />
-                  </Refine>
-                </RefineSnackbarProvider>
-              </DevtoolsProvider>
-            </RefineKbarProvider>
-          </Suspense>
+          <SnackbarProvider>{children}</SnackbarProvider>
         </ThemeProvider>
       </body>
     </html>

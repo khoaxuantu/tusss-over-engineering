@@ -1,12 +1,11 @@
 "use client";
 
-import { AuthProvider } from "@refinedev/core";
 import { getSession } from "../actions/check";
 import { login } from "../actions/login";
 import { logout } from "../actions/logout";
 
-export const RefineAuthProvider: AuthProvider = {
-  login: async ({ email, password }) => {
+export const RefineAuthProvider = {
+  login: async ({ email, password }: { email: string; password: string }) => {
     const res = await login(email, password);
     if (res.error) {
       return {
@@ -25,7 +24,7 @@ export const RefineAuthProvider: AuthProvider = {
     await logout();
     return { success: true, redirectTo: "/login" };
   },
-  onError: async (error) => {
+  onError: async (error: any) => {
     console.error(error);
     return {};
   },
