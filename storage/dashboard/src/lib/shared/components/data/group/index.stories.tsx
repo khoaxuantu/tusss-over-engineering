@@ -1,13 +1,13 @@
 import { List, ListItem } from "@mui/material";
 import { Meta, StoryObj } from "@storybook/nextjs";
 import DataGroup from ".";
-import DataBox from "../Box";
+import DataBox from "../box";
 
 const meta: Meta<typeof DataGroup> = {
   title: "Shared/Data/Group",
   component: DataGroup,
   tags: ["autodocs"],
-}
+};
 
 export default meta;
 
@@ -35,6 +35,6 @@ export const WithList: Story = {
         <ListItem>Two</ListItem>
         <ListItem>Three</ListItem>
       </List>
-    )
+    ),
   },
 };

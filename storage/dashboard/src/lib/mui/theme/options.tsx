@@ -10,7 +10,7 @@ export const themeOptions: ThemeOptions = {
     },
     secondary: {
       main: "#CE93D8", // Light Lavender
-      light: "#E1BEE7", // Lighter shade
+      light: "#E1BEE7", // Lighter shaden
       dark: "#BA68C8", // Deeper shade
     },
     text: {
@@ -78,7 +78,6 @@ export const themeOptions: ThemeOptions = {
       styleOverrides: {
         root: {
           boxShadow: "none",
-          borderRadius: 8,
         },
       },
     },

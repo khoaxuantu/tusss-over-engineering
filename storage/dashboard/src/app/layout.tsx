@@ -2,7 +2,7 @@ import { RefineAuthProvider } from "@lib/auth/refine/provider";
 import { ThemeProvider } from "@lib/mui/theme";
 import { ResourceClientSideProvider } from "@lib/resource/client.provider";
 import { RESOURCE_IDENTIFIER } from "@lib/resource/constants";
-import { DevtoolsProvider } from "@lib/shared/components/Devtools";
+import { DevtoolsProvider } from "@lib/shared/components/devtools";
 import { Refine } from "@refinedev/core";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 import { RefineSnackbarProvider, useNotificationProvider } from "@refinedev/mui";
