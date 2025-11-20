@@ -4,7 +4,7 @@ import { BackendClient } from "@lib/apis/client";
 import { ServerActionResponse, ServerPlainResponse } from "@lib/apis/response";
 import { BackendSchemas } from "@lib/apis/types";
 import { cookies } from "next/headers";
-import { SessionProvider } from "../sessions/provider";
+import { SessionProvider } from "../sessions/server.provider";
 
 export type SignInResponse = BackendSchemas["SignInResponse"];
 

@@ -1,0 +1,8 @@
+@layer theme, base, mui, components, utilities;
+
+@layer components {
+  mark {
+    color: var(--mui-palette-primary-main);
+    background-color: unset;
+  }
+}

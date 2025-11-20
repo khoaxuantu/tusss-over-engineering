@@ -1,5 +1,5 @@
 import { ServerAuthenticated } from "@lib/shared/components/server-authenticated";
-import { Snackbar } from "@mui/material";
+import Snackbar from "@lib/shared/components/snackbar/variants";
 import { Suspense } from "react";
 
 export default function IndexPage() {

@@ -2,7 +2,7 @@
 
 import { ServerActionResponse } from "@lib/apis/response";
 import { cookies } from "next/headers";
-import { Session, SessionProvider } from "../sessions/provider";
+import { Session, SessionProvider } from "../sessions/server.provider";
 
 export async function getSession() {
   const cookieStore = await cookies();

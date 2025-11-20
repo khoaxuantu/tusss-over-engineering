@@ -1,19 +1,12 @@
-import { FlatCompat } from "@eslint/eslintrc";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTs from "eslint-config-next/typescript";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
 import eslintPluginPrettier from "eslint-plugin-prettier/recommended";
-import { defineConfig } from "eslint/config";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
+import { defineConfig, globalIgnores } from "eslint/config";
 
 export default defineConfig([
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...nextVitals,
+  ...nextTs,
   {
     rules: {
       "@typescript-eslint/no-empty-object-type": "off",
@@ -23,8 +16,8 @@ export default defineConfig([
       "react-hooks/exhaustive-deps": "off",
       "react/no-unescaped-entities": "off",
     },
-    ignores: ["**/node_modules/**", "**/.next/**"],
   },
+  globalIgnores(["node_modules/**", ".next/**", "out/**", "build/**", "next-env.d.ts"]),
   eslintPluginPrettier,
   eslintConfigPrettier,
 ]);

@@ -1,4 +1,4 @@
-import { SessionProvider } from "@lib/auth/sessions/provider";
+import { SessionProvider } from "@lib/auth/sessions/server.provider";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function proxy(req: NextRequest) {

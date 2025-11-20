@@ -1,30 +1,54 @@
 import { createTheme, ThemeOptions } from "@mui/material/styles";
 
+declare module "@mui/material/styles" {
+  interface PaletteOptions {
+    surface?: {
+      lowest?: string;
+      low?: string;
+      medium?: string;
+      high?: string;
+      highest?: string;
+    };
+  }
+}
+
 export const themeOptions: ThemeOptions = {
-  palette: {
-    mode: "light",
-    primary: {
-      main: "#F48FB1", // Strawberry Milkshake Pink
-      light: "#F8BBD0", // Lighter shade for contrast
-      dark: "#F06292", // Deeper shade for hover/active
+  cssVariables: {
+    nativeColor: true,
+  },
+  colorSchemes: {
+    light: {
+      palette: {
+        primary: {
+          main: "#415f91", // Strawberry Milkshake Pink
+          light: "#d6e3ff", // Lighter shade for contrast
+          dark: "#284777", // Deeper shade for hover/active
+          contrastText: "#ffffff",
+        },
+        secondary: {
+          main: "#565f71", // Light Lavender
+          light: "#dae2f9", // Lighter shade
+          dark: "#3e4759", // Deeper shade
+          contrastText: "#ffffff",
+        },
+        text: {
+          primary: "#191c20",
+          secondary: "#44474e",
+        },
+        background: {
+          default: "#f9f9ff",
+          paper: "#ededf4",
+        },
+        divider: "#c4c6d0",
+        surface: {
+          lowest: "#fff",
+          low: "#f3f3fa",
+          medium: "#ededf4",
+          high: "#e7e8ee",
+          highest: "#e2e2e9",
+        },
+      },
     },
-    secondary: {
-      main: "#CE93D8", // Light Lavender
-      light: "#E1BEE7", // Lighter shade
-      dark: "#BA68C8", // Deeper shade
-    },
-    text: {
-      primary: "#191c20",
-      secondary: "#44474e",
-    },
-    background: {
-      default: "#f9f9ff",
-      paper: "#ededf4",
-    },
-    error: {
-      main: "#ba1a1a",
-    },
-    divider: "#c4c6d0",
   },
   components: {
     MuiButton: {
@@ -38,7 +62,7 @@ export const themeOptions: ThemeOptions = {
           fontWeight: "bold",
         },
         sizeMedium: {
-          padding: "8px 16px",
+          padding: "12px 16px",
         },
         sizeSmall: {
           padding: "6px 12px",
@@ -98,7 +122,38 @@ export const themeOptions: ThemeOptions = {
     },
     MuiCard: {
       defaultProps: {
-        elevation: 0,
+        variant: "outlined",
+        elevation: 2,
+      },
+    },
+    MuiPaper: {
+      defaultProps: {
+        elevation: 2,
+      },
+      styleOverrides: {
+        outlined: {
+          backgroundColor: "unset",
+        },
+        elevation0: {
+          backgroundColor: "var(--mui-palette-surface-lowest)",
+          boxShadow: "none",
+        },
+        elevation1: {
+          backgroundColor: "var(--mui-palette-surface-low)",
+          boxShadow: "none",
+        },
+        elevation2: {
+          backgroundColor: "var(--mui-palette-surface-medium)",
+          boxShadow: "none",
+        },
+        elevation3: {
+          backgroundColor: "var(--mui-palette-surface-high)",
+          boxShadow: "none",
+        },
+        elevation4: {
+          backgroundColor: "var(--mui-palette-surface-highest)",
+          boxShadow: "none",
+        },
       },
     },
   },
