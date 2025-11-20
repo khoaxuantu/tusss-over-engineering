@@ -12,38 +12,44 @@ export async function login(
   email: string,
   password: string,
 ): Promise<ServerPlainResponse<SignInResponse | null>> {
-  const res = await BackendClient.POST("/auth/login", {
-    body: { password, username: email },
-  });
+  try {
+    const res = await BackendClient.POST("/auth/login", {
+      body: { password, username: email },
+    });
+    if (res.error || !res.data) {
+      return new ServerActionResponse({
+        error: { code: "401", message: "Login Failed" },
+        data: null,
+      }).toPlain();
+    }
 
-  if (res.error || !res.data) {
+    const session = SessionProvider.getInstance();
+    const sessionToken = await session.create({
+      accessToken: res.data.access_token,
+      refreshToken: res.data.refresh_token,
+      user: {
+        id: res.data.session.id,
+        roles: res.data.session.roles,
+      },
+      ts: Date.now(),
+    });
+
+    const cookieStore = await cookies();
+    cookieStore.set(session.cookieName, sessionToken.token, {
+      httpOnly: true,
+      secure: true,
+      expires: new Date(sessionToken.exp),
+      sameSite: "lax",
+      path: "/",
+    });
+
+    return new ServerActionResponse<SignInResponse>({
+      data: res.data,
+    }).toPlain();
+  } catch {
     return new ServerActionResponse({
-      error: { code: "401", message: "Login Failed" },
+      error: { code: "500", message: "Login failed. Something went wrong in the server. " },
       data: null,
     }).toPlain();
   }
-
-  const session = SessionProvider.getInstance();
-  const sessionToken = await session.create({
-    accessToken: res.data.access_token,
-    refreshToken: res.data.refresh_token,
-    user: {
-      id: res.data.session.id,
-      roles: res.data.session.roles,
-    },
-    ts: Date.now(),
-  });
-
-  const cookieStore = await cookies();
-  cookieStore.set(session.cookieName, sessionToken.token, {
-    httpOnly: true,
-    secure: true,
-    expires: new Date(sessionToken.exp),
-    sameSite: "lax",
-    path: "/",
-  });
-
-  return new ServerActionResponse<SignInResponse>({
-    data: res.data,
-  }).toPlain();
 }

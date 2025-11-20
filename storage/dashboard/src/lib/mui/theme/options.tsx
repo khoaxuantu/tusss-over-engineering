@@ -1,17 +1,5 @@
 import { createTheme, ThemeOptions } from "@mui/material/styles";
 
-declare module "@mui/material/styles" {
-  interface PaletteOptions {
-    surface?: {
-      lowest?: string;
-      low?: string;
-      medium?: string;
-      high?: string;
-      highest?: string;
-    };
-  }
-}
-
 export const themeOptions: ThemeOptions = {
   cssVariables: {
     nativeColor: true,
@@ -73,21 +61,10 @@ export const themeOptions: ThemeOptions = {
         },
       },
     },
-    MuiInput: {
-      styleOverrides: {
-        root: {
-          borderRadius: 6,
-        },
-      },
-    },
     MuiTextField: {
       defaultProps: {
         variant: "outlined",
-        slotProps: {
-          inputLabel: {
-            shrink: true,
-          },
-        },
+        size: "small",
       },
     },
     MuiAppBar: {
@@ -113,10 +90,29 @@ export const themeOptions: ThemeOptions = {
       },
     },
     MuiMenu: {
+      defaultProps: {
+        slotProps: {
+          paper: {
+            variant: "elevation",
+          },
+        },
+      },
       styleOverrides: {
         paper: {
           marginTop: 8,
           minWidth: 250,
+        },
+        list: {
+          marginLeft: 8,
+          marginRight: 8,
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          borderRadius: 6,
+          padding: 8,
         },
       },
     },
@@ -126,39 +122,74 @@ export const themeOptions: ThemeOptions = {
         elevation: 2,
       },
     },
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+          padding: 16,
+        },
+      },
+    },
+    MuiCardActions: {
+      styleOverrides: {
+        root: {
+          padding: 16,
+        },
+      },
+    },
     MuiPaper: {
       defaultProps: {
-        elevation: 2,
+        variant: "medium",
       },
       styleOverrides: {
         outlined: {
           backgroundColor: "unset",
         },
-        elevation0: {
-          backgroundColor: "var(--mui-palette-surface-lowest)",
-          boxShadow: "none",
-        },
-        elevation1: {
-          backgroundColor: "var(--mui-palette-surface-low)",
-          boxShadow: "none",
-        },
-        elevation2: {
-          backgroundColor: "var(--mui-palette-surface-medium)",
-          boxShadow: "none",
-        },
-        elevation3: {
-          backgroundColor: "var(--mui-palette-surface-high)",
-          boxShadow: "none",
-        },
-        elevation4: {
-          backgroundColor: "var(--mui-palette-surface-highest)",
-          boxShadow: "none",
+        root: {
+          variants: [
+            {
+              props: { variant: "lowest" },
+              style: {
+                backgroundColor: "var(--mui-palette-surface-lowest)",
+              },
+            },
+            {
+              props: { variant: "low" },
+              style: {
+                backgroundColor: "var(--mui-palette-surface-low)",
+              },
+            },
+            {
+              props: { variant: "medium" },
+              style: {
+                backgroundColor: "var(--mui-palette-surface-medium)",
+              },
+            },
+            {
+              props: { variant: "high" },
+              style: {
+                backgroundColor: "var(--mui-palette-surface-high)",
+              },
+            },
+            {
+              props: { variant: "highest" },
+              style: {
+                backgroundColor: "var(--mui-palette-surface-highest)",
+              },
+            },
+          ],
         },
       },
     },
   },
   shape: {
     borderRadius: 6,
+    radius: {
+      "1": 4,
+      "2": 6,
+      "3": 10,
+      "4": 16,
+      "5": 26,
+    },
   },
   typography: {
     fontFamily: "system-ui",

@@ -8,14 +8,18 @@ import { useRouter } from "next/navigation";
 import { createContext, PropsWithChildren } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-export const SigninContext = createContext<FormContextProps>({
+export const LoginContext = createContext<FormContextProps>({
   onSubmit: () => {},
 });
 
-export function SigninFormProvider(props: PropsWithChildren) {
+export function LoginFormProvider(props: PropsWithChildren) {
   const router = useRouter();
   const methods = useForm<LoginFormData>({
     resolver: zodResolver(LoginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
 
   const submit = async (data: LoginFormData) => {
@@ -23,7 +27,7 @@ export function SigninFormProvider(props: PropsWithChildren) {
     const res = await login(data.email, data.password);
 
     if (res.error || !res.data) {
-      alert(res.error);
+      alert(`Error: ${res.error?.message}\nCode: ${res.error?.code}`);
       return;
     }
 
@@ -32,13 +36,13 @@ export function SigninFormProvider(props: PropsWithChildren) {
 
   return (
     <FormProvider {...methods}>
-      <SigninContext.Provider
+      <LoginContext.Provider
         value={{
           onSubmit: methods.handleSubmit(submit),
         }}
       >
         {props.children}
-      </SigninContext.Provider>
+      </LoginContext.Provider>
     </FormProvider>
   );
 }
