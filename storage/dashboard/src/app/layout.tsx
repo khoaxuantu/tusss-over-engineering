@@ -1,5 +1,5 @@
 import { ThemeProvider } from "@lib/mui/theme";
-import { SnackbarProvider } from "@lib/shared/components/snackbar/provider";
+import { ToastProvider } from "@lib/shared/components/toast/provider";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { Metadata } from "next";
 import React from "react";
@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider>
-            <SnackbarProvider>{children}</SnackbarProvider>
+            <ToastProvider>{children}</ToastProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

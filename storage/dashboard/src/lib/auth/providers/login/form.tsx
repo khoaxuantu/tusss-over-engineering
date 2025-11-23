@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { login } from "@lib/auth/actions/login";
 import { LoginFormData, LoginSchema } from "@lib/auth/schemas/login";
+import { useToast } from "@lib/shared/components/toast/hooks";
 import { FormContextProps } from "@lib/shared/interfaces/form";
 import { useRouter } from "next/navigation";
 import { createContext, PropsWithChildren } from "react";
@@ -21,13 +22,18 @@ export function LoginFormProvider(props: PropsWithChildren) {
       password: "",
     },
   });
+  const toast = useToast();
 
   const submit = async (data: LoginFormData) => {
     console.log(data);
     const res = await login(data.email, data.password);
 
     if (res.error || !res.data) {
-      alert(`Error: ${res.error?.message}\nCode: ${res.error?.code}`);
+      toast({
+        title: res.error?.code,
+        description: res.error?.message,
+        variant: "error",
+      });
       return;
     }
 

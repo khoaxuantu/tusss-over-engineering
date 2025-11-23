@@ -82,6 +82,14 @@ export const themeOptions: ThemeOptions = {
         },
       },
     },
+    MuiSnackbar: {
+      defaultProps: {
+        anchorOrigin: {
+          horizontal: "right",
+          vertical: "top",
+        },
+      },
+    },
     MuiDrawer: {
       styleOverrides: {
         paper: {
