@@ -1,5 +1,6 @@
 "use client";
 
+import { ToastProvider } from "@lib/shared/components/toast/provider";
 import CssBaseLine from "@mui/material/CssBaseline";
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 import React from "react";
@@ -9,7 +10,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseLine />
-      {children}
+      <ToastProvider>{children}</ToastProvider>
     </MuiThemeProvider>
   );
 }

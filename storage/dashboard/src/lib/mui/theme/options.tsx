@@ -71,6 +71,8 @@ export const themeOptions: ThemeOptions = {
       styleOverrides: {
         root: {
           boxShadow: "none",
+          backgroundColor: "var(--mui-palette-background-default)",
+          color: "var(--mui-palette-text-primary)",
         },
       },
     },
