@@ -1,4 +1,4 @@
-import { BackendUrl } from "@lib/configs/client";
+import { BackendUrl } from "@lib/shared/configs/client";
 import createClient from "openapi-fetch";
 import QueryString from "qs";
 import type { paths } from "./gen/schemas";

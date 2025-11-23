@@ -1,11 +1,22 @@
-import { Box, Typography } from "@mui/material";
+import ResourceHeader from "@lib/resource/components/header";
+import Link from "@lib/shared/components/links";
+import { Box, Button } from "@mui/material";
 
 export default function Page() {
   return (
     <>
-      <Typography variant="h2">
-        <mark>Cities</mark>
-      </Typography>
+      <ResourceHeader
+        title="Cities"
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Cities", isCurrent: true },
+        ]}
+        actions={
+          <Link href="/cities/new">
+            <Button variant="contained">Create</Button>
+          </Link>
+        }
+      />
       <Box>This is cities page</Box>
     </>
   );

@@ -1,6 +1,6 @@
 import { BackendClient } from "@lib/apis/client";
 import { BackendSchemas } from "@lib/apis/types";
-import { JwtSecret } from "@lib/configs/server";
+import { JwtSecret } from "@lib/shared/configs/server";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import "server-only";

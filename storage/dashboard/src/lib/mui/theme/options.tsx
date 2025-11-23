@@ -197,6 +197,11 @@ export const themeOptions: ThemeOptions = {
         },
       },
     },
+    MuiLink: {
+      defaultProps: {
+        underline: "hover",
+      },
+    },
   },
   shape: {
     borderRadius: 6,

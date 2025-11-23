@@ -1,7 +1,7 @@
 import "server-only";
 
 import colors from "@colors/colors";
-import { Environment } from "@lib/configs/server";
+import { Environment } from "@lib/shared/configs/server";
 import util from "util";
 import winston from "winston";
 
