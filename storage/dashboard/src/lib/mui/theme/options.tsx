@@ -126,6 +126,13 @@ export const themeOptions: ThemeOptions = {
         },
       },
     },
+    MuiListItemButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 999,
+        },
+      },
+    },
     MuiCard: {
       defaultProps: {
         variant: "outlined",

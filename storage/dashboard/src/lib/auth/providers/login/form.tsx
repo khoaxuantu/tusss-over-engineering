@@ -25,7 +25,6 @@ export function LoginFormProvider(props: PropsWithChildren) {
   const toast = useToast();
 
   const submit = async (data: LoginFormData) => {
-    console.log(data);
     const res = await login(data.email, data.password);
 
     if (res.error || !res.data) {

@@ -1,3 +1,12 @@
+import { Typography } from "@mui/material";
+
 export default async function IndexPage() {
-  return <main>Welcome to Tusss Storage Admin!</main>;
+  return (
+    <>
+      <Typography variant="h1" component="h1">
+        <mark>Tusss Storage Admin</mark>
+      </Typography>
+      Welcome!
+    </>
+  );
 }
