@@ -1,5 +1,6 @@
 import ResourceHeader from "@lib/resource/components/header";
-import { Box } from "@mui/material";
+import CityNewForm from "@lib/resource/locations/cities/components/forms/new";
+import { CityNewProvider } from "@lib/resource/locations/cities/providers/new.provider";
 
 export default function Page() {
   return (
@@ -12,7 +13,9 @@ export default function Page() {
           { label: "New", isCurrent: true },
         ]}
       />
-      <Box>This is new city page</Box>
+      <CityNewProvider>
+        <CityNewForm />
+      </CityNewProvider>
     </>
   );
 }

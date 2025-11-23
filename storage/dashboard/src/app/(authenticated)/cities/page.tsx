@@ -1,5 +1,6 @@
 import ResourceHeader from "@lib/resource/components/header";
 import Link from "@lib/shared/components/links";
+import { Add } from "@mui/icons-material";
 import { Box, Button } from "@mui/material";
 
 export default function Page() {
@@ -13,7 +14,9 @@ export default function Page() {
         ]}
         actions={
           <Link href="/cities/new">
-            <Button variant="contained">Create</Button>
+            <Button variant="contained" startIcon={<Add />}>
+              New
+            </Button>
           </Link>
         }
       />
