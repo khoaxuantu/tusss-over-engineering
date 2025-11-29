@@ -3,38 +3,55 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import DataGroup from ".";
 import DataBox from "../box";
 
+/**
+ * A custom display component, which is used to display a group of data.
+ */
 const meta: Meta<typeof DataGroup> = {
-  title: "Shared/Data/Group",
+  title: "Shared/Data/Data Group",
   component: DataGroup,
   tags: ["autodocs"],
 };
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof DataGroup>;
 
 export const Default: Story = {
   args: {
     label: "Group Label",
-    children: (
-      <>
-        <DataBox label="First" value="First value" />
-        <DataBox label="Second" value="Second value" />
-        <DataBox label="Third" value="Third value" />
-      </>
-    ),
+    bodyProps: {
+      sx: {
+        p: 2,
+      },
+    },
+  },
+  render: (args) => {
+    return (
+      <DataGroup {...args}>
+        <DataBox label="Children" variant="text" value="This is a children" />
+      </DataGroup>
+    );
   },
 };
 
 export const WithList: Story = {
   args: {
     label: "List in Data Group",
-    children: (
-      <List>
-        <ListItem>One</ListItem>
-        <ListItem>Two</ListItem>
-        <ListItem>Three</ListItem>
-      </List>
-    ),
+    bodyProps: {
+      sx: {
+        p: 2,
+      },
+    },
+  },
+  render: (args) => {
+    return (
+      <DataGroup {...args}>
+        <List disablePadding dense>
+          <ListItem>One</ListItem>
+          <ListItem>Two</ListItem>
+          <ListItem>Three</ListItem>
+        </List>
+      </DataGroup>
+    );
   },
 };

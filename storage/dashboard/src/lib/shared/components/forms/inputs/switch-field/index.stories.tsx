@@ -1,6 +1,9 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import SwitchField from ".";
 
+/**
+ * A custom checkbox field which wraps around the MUI's `FomControlLabel` and `Switch`
+ */
 const meta: Meta<typeof SwitchField> = {
   title: "Shared/Form/Inputs/SwitchField",
   component: SwitchField,
@@ -9,12 +12,11 @@ const meta: Meta<typeof SwitchField> = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof SwitchField>;
 
 export const Default: Story = {
   args: {
     label: "Default Label",
-    checked: false,
   },
 };
 
@@ -28,7 +30,6 @@ export const Checked: Story = {
 export const Required: Story = {
   args: {
     label: "Required Label",
-    checked: false,
     required: true,
   },
 };
@@ -36,7 +37,6 @@ export const Required: Story = {
 export const Disabled: Story = {
   args: {
     label: "Disabled Label",
-    checked: false,
     disabled: true,
   },
 };

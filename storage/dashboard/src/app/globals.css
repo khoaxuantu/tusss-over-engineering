@@ -1,8 +1,47 @@
 @layer theme, base, mui, components, utilities;
 
 @layer components {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track,
+  ::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--mui-palette-secondary-light);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--mui-palette-secondary-main);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--mui-palette-primary-main);
+  }
+
   mark {
     color: var(--mui-palette-primary-main);
     background-color: unset;
+  }
+
+  body {
+    margin-bottom: 1rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--mui-palette-primary-main);
+  }
+
+  dd {
+    margin-inline-start: 0;
   }
 }

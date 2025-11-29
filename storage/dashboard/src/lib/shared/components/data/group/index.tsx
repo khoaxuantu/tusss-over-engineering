@@ -1,19 +1,34 @@
-import { Box, BoxProps, Paper, Typography, TypographyProps } from "@mui/material";
+import { Box, BoxProps, Paper, PaperProps, Typography, TypographyProps } from "@mui/material";
 import { PropsWithChildren } from "react";
 
 interface DataGroupProps extends PropsWithChildren {
   label: string;
   labelProps?: TypographyProps;
   boxProps?: BoxProps;
+  bodyProps?: PaperProps;
 }
 
-export default function DataGroup({ label, children, boxProps, labelProps }: DataGroupProps) {
+export default function DataGroup({
+  label,
+  children,
+  boxProps,
+  labelProps,
+  bodyProps,
+}: DataGroupProps) {
   return (
-    <Box {...boxProps}>
-      <Typography variant="h6" mb={1} {...labelProps}>
-        {label}
+    <Box {...boxProps} className="data-group">
+      <Typography mb={1} {...labelProps}>
+        <b>{label}</b>
       </Typography>
-      <Paper variant="outlined" sx={{ padding: 2, "& > .MuiBox-root": { mb: 2 } }}>
+      <Paper
+        variant="outlined"
+        {...bodyProps}
+        sx={{
+          overflow: "auto",
+          ...bodyProps?.sx,
+        }}
+        className="body"
+      >
         {children}
       </Paper>
     </Box>

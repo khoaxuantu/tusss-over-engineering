@@ -6,7 +6,7 @@ export default function Page() {
   return (
     <>
       <ResourceHeader
-        title="Cities"
+        title="Cities - New"
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Cities", href: "/cities" },

@@ -18,6 +18,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
         spacing={2}
         component="div"
         sx={{
+          mt: 1,
           "& > section, & main": {
             minHeight: "90dvh",
           },
@@ -32,6 +33,9 @@ export default async function Layout({ children }: { children: React.ReactNode }
             borderTopRightRadius: "var(--mui-shape-radius-5)",
             borderBottomRightRadius: "var(--mui-shape-radius-5)",
             overflow: "auto",
+            position: "sticky",
+            top: 72,
+            maxHeight: "calc(100vh - 80px)",
           }}
         >
           <Sidebar />

@@ -1,3 +1,6 @@
+import type {} from "@mui/x-data-grid/themeAugmentation";
+import type {} from "@mui/x-date-pickers/themeAugmentation";
+
 declare module "@mui/material/styles" {
   interface Palette {
     surface: {

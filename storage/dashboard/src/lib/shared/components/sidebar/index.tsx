@@ -1,32 +1,49 @@
-import { LocationCity, LocationOn } from "@mui/icons-material";
-import { Box, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
-import { ListItemGroup } from "../lists/group/provider";
+import { Person, PersonOutline } from "@mui/icons-material";
+import { Box, BoxProps, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import ListItemGroupTrigger from "../lists/group/trigger";
-import ListItemLink from "../lists/link";
+import SidebarGroup from "./group";
+import SidebarLink from "./link";
+import SidebarRoot from "./root";
 
-export default function Sidebar() {
+interface SidebarProps {
+  activePath?: string;
+  boxProps?: BoxProps;
+}
+
+export default function Sidebar(props: SidebarProps) {
   return (
-    <Box component="nav" p={1}>
+    <Box component="nav" p={1} {...props.boxProps}>
       <List>
-        <ListItemGroup
-          trigger={
-            <ListItemGroupTrigger>
-              <ListItemIcon>
-                <LocationOn />
-              </ListItemIcon>
-              <ListItemText>Locations</ListItemText>
-            </ListItemGroupTrigger>
-          }
-        >
-          <ListItem>
-            <ListItemLink href="/cities">
-              <ListItemIcon>
-                <LocationCity />
-              </ListItemIcon>
-              <ListItemText>City</ListItemText>
-            </ListItemLink>
-          </ListItem>
-        </ListItemGroup>
+        <SidebarRoot>
+          <SidebarGroup
+            activePaths={["/users", "/photographers"]}
+            trigger={
+              <ListItemGroupTrigger>
+                <ListItemIcon>
+                  <Person />
+                </ListItemIcon>
+                <ListItemText>NPC</ListItemText>
+              </ListItemGroupTrigger>
+            }
+          >
+            <ListItem sx={{ py: 0 }}>
+              <SidebarLink href="/users">
+                <ListItemIcon>
+                  <PersonOutline />
+                </ListItemIcon>
+                <ListItemText>Users</ListItemText>
+              </SidebarLink>
+            </ListItem>
+            <ListItem sx={{ py: 0 }}>
+              <SidebarLink href="/photographers">
+                <ListItemIcon>
+                  <PersonOutline />
+                </ListItemIcon>
+                <ListItemText>Photographers</ListItemText>
+              </SidebarLink>
+            </ListItem>
+          </SidebarGroup>
+        </SidebarRoot>
       </List>
     </Box>
   );

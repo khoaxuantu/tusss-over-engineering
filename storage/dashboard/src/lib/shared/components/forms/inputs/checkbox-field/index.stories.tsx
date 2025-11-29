@@ -1,6 +1,9 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import CheckboxField from ".";
 
+/**
+ * A custom checkbox field which wraps around the MUI's `FomControlLabel` and `Checkbox`
+ */
 const meta: Meta<typeof CheckboxField> = {
   title: "Shared/Form/Inputs/CheckboxField",
   component: CheckboxField,
@@ -9,34 +12,37 @@ const meta: Meta<typeof CheckboxField> = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof CheckboxField>;
 
 export const Default: Story = {
   args: {
     label: "Default Label",
-    checked: false,
   },
 };
 
 export const Checked: Story = {
   args: {
     label: "Checked Label",
-    checked: true,
+    inputProps: {
+      checked: true,
+    },
   },
 };
 
 export const Required: Story = {
   args: {
     label: "Required Label",
-    checked: false,
-    required: true,
+    inputProps: {
+      required: true,
+    },
   },
 };
 
 export const Disabled: Story = {
   args: {
     label: "Disabled Label",
-    checked: false,
-    disabled: true,
+    inputProps: {
+      disabled: true,
+    },
   },
 };

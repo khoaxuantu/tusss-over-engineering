@@ -5,6 +5,7 @@ import { createContext, JSX, PropsWithChildren, useState } from "react";
 
 interface Props extends PropsWithChildren {
   trigger: JSX.Element;
+  defaultOpen?: boolean;
 }
 
 interface ListGroupContextProps {
@@ -18,7 +19,7 @@ export const ListGroupContext = createContext<ListGroupContextProps>({
 });
 
 export function ListItemGroup(props: Props) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(!!props.defaultOpen);
 
   const toggle = () => setOpen(!open);
 

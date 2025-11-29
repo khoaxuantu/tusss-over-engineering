@@ -46,7 +46,7 @@ export const themeOptions: ThemeOptions = {
       styleOverrides: {
         root: {
           boxShadow: "none",
-          borderRadius: 6,
+          borderRadius: 999,
           fontWeight: "bold",
         },
         sizeMedium: {
@@ -64,6 +64,12 @@ export const themeOptions: ThemeOptions = {
     MuiTextField: {
       defaultProps: {
         variant: "outlined",
+        size: "small",
+        fullWidth: true,
+      },
+    },
+    MuiSelect: {
+      defaultProps: {
         size: "small",
       },
     },
@@ -130,6 +136,14 @@ export const themeOptions: ThemeOptions = {
       styleOverrides: {
         root: {
           borderRadius: 999,
+        },
+      },
+    },
+    MuiListItemIcon: {
+      styleOverrides: {
+        root: {
+          minWidth: "unset",
+          marginRight: 8,
         },
       },
     },
@@ -200,6 +214,72 @@ export const themeOptions: ThemeOptions = {
     MuiLink: {
       defaultProps: {
         underline: "hover",
+      },
+    },
+    MuiDataGrid: {
+      styleOverrides: {
+        root: {
+          borderRadius: "var(--mui-shape-radius-4)",
+          padding: "0 var(--mui-spacing)",
+        },
+        row: {
+          borderRadius: "var(--mui-shape-radius-3)",
+        },
+        cell: {
+          borderTop: "none",
+        },
+        menu: {
+          "& .MuiPaper-root": {
+            boxShadow: "var(--mui-shadows-6)",
+            borderRadius: "var(--mui-shape-radius-4)",
+          },
+          "& .MuiMenuItem-root": {
+            borderRadius: "var(--mui-shape-radius-3)",
+          },
+          "& .MuiList-root": {
+            paddingLeft: 6,
+            paddingRight: 6,
+          },
+        },
+        panelContent: {
+          borderRadius: "var(--mui-shape-radius-3)",
+        },
+        columnsManagementFooter: {
+          borderTop: "unset",
+
+          "& > label": {
+            borderRadius: 999,
+            paddingRight: "var(--mui-spacing)",
+            ":hover": {
+              backgroundColor: "var(--mui-palette-surface-highest)",
+            },
+          },
+        },
+        columnsManagementHeader: {
+          borderBottom: "unset",
+        },
+        columnsManagementRow: {
+          borderRadius: "var(--mui-shape-radius-2)",
+          ":hover": {
+            backgroundColor: "var(--mui-palette-surface-highest)",
+          },
+        },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          padding: 8,
+          "@media (min-width: 600px)": {
+            padding: 16,
+          },
+        },
+      },
+    },
+    MuiDateField: {
+      defaultProps: {
+        fullWidth: true,
+        size: "small",
       },
     },
   },
