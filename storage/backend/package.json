@@ -16,7 +16,10 @@
     "jest": "node --expose-gc ./node_modules/jest/bin/jest.js",
     "test": "bun run jest -- --config ./test/default.config.json",
     "test:cov": "bun run jest -- --coverage --config ./test/cov.config.json",
-    "prisma": "prisma"
+    "prisma": "prisma",
+    "migrate:create": "prisma migrate dev --create-only",
+    "migrate:up": "prisma migrate dev",
+    "migrate:status": "prisma migrate status"
   },
   "dependencies": {
     "@fastify/static": "^8.2.0",

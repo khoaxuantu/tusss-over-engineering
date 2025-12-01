@@ -11,6 +11,7 @@ export function ApiAuthRequired() {
           message: { type: "string", example: "Unauthorized" },
           statusCode: { type: "integer", example: HttpStatus.UNAUTHORIZED },
         },
+        required: ["message", "statusCode"],
       },
     }),
   );

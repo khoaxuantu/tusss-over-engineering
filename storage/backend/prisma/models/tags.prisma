@@ -1,0 +1,9 @@
+model TagTable {
+  id          Int      @id @default(autoincrement()) @db.SmallInt
+  name        String   @db.VarChar(64)
+  description String?
+  color       String?  @db.VarChar(7)
+  created_at  DateTime @default(now())
+
+  @@map("tags")
+}

@@ -1,6 +1,6 @@
 import { TokenService } from "@/shared/tokens/services/token.service";
+import { User } from "@/users/models/user.model";
 import { UserRepository } from "@/users/repositories/user.repository";
-import { User } from "@/users/schemas/user.schema";
 import { createMock } from "@golevelup/ts-jest";
 import { Test } from "@nestjs/testing";
 import { AuthService } from "../auth.service";

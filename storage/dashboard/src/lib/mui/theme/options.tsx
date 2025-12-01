@@ -1,30 +1,42 @@
 import { createTheme, ThemeOptions } from "@mui/material/styles";
 
 export const themeOptions: ThemeOptions = {
-  palette: {
-    mode: "light",
-    primary: {
-      main: "#F48FB1", // Strawberry Milkshake Pink
-      light: "#F8BBD0", // Lighter shade for contrast
-      dark: "#F06292", // Deeper shade for hover/active
+  cssVariables: {
+    nativeColor: true,
+  },
+  colorSchemes: {
+    light: {
+      palette: {
+        primary: {
+          main: "#415f91", // Strawberry Milkshake Pink
+          light: "#d6e3ff", // Lighter shade for contrast
+          dark: "#284777", // Deeper shade for hover/active
+          contrastText: "#ffffff",
+        },
+        secondary: {
+          main: "#565f71", // Light Lavender
+          light: "#dae2f9", // Lighter shade
+          dark: "#3e4759", // Deeper shade
+          contrastText: "#ffffff",
+        },
+        text: {
+          primary: "#191c20",
+          secondary: "#44474e",
+        },
+        background: {
+          default: "#f9f9ff",
+          paper: "#ededf4",
+        },
+        divider: "#c4c6d0",
+        surface: {
+          lowest: "#fff",
+          low: "#f3f3fa",
+          medium: "#ededf4",
+          high: "#e7e8ee",
+          highest: "#e2e2e9",
+        },
+      },
     },
-    secondary: {
-      main: "#CE93D8", // Light Lavender
-      light: "#E1BEE7", // Lighter shade
-      dark: "#BA68C8", // Deeper shade
-    },
-    text: {
-      primary: "#191c20",
-      secondary: "#44474e",
-    },
-    background: {
-      default: "#f9f9ff",
-      paper: "#ededf4",
-    },
-    error: {
-      main: "#ba1a1a",
-    },
-    divider: "#c4c6d0",
   },
   components: {
     MuiButton: {
@@ -34,11 +46,11 @@ export const themeOptions: ThemeOptions = {
       styleOverrides: {
         root: {
           boxShadow: "none",
-          borderRadius: 6,
+          borderRadius: 999,
           fontWeight: "bold",
         },
         sizeMedium: {
-          padding: "8px 16px",
+          padding: "12px 16px",
         },
         sizeSmall: {
           padding: "6px 12px",
@@ -49,28 +61,24 @@ export const themeOptions: ThemeOptions = {
         },
       },
     },
-    MuiInput: {
-      styleOverrides: {
-        root: {
-          borderRadius: 6,
-        },
-      },
-    },
     MuiTextField: {
       defaultProps: {
         variant: "outlined",
         size: "small",
-        slotProps: {
-          inputLabel: {
-            shrink: true,
-          },
-        },
+        fullWidth: true,
+      },
+    },
+    MuiSelect: {
+      defaultProps: {
+        size: "small",
       },
     },
     MuiAppBar: {
       styleOverrides: {
         root: {
           boxShadow: "none",
+          backgroundColor: "var(--mui-palette-background-default)",
+          color: "var(--mui-palette-text-primary)",
         },
       },
     },
@@ -79,6 +87,14 @@ export const themeOptions: ThemeOptions = {
         root: {
           boxShadow: "none",
           borderRadius: 8,
+        },
+      },
+    },
+    MuiSnackbar: {
+      defaultProps: {
+        anchorOrigin: {
+          horizontal: "right",
+          vertical: "top",
         },
       },
     },
@@ -91,18 +107,191 @@ export const themeOptions: ThemeOptions = {
     },
     MuiMenu: {
       defaultProps: {
-        elevation: 0,
+        slotProps: {
+          paper: {
+            variant: "elevation",
+          },
+        },
       },
       styleOverrides: {
         paper: {
           marginTop: 8,
           minWidth: 250,
         },
+        list: {
+          marginLeft: 8,
+          marginRight: 8,
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          borderRadius: 6,
+          padding: 8,
+        },
+      },
+    },
+    MuiListItemButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 999,
+        },
+      },
+    },
+    MuiListItemIcon: {
+      styleOverrides: {
+        root: {
+          minWidth: "unset",
+          marginRight: 8,
+        },
+      },
+    },
+    MuiCard: {
+      defaultProps: {
+        variant: "outlined",
+        elevation: 2,
+      },
+    },
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+          padding: 16,
+        },
+      },
+    },
+    MuiCardActions: {
+      styleOverrides: {
+        root: {
+          padding: 16,
+        },
+      },
+    },
+    MuiPaper: {
+      defaultProps: {
+        variant: "medium",
+      },
+      styleOverrides: {
+        outlined: {
+          backgroundColor: "unset",
+        },
+        root: {
+          variants: [
+            {
+              props: { variant: "lowest" },
+              style: {
+                backgroundColor: "var(--mui-palette-surface-lowest)",
+              },
+            },
+            {
+              props: { variant: "low" },
+              style: {
+                backgroundColor: "var(--mui-palette-surface-low)",
+              },
+            },
+            {
+              props: { variant: "medium" },
+              style: {
+                backgroundColor: "var(--mui-palette-surface-medium)",
+              },
+            },
+            {
+              props: { variant: "high" },
+              style: {
+                backgroundColor: "var(--mui-palette-surface-high)",
+              },
+            },
+            {
+              props: { variant: "highest" },
+              style: {
+                backgroundColor: "var(--mui-palette-surface-highest)",
+              },
+            },
+          ],
+        },
+      },
+    },
+    MuiLink: {
+      defaultProps: {
+        underline: "hover",
+      },
+    },
+    MuiDataGrid: {
+      styleOverrides: {
+        root: {
+          borderRadius: "var(--mui-shape-radius-4)",
+          padding: "0 var(--mui-spacing)",
+        },
+        row: {
+          borderRadius: "var(--mui-shape-radius-3)",
+        },
+        cell: {
+          borderTop: "none",
+        },
+        menu: {
+          "& .MuiPaper-root": {
+            boxShadow: "var(--mui-shadows-6)",
+            borderRadius: "var(--mui-shape-radius-4)",
+          },
+          "& .MuiMenuItem-root": {
+            borderRadius: "var(--mui-shape-radius-3)",
+          },
+          "& .MuiList-root": {
+            paddingLeft: 6,
+            paddingRight: 6,
+          },
+        },
+        panelContent: {
+          borderRadius: "var(--mui-shape-radius-3)",
+        },
+        columnsManagementFooter: {
+          borderTop: "unset",
+
+          "& > label": {
+            borderRadius: 999,
+            paddingRight: "var(--mui-spacing)",
+            ":hover": {
+              backgroundColor: "var(--mui-palette-surface-highest)",
+            },
+          },
+        },
+        columnsManagementHeader: {
+          borderBottom: "unset",
+        },
+        columnsManagementRow: {
+          borderRadius: "var(--mui-shape-radius-2)",
+          ":hover": {
+            backgroundColor: "var(--mui-palette-surface-highest)",
+          },
+        },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          padding: 8,
+          "@media (min-width: 600px)": {
+            padding: 16,
+          },
+        },
+      },
+    },
+    MuiDateField: {
+      defaultProps: {
+        fullWidth: true,
+        size: "small",
       },
     },
   },
   shape: {
-    borderRadius: 8,
+    borderRadius: 6,
+    radius: {
+      "1": 4,
+      "2": 6,
+      "3": 10,
+      "4": 16,
+      "5": 26,
+    },
   },
   typography: {
     fontFamily: "system-ui",

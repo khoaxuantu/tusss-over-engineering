@@ -1,6 +1,10 @@
+// This file has been automatically migrated to valid ESM format by Storybook.
 import type { StorybookConfig } from "@storybook/nextjs";
+import { createRequire } from "node:module";
 
 import { dirname, join } from "path";
+
+const require = createRequire(import.meta.url);
 
 /**
  * This function is used to resolve the absolute path of a package.
@@ -12,10 +16,10 @@ function getAbsolutePath(value: string): any {
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
   addons: [
-    getAbsolutePath("@storybook/addon-essentials"),
     getAbsolutePath("@storybook/addon-onboarding"),
     getAbsolutePath("@chromatic-com/storybook"),
-    getAbsolutePath("@storybook/experimental-addon-test"),
+    getAbsolutePath("@storybook/addon-vitest"),
+    getAbsolutePath("@storybook/addon-docs"),
   ],
   framework: {
     name: getAbsolutePath("@storybook/nextjs"),
@@ -23,6 +27,9 @@ const config: StorybookConfig = {
   },
   docs: {
     defaultName: "Components",
+  },
+  typescript: {
+    reactDocgen: "react-docgen-typescript",
   },
 };
 export default config;

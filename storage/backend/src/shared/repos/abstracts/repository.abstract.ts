@@ -1,72 +1,92 @@
-import { DbClient } from "@/db/modules/types";
+import type { DbClient } from "@/db/modules/types";
 import { TusssDb } from "@/db/types/schemas.auto";
-import {
-  DeleteQueryBuilder,
-  DeleteResult,
-  InsertObject,
-  InsertQueryBuilder,
-  InsertResult,
-  SelectQueryBuilder,
-  UpdateQueryBuilder,
-  UpdateResult,
-} from "kysely";
+import { InsertObject, SelectQueryBuilder } from "kysely";
+import { HasPrimaryKey, Id } from "../types";
+import { UpdateObjBuilder } from "./updater.abstract";
 
 type SelectQuery = SelectQueryBuilder<TusssDb, keyof TusssDb, any>;
-type InsertQuery = InsertQueryBuilder<TusssDb, keyof TusssDb, InsertResult>;
-type UpdateQuery = UpdateQueryBuilder<TusssDb, keyof TusssDb, keyof TusssDb, UpdateResult>;
-type DeleteQuery = DeleteQueryBuilder<TusssDb, keyof TusssDb, DeleteResult>;
 
-export abstract class WriteRepository<T> {
+/**
+ * This interface provide a guideline to implement insertable repositories. It contains 2 actions,
+ * inserting single record, and inserting multiple records.
+ */
+export interface InsertPlugin<TBK extends keyof TusssDb, TID extends Id = number> {
+  insertOne(data: InsertObject<TusssDb, TBK>): Promise<HasPrimaryKey<TID> | undefined>;
+  insertMany(data: InsertObject<TusssDb, TBK>[]): Promise<TID[]>;
+}
+
+/**
+ * This interface provide a guideline to implement updatable repositories. There are 2 common cases
+ * of updating that a repository has to cover: Update a record only or update then return the
+ * updated record.
+ *
+ * The interface would not provide an update multiple reocords method, since there might be a lot of
+ * cases with different inputs that the method has to cover.
+ */
+export interface UpdatePlugin<O, TID extends Id = number> {
+  update(id: TID, builder: UpdateObjBuilder): Promise<boolean>;
+  updateAndReturn(id: TID, builder: UpdateObjBuilder): Promise<O | undefined>;
+}
+
+/**
+ * This interface provide a guideline to implement deletable repositories. The most common case of
+ * deleting an record is deleting by id.
+ *
+ * Because many join tables may not contain the primary key, the interface is only suitable to
+ * entity tables, whose records are identified by a primary key.
+ */
+export interface DeletePlugin<TID extends Id = number> {
+  delete(id: TID): Promise<boolean>;
+}
+
+/**
+ * Some entity tables provide soft delete methods, in which we mark a record to be true in delete
+ * column instead of delete the record completely out of the table.
+ *
+ * This interface provide a guideline to implement soft delete plugin in repositories.
+ */
+export interface SoftDeletePlugin<TID extends Id = number> {
+  deleteSoft(id: TID): Promise<boolean>;
+}
+
+export abstract class WriteRepository<
+    T extends HasPrimaryKey<TID>,
+    TBK extends keyof TusssDb = keyof TusssDb,
+    TID extends Id = number,
+  >
+  implements InsertPlugin<TBK, TID>, UpdatePlugin<T, TID>, DeletePlugin<TID>
+{
   constructor(readonly db: DbClient) {}
 
-  abstract get insertQuery(): InsertQuery;
-  abstract get updateQuery(): UpdateQuery;
-  abstract get deleteQuery(): DeleteQuery;
+  abstract get updater(): UpdateObjBuilder;
 
   get transaction() {
     return this.db.transaction();
   }
 
-  async insertOne(data: InsertObject<TusssDb, keyof TusssDb>) {
-    const res = await this.insertQuery.values(data).returning("id").executeTakeFirst();
-    return res;
-  }
-
-  async insertMany(data: InsertObject<TusssDb, keyof TusssDb>[]) {
-    const res = await this.insertQuery.values(data).returning("id").execute();
-    return res;
-  }
-
-  async update(id: number, query: UpdateQuery): Promise<boolean> {
-    const res = await query.where("id", "=", id).executeTakeFirst();
-    return res.numUpdatedRows > 0;
-  }
-
-  async updateAndReturn(id: number, query: UpdateQuery): Promise<T | undefined> {
-    const res = await query.where("id", "=", id).returningAll().executeTakeFirst();
-    return res as T | undefined;
-  }
-
-  async delete(id: number) {
-    const res = await this.deleteQuery.where("id", "=", id).executeTakeFirst();
-    return res;
-  }
-
-  async deleteMany(query: DeleteQuery) {
-    const res = await query.execute();
-    return res;
-  }
+  abstract insertOne(data: InsertObject<TusssDb, TBK>): Promise<HasPrimaryKey<TID> | undefined>;
+  abstract insertMany(data: InsertObject<TusssDb, TBK>[]): Promise<TID[]>;
+  abstract update(id: TID, builder: UpdateObjBuilder): Promise<boolean>;
+  abstract updateAndReturn(id: TID, builder: UpdateObjBuilder): Promise<T | undefined>;
+  abstract delete(id: TID): Promise<boolean>;
 }
 
-export abstract class ReadRepository<T> {
+export abstract class ReadRepository<T extends HasPrimaryKey<TID>, TID extends Id = number> {
   constructor(readonly db: DbClient) {}
 
   abstract get selectQuery(): SelectQuery;
 
-  async findById(id: number): Promise<T | undefined> {
+  async findById(id: TID): Promise<T | undefined> {
     const res = (await this.selectQuery.where("id", "=", id).selectAll().executeTakeFirst()) as
       | T
       | undefined;
     return res;
   }
+}
+
+export abstract class JoinTableRepository<TBK extends keyof TusssDb> implements InsertPlugin<TBK> {
+  constructor(readonly db: DbClient) {}
+
+  abstract insertOne(data: InsertObject<TusssDb, TBK>): Promise<HasPrimaryKey | undefined>;
+  abstract insertMany(data: InsertObject<TusssDb, TBK>[]): Promise<number[]>;
 }

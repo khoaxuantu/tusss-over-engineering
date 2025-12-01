@@ -1,0 +1,29 @@
+model SellerTable {
+  id   Int        @id @default(autoincrement())
+  name String     @db.VarChar(255)
+  type SellerType
+  href String?
+
+  sold_items      ItemTable[]           @relation(name: "retailer_items")
+  published_items ItemTable[]           @relation(name: "brand_items")
+  locations       SellerLocationTable[]
+
+  @@map("sellers")
+}
+
+enum SellerType {
+  AUTH
+  RETAIL
+}
+
+model SellerLocationTable {
+  seller_id   Int
+  seller      SellerTable   @relation(fields: [seller_id], references: [id], onDelete: Cascade)
+  city_id     String        @db.VarChar(32)
+  city        CityTable     @relation(fields: [city_id], references: [id], onDelete: Cascade)
+  district_id String        @db.VarChar(32)
+  district    DistrictTable @relation(fields: [district_id], references: [id], onDelete: Cascade)
+
+  @@id([seller_id, city_id, district_id])
+  @@map("sellers_locations")
+}

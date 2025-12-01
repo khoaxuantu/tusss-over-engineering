@@ -6,6 +6,7 @@ import { AuthController } from "./controllers/auth.controller";
 import { JwtAuthGuard } from "./guards/jwt.guard";
 import { RolesGuard } from "./guards/roles.guard";
 import { AuthService } from "./services/auth.service";
+import { JwtRefreshStrategy } from "./strategies/jwt-refresh.strategy";
 import { JwtStrategy } from "./strategies/jwt.strategy";
 import { LocalStrategy } from "./strategies/local.strategy";
 
@@ -15,6 +16,7 @@ import { LocalStrategy } from "./strategies/local.strategy";
     AuthService,
     LocalStrategy,
     JwtStrategy,
+    JwtRefreshStrategy,
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,

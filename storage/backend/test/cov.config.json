@@ -22,7 +22,8 @@
     "schema-factory",
     "schema.helper.ts",
     "print.helper.ts",
-    "coverage"
+    "coverage",
+    "catch-all.filter.ts"
   ],
   "coverageDirectory": "../coverage"
 }

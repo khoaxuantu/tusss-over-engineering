@@ -1,52 +1,10 @@
-import { TusssConfigService } from "@/configs/config.service";
-import { DecimalPrecision } from "@/shared/helpers/calc.helper";
-import { formatErrWithStack } from "@/shared/helpers/format.helper";
-import { Global, Logger, Module } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import { Kysely, PostgresDialect } from "kysely";
-import { Pool } from "pg";
-import { TusssDb } from "../types/schemas.auto";
+import { Global, Module } from "@nestjs/common";
 import { DbClientProvider } from "./constants";
-import { setupDbParser } from "./parser";
-import { DbClient } from "./types";
-
-const logger = new Logger("Kysely");
+import { DbProvider } from "./database.provider";
 
 @Global()
 @Module({
-  providers: [
-    {
-      provide: DbClientProvider,
-      inject: [ConfigService],
-      useFactory: (config: TusssConfigService): DbClient => {
-        setupDbParser();
-
-        const pool = new Pool({
-          host: config.getOrThrow("db.host"),
-          user: config.getOrThrow("db.user"),
-          password: config.getOrThrow("db.password"),
-          database: config.getOrThrow("db.name"),
-          port: config.getOrThrow("db.port"),
-        });
-        const dialect = new PostgresDialect({ pool });
-        const db = new Kysely<TusssDb>({
-          dialect,
-          log(event) {
-            if (event.level == "error") {
-              logger.error(
-                `[ouch!][${DecimalPrecision.round(event.queryDurationMillis, 2)}ms] ${formatErrWithStack(event.error as any)}`,
-              );
-            }
-            logger.debug(
-              `[query][${DecimalPrecision.round(event.queryDurationMillis, 2)}ms] ${event.query.sql}`,
-            );
-          },
-        });
-
-        return db;
-      },
-    },
-  ],
+  providers: [DbProvider],
   exports: [DbClientProvider],
 })
 export class DatabaseModule {}

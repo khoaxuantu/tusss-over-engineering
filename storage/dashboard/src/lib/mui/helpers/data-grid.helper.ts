@@ -3,32 +3,38 @@ import {
   getGridNumericOperators,
   getGridStringOperators,
   GridColDef,
+  GridValidRowModel,
 } from "@mui/x-data-grid";
-import { CrudOperators } from "@refinedev/core";
+
+type ColProps<TData extends GridValidRowModel> = GridColDef<TData> & {
+  field: keyof TData | "actions";
+};
 
 /**
  * I would not recommend create methods based on type properties, i.e date(), number().
  * Because it may cause too many spread operations.
  */
 export class ColumnDefHelper {
-  static common(props: GridColDef): GridColDef {
+  static common<TData extends GridValidRowModel>(props: ColProps<TData>): GridColDef<TData> {
     return {
       minWidth: 250,
       ...props,
     };
   }
 
-  static id(props?: Partial<GridColDef>): GridColDef {
+  static id<TData extends GridValidRowModel>(props?: Partial<ColProps<TData>>): GridColDef<TData> {
     return ColumnDefHelper.common({
-      ...props,
-      field: "_id",
+      field: "id",
       headerName: "Id",
+      ...props,
     });
   }
 
-  static createdAt(props?: Partial<GridColDef>): GridColDef {
+  static createdAt<TData extends GridValidRowModel>(
+    props?: Partial<ColProps<TData>>,
+  ): GridColDef<TData> {
     return ColumnDefHelper.common({
-      filterOperators: FilterOperatorMapper.getGridDateOperators(),
+      filterOperators: FilterOperator.date,
       ...props,
       field: "createdAt",
       headerName: "Created At",
@@ -38,14 +44,14 @@ export class ColumnDefHelper {
   }
 }
 
-export class FilterOperatorMapper {
-  static string: Record<string, CrudOperators> = {
+export class FilterOperator {
+  private static _string: Record<string, string> = {
     contains: "contains",
     equals: "eq",
     isAnyOf: "in",
   };
 
-  static numeric: Record<string, CrudOperators> = {
+  private static _numeric: Record<string, string> = {
     "=": "eq",
     "!=": "ne",
     ">": "gt",
@@ -55,7 +61,7 @@ export class FilterOperatorMapper {
     isAnyOf: "in",
   };
 
-  static date: Record<string, CrudOperators> = {
+  private static _date: Record<string, string> = {
     is: "eq",
     not: "ne",
     after: "gt",
@@ -65,21 +71,19 @@ export class FilterOperatorMapper {
     isAnyOf: "in",
   };
 
-  static getGridStringOperators() {
-    return getGridStringOperators().filter((operator) => {
-      return !!FilterOperatorMapper.string[operator.value];
-    });
-  }
+  static stringFull = getGridStringOperators();
+  static numericFull = getGridNumericOperators();
+  static dateFull = getGridDateOperators();
 
-  static getGridNumericOperators() {
-    return getGridNumericOperators().filter((operator) => {
-      return !!FilterOperatorMapper.numeric[operator.value];
-    });
-  }
+  static string = FilterOperator.stringFull.filter((operator) => {
+    return !!FilterOperator._string[operator.value];
+  });
 
-  static getGridDateOperators() {
-    return getGridDateOperators().filter((operator) => {
-      return !!FilterOperatorMapper.date[operator.value];
-    });
-  }
+  static numeric = FilterOperator.numericFull.filter((operator) => {
+    return !!FilterOperator._numeric[operator.value];
+  });
+
+  static date = FilterOperator.dateFull.filter((operator) => {
+    return !!FilterOperator._date[operator.value];
+  });
 }

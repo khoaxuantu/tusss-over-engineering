@@ -1,0 +1,35 @@
+model UsersOwningItemsTable {
+  created_at DateTime @default(now())
+
+  user    UserTable @relation(fields: [user_id], references: [id])
+  user_id Int
+  item    ItemTable @relation(fields: [item_id], references: [id])
+  item_id Int       @unique
+
+  @@id([user_id, item_id])
+  @@map("users_owning_items")
+}
+
+model UsersWatchingItemsTable {
+  created_at DateTime @default(now())
+
+  user    UserTable @relation(fields: [user_id], references: [id])
+  user_id Int
+  item    ItemTable @relation(fields: [item_id], references: [id])
+  item_id Int
+
+  @@id([user_id, item_id])
+  @@map("users_watching_items")
+}
+
+model PurchaseLogTable {
+  date DateTime @default(now())
+
+  buyer    UserTable @relation(fields: [buyer_id], references: [id])
+  buyer_id Int
+  item     ItemTable @relation(fields: [item_id], references: [id])
+  item_id  Int
+
+  @@id([buyer_id, item_id])
+  @@map("purchase_logs")
+}

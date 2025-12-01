@@ -7,7 +7,14 @@ import tseslint from "typescript-eslint";
 
 export default defineConfig(
   {
-    ignores: ["eslint.config.mjs", "scripts", "node_modules", "coverage", "src/db/types/*"],
+    ignores: [
+      "eslint.config.mjs",
+      "scripts",
+      "node_modules",
+      "coverage",
+      "src/db/types/*",
+      "**/*spec.ts",
+    ],
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,

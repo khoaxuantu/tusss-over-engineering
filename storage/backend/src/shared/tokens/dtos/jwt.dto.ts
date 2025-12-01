@@ -1,23 +1,26 @@
 import { Role } from "@/db/types/enums.auto";
 import { enumToArray } from "@/shared/helpers/enum.helper";
 import { UserExternalEnum } from "@/users/constants";
-import { User } from "@/users/schemas/user.schema";
+import { User } from "@/users/models/user.model";
 import { ApiProperty } from "@nestjs/swagger";
-import { instanceToPlain, plainToInstance } from "class-transformer";
+import { Expose, instanceToPlain, plainToInstance } from "class-transformer";
 import { ArrayMinSize, IsArray, IsNotEmpty } from "class-validator";
 
 export class UserIdentifier {
   @ApiProperty()
   @IsNotEmpty()
+  @Expose()
   id: number = 0;
 
   @ApiProperty()
   @IsNotEmpty()
+  @Expose()
   name: string = "";
 
-  @ApiProperty({ enum: enumToArray(Role), enumName: UserExternalEnum.roles })
+  @ApiProperty({ enum: enumToArray(Role), enumName: UserExternalEnum.roles, isArray: true })
   @IsArray()
   @ArrayMinSize(1)
+  @Expose()
   roles: Role[] = [];
 
   constructor(data?: UserIdentifier) {
@@ -29,7 +32,10 @@ export class UserIdentifier {
   }
 
   static create(data: Partial<UserIdentifier> = {}) {
-    return plainToInstance(UserIdentifier, data, { exposeDefaultValues: true });
+    return plainToInstance(UserIdentifier, data, {
+      exposeDefaultValues: true,
+      excludeExtraneousValues: true,
+    });
   }
 
   static fromUser(user: User) {

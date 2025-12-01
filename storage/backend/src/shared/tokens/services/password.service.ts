@@ -1,12 +1,18 @@
 import { Injectable } from "@nestjs/common";
 import bcrypt from "bcrypt";
 
-const SaltRounds = 10;
+const SaltRounds = 12;
 
 @Injectable()
 export class PasswordService {
-  hash(raw: string) {
-    return bcrypt.hash(raw, SaltRounds);
+  constructor() {}
+
+  hash(raw: string, saltRounds: number = SaltRounds) {
+    return bcrypt.hash(raw, saltRounds ?? SaltRounds);
+  }
+
+  hashSync(raw: string, saltRounds: number = SaltRounds) {
+    return bcrypt.hashSync(raw, saltRounds);
   }
 
   check(raw: string, encrypted: string) {

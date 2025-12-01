@@ -1,8 +1,14 @@
 model UserTable {
-  id       Int    @id @default(autoincrement())
-  name     String
-  password String
-  roles    Role[]
+  id         Int      @id @default(autoincrement())
+  name       String   @db.VarChar(255)
+  password   String   @db.VarChar(60)
+  roles      Role[]
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  owned_items    UsersOwningItemsTable[]
+  watching_items UsersWatchingItemsTable[]
+  purchase_logs  PurchaseLogTable[]
 
   @@map("users")
 }
