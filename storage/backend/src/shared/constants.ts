@@ -4,6 +4,7 @@ export const CommonMessage = {
     duplicated: "errors.duplicated",
     corruptedData: "errors.corrupted_data",
     db: "errors.db",
+    notFound: "errors.not_found",
   },
 };
 

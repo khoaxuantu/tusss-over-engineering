@@ -1,7 +1,6 @@
 import { DbClientProvider } from "@/db/modules/constants";
 import { MockDbClient } from "@/db/tests/shared-contexts/db";
 import { Pagination } from "@/shared/models/pagination.model";
-import { Sort } from "@/shared/models/sort.model";
 import { PaginationHelper } from "@/shared/repos/helpers/pagination.helper";
 import { MockPaginationHelper } from "@/shared/repos/helpers/tests/mocks/pagination.helper";
 import { Test } from "@nestjs/testing";
@@ -39,9 +38,7 @@ describe(CityReadRepository.name, () => {
   describe("paginate", () => {
     test("execute", async () => {
       const query = repository.selectQuery.selectAll();
-      const res = await repository.paginate(query, new Pagination(), [
-        new Sort({ direction: "asc", field: "name" }),
-      ]);
+      const res = await repository.paginate(query, new Pagination());
       expect(res).toBeDefined();
     });
   });
