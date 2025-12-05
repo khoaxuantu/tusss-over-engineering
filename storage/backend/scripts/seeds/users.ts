@@ -1,6 +1,6 @@
 import loadConfig from "@/configs/loader";
+import { Db } from "@/db/modules/types";
 import { Role } from "@/db/types/enums.auto";
-import { TusssDb } from "@/db/types/schemas.auto";
 import bcrypt from "bcrypt";
 import { Kysely, PostgresDialect } from "kysely";
 import { Pool } from "pg";
@@ -14,7 +14,7 @@ const pool = new Pool({
   port: config.db.port,
 });
 const dialect = new PostgresDialect({ pool });
-const db = new Kysely<TusssDb>({ dialect, log: ["error", "query"] });
+const db = new Kysely<Db>({ dialect, log: ["error", "query"] });
 
 async function run() {
   const pwd = await bcrypt.hash("aaa", 10);

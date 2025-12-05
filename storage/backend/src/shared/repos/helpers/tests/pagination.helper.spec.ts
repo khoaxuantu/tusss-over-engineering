@@ -1,4 +1,4 @@
-import { TusssDb } from "@/db/types/schemas.auto";
+import { Db, DbTable } from "@/db/modules/types";
 import { Pagination } from "@/shared/models/pagination.model";
 import { Sort } from "@/shared/models/sort.model";
 import { createMock } from "@golevelup/ts-jest";
@@ -7,7 +7,7 @@ import { PaginationHelper } from "../pagination.helper";
 
 describe(PaginationHelper.name, () => {
   const helper = new PaginationHelper();
-  const query = createMock<SelectQueryBuilder<TusssDb, keyof TusssDb, {}>>({
+  const query = createMock<SelectQueryBuilder<Db, DbTable, {}>>({
     select: jest.fn().mockReturnThis(),
   });
 

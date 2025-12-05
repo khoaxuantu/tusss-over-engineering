@@ -1,6 +1,5 @@
 import { DbClientProvider } from "@/db/modules/constants";
-import { DbClient } from "@/db/modules/types";
-import { TusssDb } from "@/db/types/schemas.auto";
+import { Db, DbClient, DbTable } from "@/db/modules/types";
 import { ReadRepository } from "@/shared/repos/abstracts/repository.abstract";
 import { User } from "@/users/models/user.model";
 import { createMock } from "@golevelup/ts-jest";
@@ -9,7 +8,7 @@ import { SelectQueryBuilder } from "kysely";
 import { UserReadRepository } from "../user.repository";
 
 describe(UserReadRepository.name, () => {
-  const mockSelect = createMock<SelectQueryBuilder<TusssDb, keyof TusssDb, any>>({
+  const mockSelect = createMock<SelectQueryBuilder<Db, DbTable, any>>({
     where: jest.fn().mockReturnThis(),
     select: jest.fn().mockReturnThis(),
     executeTakeFirst: jest.fn(),

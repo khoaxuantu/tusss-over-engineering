@@ -1,6 +1,5 @@
 import { InjectDbClient } from "@/db/decorators/inject-client.decorator";
-import type { DbClient } from "@/db/modules/types";
-import { TusssDb } from "@/db/types/schemas.auto";
+import type { Db, DbClient } from "@/db/modules/types";
 import { Pagination, PaginationResult } from "@/shared/models/pagination.model";
 import { Sort } from "@/shared/models/sort.model";
 import { InsertPlugin } from "@/shared/repos/abstracts/repository.abstract";
@@ -17,14 +16,12 @@ export class CityWriteRepository implements InsertPlugin<"cities", string> {
     private db: DbClient,
   ) {}
 
-  async insertOne(
-    data: InsertObject<TusssDb, "cities">,
-  ): Promise<HasPrimaryKey<string> | undefined> {
+  async insertOne(data: InsertObject<Db, "cities">): Promise<HasPrimaryKey<string> | undefined> {
     const res = await this.db.insertInto("cities").values(data).returning("id").executeTakeFirst();
     return res;
   }
 
-  async insertMany(data: InsertObject<TusssDb, "cities">[]): Promise<string[]> {
+  async insertMany(data: InsertObject<Db, "cities">[]): Promise<string[]> {
     const res = await this.db.insertInto("cities").values(data).returning("id").execute();
     return res.map((r) => r.id);
   }
@@ -43,16 +40,12 @@ export class CityReadRepository {
   }
 
   async findById(id: string) {
-    const res = await this.db
-      .selectFrom("cities")
-      .where("id", "=", id)
-      .selectAll()
-      .executeTakeFirst();
+    const res = await this.selectQuery.where("id", "=", id).selectAll().executeTakeFirst();
     return res;
   }
 
   async paginate(
-    query: SelectQueryBuilder<TusssDb, "cities", City>,
+    query: SelectQueryBuilder<Db, "cities", City>,
     pagination: Pagination,
     sorts: Sort<keyof City>[] = [],
   ) {
