@@ -1,6 +1,5 @@
 import { InjectDbClient } from "@/db/decorators/inject-client.decorator";
-import type { DbClient } from "@/db/modules/types";
-import { TusssDb } from "@/db/types/schemas.auto";
+import type { Db, DbClient } from "@/db/modules/types";
 import { ReadRepository, WriteRepository } from "@/shared/repos/abstracts/repository.abstract";
 import { UpdateObjBuilder } from "@/shared/repos/abstracts/updater.abstract";
 import { HasPrimaryKey } from "@/shared/repos/types";
@@ -22,14 +21,12 @@ export class SellerWriteRepository extends WriteRepository<Seller, "sellers"> {
     return new SellerUpdateBuilder();
   }
 
-  override async insertOne(
-    data: InsertObject<TusssDb, "sellers">,
-  ): Promise<HasPrimaryKey | undefined> {
+  override async insertOne(data: InsertObject<Db, "sellers">): Promise<HasPrimaryKey | undefined> {
     const res = await this.db.insertInto("sellers").values(data).returning("id").executeTakeFirst();
     return res;
   }
 
-  override async insertMany(data: InsertObject<TusssDb, "sellers">[]): Promise<number[]> {
+  override async insertMany(data: InsertObject<Db, "sellers">[]): Promise<number[]> {
     const res = await this.db.insertInto("sellers").values(data).returning("id").execute();
     return res.map((r) => r.id);
   }

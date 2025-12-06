@@ -1,3 +1,4 @@
+import { ResourceFilterString } from "@lib/resource/types/params.type";
 import {
   getGridDateOperators,
   getGridNumericOperators,
@@ -5,6 +6,7 @@ import {
   GridColDef,
   GridValidRowModel,
 } from "@mui/x-data-grid";
+import { GridFilterOperatorKey } from "../types";
 
 type ColProps<TData extends GridValidRowModel> = GridColDef<TData> & {
   field: keyof TData | "actions";
@@ -42,48 +44,57 @@ export class ColumnDefHelper {
       valueGetter: (value: any) => value && new Date(value),
     });
   }
+
+  static actions<TData extends GridValidRowModel>(props: Partial<ColProps<TData>>) {
+    return ColumnDefHelper.common<TData>({
+      field: "actions",
+      headerName: "Actions",
+      type: "actions",
+      ...props,
+    });
+  }
 }
 
+export const FilterStringOperatorMap = new Map<GridFilterOperatorKey, keyof ResourceFilterString>([
+  ["contains", "contain"],
+  ["equals", "eq"],
+  ["isAnyOf", "in"],
+]);
+
+export const FilterNumericOperatorMap = new Map<GridFilterOperatorKey, string>([
+  ["=", "eq"],
+  ["!=", "ne"],
+  [">", "gt"],
+  [">=", "gte"],
+  ["<", "lt"],
+  ["<=", "lte"],
+  ["isAnyOf", "in"],
+]);
+
+export const FilterDateOperatorMap = new Map<GridFilterOperatorKey, string>([
+  ["is", "eq"],
+  ["not", "ne"],
+  ["after", "gt"],
+  ["onOrAfter", "gte"],
+  ["before", "lt"],
+  ["onOrBefore", "lte"],
+  ["isAnyOf", "in"],
+]);
+
 export class FilterOperator {
-  private static _string: Record<string, string> = {
-    contains: "contains",
-    equals: "eq",
-    isAnyOf: "in",
-  };
-
-  private static _numeric: Record<string, string> = {
-    "=": "eq",
-    "!=": "ne",
-    ">": "gt",
-    ">=": "gte",
-    "<": "lt",
-    "<=": "lte",
-    isAnyOf: "in",
-  };
-
-  private static _date: Record<string, string> = {
-    is: "eq",
-    not: "ne",
-    after: "gt",
-    onOrAfter: "gte",
-    before: "lt",
-    onOrBefore: "lte",
-    isAnyOf: "in",
-  };
-
   static stringFull = getGridStringOperators();
   static numericFull = getGridNumericOperators();
   static dateFull = getGridDateOperators();
 
   static string = FilterOperator.stringFull.filter((operator) => {
-    return !!FilterOperator._string[operator.value];
+    return !!FilterStringOperatorMap.has(operator.value);
   });
 
   static numeric = FilterOperator.numericFull.filter((operator) => {
-    return !!FilterOperator._numeric[operator.value];
+    return !!FilterNumericOperatorMap.has(operator.value);
   });
 
   static date = FilterOperator.dateFull.filter((operator) => {
-    return !!FilterOperator._date[operator.value];
+    return !!FilterDateOperatorMap.has(operator.value);
   });
 }

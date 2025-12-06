@@ -1,4 +1,5 @@
 import ResourceHeader from "@lib/resource/components/header";
+import CityDatagrid from "@lib/resource/locations/cities/components/datagrid/list";
 import Link from "@lib/shared/components/links";
 import { Add } from "@mui/icons-material";
 import { Box, Button } from "@mui/material";
@@ -20,7 +21,9 @@ export default function Page() {
           </Link>
         }
       />
-      <Box>This is cities page</Box>
+      <Box>
+        <CityDatagrid />
+      </Box>
     </>
   );
 }

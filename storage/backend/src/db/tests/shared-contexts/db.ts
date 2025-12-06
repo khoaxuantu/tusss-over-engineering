@@ -1,3 +1,4 @@
+import { DbClientProvider } from "@/db/modules/constants";
 import { DbClient } from "@/db/modules/types";
 import {
   DeleteQueryBuilder,
@@ -91,6 +92,7 @@ export class MockDeleteQuery implements MockDeleteQueryProps {
 }
 
 export class MockDbClient implements MockDbProps {
+  provide = DbClientProvider;
   selectFrom = jest.fn().mockReturnValue(new MockSelectQuery()) as jest.Mock<
     MockSelectQuery,
     any,

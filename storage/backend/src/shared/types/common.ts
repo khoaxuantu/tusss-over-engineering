@@ -8,3 +8,5 @@ export declare type ClassConstructor<T> = {
 export interface TusssRequest extends Request {
   user?: UserIdentifier;
 }
+
+export type KeyOrString<TObject> = keyof TObject | (string & {});
