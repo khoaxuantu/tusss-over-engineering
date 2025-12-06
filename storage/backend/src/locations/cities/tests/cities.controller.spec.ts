@@ -4,7 +4,8 @@ import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { Test, TestingModule } from "@nestjs/testing";
 import { CityController } from "../city.controller";
 import { CityCreateCommand } from "../commands/create.command";
-import { CityCreateRequest } from "../dtos/request";
+import { CityCreateRequest, CityFilterRequest } from "../dtos/request";
+import { CityFilterQuery } from "../queries/filter.query";
 import { CityGetOneQuery } from "../queries/get-one.query";
 
 describe("CityController", () => {
@@ -41,5 +42,12 @@ describe("CityController", () => {
     queryBusFactory: () => queryBus,
     queryFactory: () => expect.any(CityGetOneQuery),
     subject: () => controller.getOne("1"),
+  });
+
+  testQueryExecute({
+    label: "filter",
+    queryBusFactory: () => queryBus,
+    queryFactory: () => expect.any(CityFilterQuery),
+    subject: () => controller.filter(new CityFilterRequest()),
   });
 });

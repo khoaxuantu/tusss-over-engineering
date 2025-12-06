@@ -1,6 +1,6 @@
 import { InjectDbClient } from "@/db/decorators/inject-client.decorator";
 import type { Db, DbClient } from "@/db/modules/types";
-import { Pagination, PaginationResult } from "@/shared/models/pagination.model";
+import { Paginable, Pagination, PaginationResult } from "@/shared/models/pagination.model";
 import { Sort } from "@/shared/models/sort.model";
 import { InsertPlugin } from "@/shared/repos/abstracts/repository.abstract";
 import { PaginationHelper } from "@/shared/repos/helpers/pagination.helper";
@@ -45,13 +45,13 @@ export class CityReadRepository {
   }
 
   async paginate(
-    query: SelectQueryBuilder<Db, "cities", City>,
+    query: SelectQueryBuilder<Db, "cities", {}>,
     pagination: Pagination,
     sorts: Sort<keyof City>[] = [],
   ) {
     const total = await this.paginationHelper.count(query);
-    const data = await this.paginationHelper.fetch(query, pagination, sorts);
+    const data = await this.paginationHelper.fetch(query.selectAll(), pagination, sorts);
 
-    return { data, pagination: new PaginationResult(pagination, total) };
+    return new Paginable(data, new PaginationResult(pagination, total));
   }
 }

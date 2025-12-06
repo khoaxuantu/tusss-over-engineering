@@ -1,5 +1,5 @@
 import { testModelCreate } from "@/shared/tests/shared-examples/model";
-import { CityCreateResponse, CityResponse } from "../response";
+import { CityCreateResponse, CityFilterResponse, CityResponse } from "../response";
 
 describe(CityCreateResponse.name, () => {
   testModelCreate({
@@ -17,6 +17,16 @@ describe(CityResponse.name, () => {
     factories: {
       testBlankObject: () => new CityResponse({}),
       testUndefined: () => new CityResponse(undefined),
+    },
+  });
+});
+
+describe(CityFilterResponse.name, () => {
+  testModelCreate({
+    cls: CityFilterResponse,
+    factories: {
+      testBlankObject: () => new CityFilterResponse({}),
+      testUndefined: () => new CityFilterResponse(undefined),
     },
   });
 });

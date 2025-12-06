@@ -30,10 +30,12 @@ export class FilterString {
 export class FilterNumber {
   @ApiPropertyOptional({ description: "Equal" })
   @IsOptional()
+  @Type(() => Number)
   eq?: number;
 
   @ApiPropertyOptional({ description: "Not Equal" })
   @IsOptional()
+  @Type(() => Number)
   ne?: number;
 
   @ApiPropertyOptional({ description: "In an array" })
@@ -48,18 +50,22 @@ export class FilterNumber {
 
   @ApiPropertyOptional({ description: "Greater than" })
   @IsOptional()
+  @Type(() => Number)
   gt?: number;
 
   @ApiPropertyOptional({ description: "Greater than or equal" })
   @IsOptional()
+  @Type(() => Number)
   gte?: number;
 
   @ApiPropertyOptional({ description: "Less than" })
   @IsOptional()
+  @Type(() => Number)
   lt?: number;
 
   @ApiPropertyOptional({ description: "Less than or equal" })
   @IsOptional()
+  @Type(() => Number)
   lte?: number;
 }
 

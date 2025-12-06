@@ -1,3 +1,4 @@
+import { PaginationResponse } from "@/shared/dtos/response";
 import { ApiProperty } from "@nestjs/swagger";
 
 export class CityCreateResponse {
@@ -19,5 +20,15 @@ export class CityResponse {
   constructor(data?: Partial<CityResponse>) {
     this.id = data?.id ?? "";
     this.name = data?.name ?? "";
+  }
+}
+
+export class CityFilterResponse {
+  data: CityResponse[];
+  pagination: PaginationResponse;
+
+  constructor(data?: Partial<CityFilterResponse>) {
+    this.data = data?.data ?? [];
+    this.pagination = data?.pagination ?? new PaginationResponse();
   }
 }

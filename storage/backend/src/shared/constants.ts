@@ -9,3 +9,8 @@ export const CommonMessage = {
 };
 
 export const TestErrorMessage = "[Test] Error";
+
+export const PaginationDefault = {
+  page: 1,
+  perPage: 10,
+};

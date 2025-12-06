@@ -1,5 +1,36 @@
 import { testTransformValues } from "@/shared/tests/shared-examples/class-transformer";
-import { FilterDate } from "../filter.model";
+import { FilterDate, FilterNumber } from "../filter.model";
+
+describe(FilterNumber.name, () => {
+  const numberStr = "123";
+  const numberExpect = 123;
+
+  describe("singular values", () => {
+    testTransformValues({
+      cls: FilterNumber,
+      plainObj: {
+        eq: numberStr,
+        ne: numberStr,
+        gt: numberStr,
+        gte: numberStr,
+        lt: numberStr,
+        lte: numberStr,
+        in: numberStr,
+        nin: numberStr,
+      },
+      expectedObj: {
+        eq: numberExpect,
+        ne: numberExpect,
+        gt: numberExpect,
+        gte: numberExpect,
+        lt: numberExpect,
+        lte: numberExpect,
+        in: [numberExpect],
+        nin: [numberExpect],
+      },
+    });
+  });
+});
 
 describe(FilterDate.name, () => {
   const dateStr = new Date().toISOString();

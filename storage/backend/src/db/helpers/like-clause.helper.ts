@@ -7,16 +7,22 @@ export class LikeClause {
   ) {}
 
   toSql() {
-    const escapedStr = this.escape();
+    let escapedStr = this.escape();
 
     switch (this.type) {
       case "contain":
-        return sql<string>`%${escapedStr}% ESCAPE "\\"`;
+        escapedStr = `%${escapedStr}%`;
+        break;
       case "startWidth":
-        return sql<string>`${escapedStr}% ESCAPE "\\"`;
+        escapedStr = `${escapedStr}%`;
+        break;
       case "endWidth":
-        return sql<string>`%${escapedStr} ESCAPE "\\"`;
+        escapedStr = `%${escapedStr}`;
+        break;
     }
+
+    const s = sql<string>`${escapedStr}`;
+    return s;
   }
 
   private escape() {
