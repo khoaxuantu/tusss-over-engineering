@@ -3,9 +3,10 @@ import { ApiAuthRequired } from "@/shared/decorators/swagger/api-auth-required.d
 import { ApiConflictResponse } from "@/shared/decorators/swagger/api-conflict-error.decorator";
 import { ApiInternalServerErrorResponse } from "@/shared/decorators/swagger/api-internal-error.decorator";
 import { ApiNotFoundResponse } from "@/shared/decorators/swagger/api-not-found.decorator";
+import { ApiQueryObject } from "@/shared/decorators/swagger/api-query-object.decorator";
 import { Body, Controller, Get, HttpStatus, Param, Post, Query } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
-import { ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiResponse, ApiTags } from "@nestjs/swagger";
 import { CityCreateCommand } from "./commands/create.command";
 import { CityCreateRequest, CityFilterField, CityFilterRequest } from "./dtos/request";
 import { CityCreateResponse, CityFilterResponse, CityResponse } from "./dtos/response";
@@ -39,11 +40,9 @@ export class CityController {
   }
 
   @Get()
-  @ApiQuery({
+  @ApiQueryObject({
     name: "and",
-    style: "deepObject",
-    explode: true,
-    type: CityFilterField,
+    cls: CityFilterField,
     examples: {
       blank: { value: {} },
       by_id: { value: { "0][id][contain": "hanoi" } },

@@ -6,6 +6,9 @@ export const CommonMessage = {
     db: "errors.db",
     notFound: "errors.not_found",
   },
+  ok: {
+    create: "ok.create",
+  },
 };
 
 export const TestErrorMessage = "[Test] Error";

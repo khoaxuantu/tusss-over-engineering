@@ -15,10 +15,10 @@ export class PaginationResponse {
   @ApiProperty()
   total_pages: number;
 
-  @ApiPropertyOptional()
+  @ApiPropertyOptional({ type: "number" })
   next_page?: number | undefined;
 
-  @ApiPropertyOptional()
+  @ApiPropertyOptional({ type: "number" })
   prev_page?: number | undefined;
 
   constructor(props?: Partial<PaginationResponse>) {
@@ -39,5 +39,14 @@ export class PaginationResponse {
       next_page: data.nextPage,
       prev_page: data.prevPage,
     });
+  }
+}
+
+export class CommonResponse {
+  @ApiProperty()
+  message: string;
+
+  constructor(props?: Partial<CommonResponse>) {
+    this.message = props?.message ?? "";
   }
 }
