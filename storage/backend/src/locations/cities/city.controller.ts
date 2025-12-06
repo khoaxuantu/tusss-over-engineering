@@ -4,6 +4,7 @@ import { ApiConflictResponse } from "@/shared/decorators/swagger/api-conflict-er
 import { ApiInternalServerErrorResponse } from "@/shared/decorators/swagger/api-internal-error.decorator";
 import { ApiNotFoundResponse } from "@/shared/decorators/swagger/api-not-found.decorator";
 import { ApiQueryObject } from "@/shared/decorators/swagger/api-query-object.decorator";
+import { ApiSortsRequest } from "@/shared/decorators/swagger/api-sort-request.decorator";
 import { Body, Controller, Get, HttpStatus, Param, Post, Query } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiResponse, ApiTags } from "@nestjs/swagger";
@@ -47,6 +48,14 @@ export class CityController {
       blank: { value: {} },
       by_id: { value: { "0][id][contain": "hanoi" } },
       by_name: { value: { "0][name][contain": "Hà Nội" } },
+    },
+  })
+  @ApiSortsRequest({
+    fields: ["name"],
+    examples: {
+      blank: { value: {} },
+      by_name_asc: { value: { "0][field": "name", "0][direction": "asc" } },
+      by_name_desc: { value: { "0][field": "name", "0][direction": "desc" } },
     },
   })
   @ApiResponse({ type: CityFilterResponse, status: HttpStatus.OK })

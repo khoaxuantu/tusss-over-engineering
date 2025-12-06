@@ -24,6 +24,6 @@ export function transformArrParams<T extends ParamClsConstructor>(
       return (props.cls as unknown as (v: string | number) => string | number)(input);
     }
 
-    return plainToInstance(props.cls as ClassConstructor<object>, input);
+    return plainToInstance<T, any>(props.cls as ClassConstructor<T>, input);
   }) as Transformed<T>[];
 }

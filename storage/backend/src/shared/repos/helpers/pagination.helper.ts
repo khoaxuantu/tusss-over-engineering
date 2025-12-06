@@ -16,11 +16,11 @@ export class PaginationHelper {
     pagination: Pagination,
     sorts: Sort<string>[],
   ) {
-    query.offset(pagination.skip).limit(pagination.limit);
+    let q = query.offset(pagination.skip).limit(pagination.limit);
     sorts.forEach((sort) => {
-      query.orderBy(sort.field, sort.direction);
+      q = q.orderBy(sort.field, sort.direction);
     });
 
-    return await query.execute();
+    return await q.execute();
   }
 }

@@ -30,6 +30,7 @@ export class CityFilterQueryHandler implements IQueryHandler<CityFilterQuery> {
     const res = await this.reader.paginate(
       q,
       new Pagination({ page: query.body.page, perPage: query.body.perPage }),
+      query.body.sorts,
     );
 
     return new CityFilterResponse({

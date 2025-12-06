@@ -29,10 +29,8 @@ export class DistrictFilterQueryHandler implements IQueryHandler<DistrictFilterQ
 
     const res = await this.repository.paginate(
       q,
-      new Pagination({
-        page: query.body.page,
-        perPage: query.body.perPage,
-      }),
+      new Pagination({ page: query.body.page, perPage: query.body.perPage }),
+      query.body.sorts,
     );
 
     return new DistrictFilterResponse({

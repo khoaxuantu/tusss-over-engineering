@@ -1,22 +1,9 @@
-import loadConfig from "@/configs/loader";
-import { Db } from "@/db/modules/types";
 import { Role } from "@/db/types/enums.auto";
 import bcrypt from "bcrypt";
-import { Kysely, PostgresDialect } from "kysely";
-import { Pool } from "pg";
-
-const config = loadConfig();
-const pool = new Pool({
-  host: config.db.host,
-  user: config.db.user,
-  password: config.db.password,
-  database: config.db.name,
-  port: config.db.port,
-});
-const dialect = new PostgresDialect({ pool });
-const db = new Kysely<Db>({ dialect, log: ["error", "query"] });
+import { DbClient } from "./shared/db";
 
 async function run() {
+  const db = DbClient.getInstance().db;
   const pwd = await bcrypt.hash("aaa", 10);
   const query = db
     .insertInto("users")

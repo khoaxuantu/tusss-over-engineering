@@ -1,6 +1,7 @@
 import { CityFilterField } from "@/locations/cities/dtos/request";
 import { TransformArrParams } from "@/shared/decorators/transforms/arr-params.decorator";
 import { PaginationRequest } from "@/shared/dtos/request";
+import { Sort } from "@/shared/models/sort.model";
 import { ApiProperty, PickType } from "@nestjs/swagger";
 import { IsNotEmpty, IsOptional, IsString } from "class-validator";
 import { DistrictInsert } from "../district.model";
@@ -23,4 +24,8 @@ export class DistrictFilterRequest extends PaginationRequest {
   @IsOptional()
   @TransformArrParams(DistrictFilterField)
   and?: DistrictFilterField[];
+
+  @IsOptional()
+  @TransformArrParams(Sort)
+  sorts?: Sort<"name">[];
 }
