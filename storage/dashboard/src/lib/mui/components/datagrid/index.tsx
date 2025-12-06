@@ -5,6 +5,7 @@ import {
   GridColDef,
   GridDataSource,
   GridGetRowsError,
+  GridSortingInitialState,
   GridValidRowModel,
   DataGrid as MuiDataGrid,
 } from "@mui/x-data-grid";
@@ -12,6 +13,7 @@ import {
 interface DatagridProps<TData extends GridValidRowModel = GridValidRowModel> {
   columns: GridColDef<TData>[];
   dataSource: GridDataSource;
+  initialSort?: GridSortingInitialState;
 }
 
 export default function DataGrid<TData extends GridValidRowModel = GridValidRowModel>(
@@ -30,6 +32,7 @@ export default function DataGrid<TData extends GridValidRowModel = GridValidRowM
             pageSize: 10,
           },
         },
+        sorting: props.initialSort,
       }}
       pageSizeOptions={[10, 25, 50, 100]}
       filterDebounceMs={500}

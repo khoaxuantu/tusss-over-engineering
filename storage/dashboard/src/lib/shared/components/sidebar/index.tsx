@@ -1,4 +1,4 @@
-import { Person, PersonOutline } from "@mui/icons-material";
+import { LocationCity, LocationPin } from "@mui/icons-material";
 import { Box, BoxProps, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import ListItemGroupTrigger from "../lists/group/trigger";
 import SidebarGroup from "./group";
@@ -16,30 +16,22 @@ export default function Sidebar(props: SidebarProps) {
       <List>
         <SidebarRoot>
           <SidebarGroup
-            activePaths={["/users", "/photographers"]}
+            activePaths={["/cities"]}
             trigger={
               <ListItemGroupTrigger>
                 <ListItemIcon>
-                  <Person />
+                  <LocationPin />
                 </ListItemIcon>
-                <ListItemText>NPC</ListItemText>
+                <ListItemText>Locations</ListItemText>
               </ListItemGroupTrigger>
             }
           >
             <ListItem sx={{ py: 0 }}>
-              <SidebarLink href="/users">
+              <SidebarLink href="/cities">
                 <ListItemIcon>
-                  <PersonOutline />
+                  <LocationCity />
                 </ListItemIcon>
-                <ListItemText>Users</ListItemText>
-              </SidebarLink>
-            </ListItem>
-            <ListItem sx={{ py: 0 }}>
-              <SidebarLink href="/photographers">
-                <ListItemIcon>
-                  <PersonOutline />
-                </ListItemIcon>
-                <ListItemText>Photographers</ListItemText>
+                <ListItemText>Cities</ListItemText>
               </SidebarLink>
             </ListItem>
           </SidebarGroup>

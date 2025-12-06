@@ -1,3 +1,4 @@
+import { applyDecorators } from "@nestjs/common";
 import { ApiQuery } from "@nestjs/swagger";
 
 interface ApiSortsRequestOpts {
@@ -6,19 +7,24 @@ interface ApiSortsRequestOpts {
 }
 
 export function ApiSortsRequest(opts: ApiSortsRequestOpts) {
-  return ApiQuery({
-    name: "sorts",
-    description: "Sorts",
-    style: "deepObject",
-    explode: true,
-    schema: {
-      type: "object",
-      properties: {
-        field: { type: "string", enum: opts.fields },
-        direction: { type: "string", enum: ["asc", "desc"] },
+  return applyDecorators(
+    ApiQuery({
+      name: "sorts",
+      description: "Sorts",
+      style: "deepObject",
+      explode: true,
+      schema: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            field: { type: "string", enum: opts.fields },
+            direction: { type: "string", enum: ["asc", "desc"] },
+          },
+          required: ["field", "direction"],
+        },
       },
-      required: ["field", "direction"],
-    },
-    examples: opts.examples,
-  });
+      examples: opts.examples,
+    }),
+  );
 }
