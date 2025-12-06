@@ -4,6 +4,8 @@ import { CityReadRepository, CityWriteRepository } from "./cities/city.repositor
 import { CityFilterQueryHandler } from "./cities/queries/filter.query";
 import { CityGetOneQueryHandler } from "./cities/queries/get-one.query";
 import { DistrictReadRepository, DistrictWriteRepository } from "./districts/district.repository";
+import { DistrictFilterQueryHandler } from "./districts/queries/filter.query";
+import { DistrictGetOneQueryHandler } from "./districts/queries/get-one.query";
 
 @Global()
 @Module({
@@ -15,6 +17,8 @@ import { DistrictReadRepository, DistrictWriteRepository } from "./districts/dis
     CityFilterQueryHandler,
     DistrictWriteRepository,
     DistrictReadRepository,
+    DistrictGetOneQueryHandler,
+    DistrictFilterQueryHandler,
   ],
   exports: [
     CityWriteRepository,

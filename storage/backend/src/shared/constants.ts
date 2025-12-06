@@ -9,7 +9,7 @@ export const CommonMessage = {
   ok: {
     create: "ok.create",
   },
-};
+} as const;
 
 export const TestErrorMessage = "[Test] Error";
 

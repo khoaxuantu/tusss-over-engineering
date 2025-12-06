@@ -5,28 +5,40 @@ import { ApiConflictResponse } from "@/shared/decorators/swagger/api-conflict-er
 import { ApiInternalServerErrorResponse } from "@/shared/decorators/swagger/api-internal-error.decorator";
 import { ApiNotFoundResponse } from "@/shared/decorators/swagger/api-not-found.decorator";
 import { ApiQueryObject } from "@/shared/decorators/swagger/api-query-object.decorator";
-import { CommonResponse } from "@/shared/dtos/response";
-import { Controller, Get, HttpStatus, Post } from "@nestjs/common";
+import { Body, Controller, Get, HttpStatus, Param, Post, Query } from "@nestjs/common";
+import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiResponse, ApiTags } from "@nestjs/swagger";
-import { DistrictFilterField } from "./dtos/request";
+import { DistrictCreateCommand } from "./commands/create.command";
+import { DistrictCreateRequest, DistrictFilterField, DistrictFilterRequest } from "./dtos/request";
 import { DistrictFilterResponse, DistrictResponse } from "./dtos/response";
+import { DistrictFilterQuery } from "./queries/filter.query";
+import { DistrictGetOneQuery } from "./queries/get-one.query";
 
 @Controller("districts")
 @ApiTags("Districts")
 @ApiAuthRequired()
 export class DistrictController {
+  constructor(
+    private readonly commandBus: CommandBus,
+    private readonly queryBus: QueryBus,
+  ) {}
+
   @Post()
   @ApiCommonResponse({ status: HttpStatus.CREATED, messages: [CommonMessage.ok.create] })
   @ApiConflictResponse({}, { messages: [CommonMessage.error.duplicated, CommonMessage.error.db] })
   @ApiInternalServerErrorResponse({}, { messages: [CommonMessage.error.create] })
-  create() {
-    return new CommonResponse({ message: CommonMessage.ok.create });
+  async create(@Body() body: DistrictCreateRequest) {
+    const res = await this.commandBus.execute(new DistrictCreateCommand(body));
+    return res;
   }
 
   @Get(":id")
   @ApiResponse({ type: DistrictResponse, status: HttpStatus.OK })
   @ApiNotFoundResponse()
-  async getOne() {}
+  async getOne(@Param("id") id: string) {
+    const res = await this.queryBus.execute(new DistrictGetOneQuery(id));
+    return res;
+  }
 
   @Get()
   @ApiQueryObject({
@@ -39,5 +51,8 @@ export class DistrictController {
     },
   })
   @ApiResponse({ type: DistrictFilterResponse, status: HttpStatus.OK })
-  async filter() {}
+  async filter(@Query() query: DistrictFilterRequest) {
+    const res = await this.queryBus.execute(new DistrictFilterQuery(query));
+    return res;
+  }
 }

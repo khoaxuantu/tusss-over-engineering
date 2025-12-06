@@ -46,7 +46,7 @@ export class CommonResponse {
   @ApiProperty()
   message: string;
 
-  constructor(props?: Partial<CommonResponse>) {
-    this.message = props?.message ?? "";
+  constructor(message: string) {
+    this.message = message;
   }
 }
