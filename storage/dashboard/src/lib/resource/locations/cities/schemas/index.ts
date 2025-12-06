@@ -10,6 +10,8 @@ export type CityRowData = {
   name: string;
 };
 
+export type CityShowData = CityRowData;
+
 export type CityFilterField = BackendSchemas["CityFilterField"];
 
 type CityBackendSorts = BackendOperations["CityController_filter"]["parameters"]["query"]["sorts"];

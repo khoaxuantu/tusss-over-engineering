@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useToast } from "@lib/shared/components/toast/hooks";
 import { FormContextProps } from "@lib/shared/interfaces/form";
+import { useRouter } from "next/navigation";
 import { createContext, PropsWithChildren } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { postCity } from "../actions/post";
@@ -15,6 +16,7 @@ export const CityNewContext = createContext<CityNewContextProps>({
 });
 
 export function CityNewProvider(props: PropsWithChildren) {
+  const router = useRouter();
   const toast = useToast();
   const methods = useForm<CityNewFormData>({
     resolver: zodResolver(CityNewSchema),
@@ -41,6 +43,8 @@ export function CityNewProvider(props: PropsWithChildren) {
       description: "Location created",
       variant: "success",
     });
+
+    router.replace(`/cities/${data.id}`);
   };
 
   return (
