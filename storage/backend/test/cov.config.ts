@@ -8,7 +8,15 @@ const config: Config = {
   },
   testRegex: ".*\\.spec\\.ts$",
   transform: {
-    "^.+\\.(t|j)s$": "<rootDir>/../scripts/ts-jest-transform-cov.js",
+    // "^.+\\.(t|j)s$": "<rootDir>/../scripts/ts-jest-transform.js",
+    "^.+\\.(t|j)s$": [
+      "@swc/jest",
+      {
+        jsc: {
+          target: "es2021",
+        },
+      },
+    ],
   },
   testEnvironment: "node",
   testEnvironmentOptions: {

@@ -1,9 +1,9 @@
-import { CommonMessage } from "@/shared/constants";
 import { applyDecorators, HttpStatus } from "@nestjs/common";
 import {
   ApiResponseNoStatusOptions,
   ApiConflictResponse as OpenApiConflictResponse,
 } from "@nestjs/swagger";
+import { CommonMessage } from "@tusss/core";
 import { ApiResponseCustomOpts } from "./types";
 
 interface CustomProps extends ApiResponseCustomOpts {}

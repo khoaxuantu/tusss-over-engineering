@@ -1,6 +1,6 @@
-import { CommonMessage } from "@/shared/constants";
 import { NotFoundException } from "@nestjs/common";
 import { IQueryHandler, Query, QueryHandler } from "@nestjs/cqrs";
+import { CommonMessage } from "@tusss/core";
 import { DistrictReadRepository } from "../district.repository";
 import { DistrictResponse } from "../dtos/response";
 

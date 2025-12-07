@@ -1,3 +1,4 @@
+import { describe, expect, test } from "bun:test";
 import { enumToArray } from "../enum.helper";
 
 describe("EnumHelper", () => {

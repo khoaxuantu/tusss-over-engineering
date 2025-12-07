@@ -1,7 +1,7 @@
-import { CommonMessage } from "@/shared/constants";
 import { CommonResponse } from "@/shared/dtos/response";
 import { InternalServerErrorException } from "@nestjs/common";
 import { Command, CommandHandler, ICommandHandler } from "@nestjs/cqrs";
+import { CommonMessage } from "@tusss/core";
 import { DistrictInsert } from "../district.model";
 import { DistrictWriteRepository } from "../district.repository";
 import { DistrictCreateRequest } from "../dtos/request";

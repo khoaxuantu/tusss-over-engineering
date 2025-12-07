@@ -1,6 +1,6 @@
-import { CommonMessage } from "@/shared/constants";
 import { InternalServerErrorException } from "@nestjs/common";
 import { Command, CommandHandler, ICommandHandler } from "@nestjs/cqrs";
+import { CommonMessage } from "@tusss/core";
 import { CityInsert } from "../city.model";
 import { CityWriteRepository } from "../city.repository";
 import { CityCreateRequest } from "../dtos/request";

@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import { PaginationDefault } from "../constants";
+import { PaginationDefault } from "@tusss/core";
 import { PaginationResult } from "../models/pagination.model";
 
 export class PaginationResponse {

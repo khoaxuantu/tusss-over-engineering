@@ -1,5 +1,4 @@
-import { PaginationDefault } from "../constants";
-import { DecimalPrecision } from "../helpers/calc.helper";
+import { DecimalPrecision, PaginationDefault } from "@tusss/core";
 
 export interface PaginationParams {
   page: number;
