@@ -1,0 +1,11 @@
+{
+  "name": "@tusss/tsconfig",
+  "version": "1.0.0",
+  "description": "This package stores tsconfig configuration files",
+  "packageManager": "pnpm@10.23.0",
+  "private": true,
+  "files": [
+    "base.json",
+    "react.json"
+  ]
+}
