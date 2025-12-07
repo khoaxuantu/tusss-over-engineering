@@ -1,4 +1,4 @@
-import { Person, PersonOutline } from "@mui/icons-material";
+import { LocationCity, LocationPin } from "@mui/icons-material";
 import { Box, BoxProps, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import ListItemGroupTrigger from "../lists/group/trigger";
 import SidebarGroup from "./group";
@@ -13,33 +13,39 @@ interface SidebarProps {
 export default function Sidebar(props: SidebarProps) {
   return (
     <Box component="nav" p={1} {...props.boxProps}>
-      <List>
+      <List
+        sx={{
+          "& .MuiListItem-root": {
+            py: 0,
+          },
+        }}
+      >
         <SidebarRoot>
           <SidebarGroup
-            activePaths={["/users", "/photographers"]}
+            activePaths={["/cities", "/districts"]}
             trigger={
               <ListItemGroupTrigger>
                 <ListItemIcon>
-                  <Person />
+                  <LocationPin />
                 </ListItemIcon>
-                <ListItemText>NPC</ListItemText>
+                <ListItemText>Locations</ListItemText>
               </ListItemGroupTrigger>
             }
           >
-            <ListItem sx={{ py: 0 }}>
-              <SidebarLink href="/users">
+            <ListItem>
+              <SidebarLink href="/cities">
                 <ListItemIcon>
-                  <PersonOutline />
+                  <LocationCity />
                 </ListItemIcon>
-                <ListItemText>Users</ListItemText>
+                <ListItemText>Cities</ListItemText>
               </SidebarLink>
             </ListItem>
-            <ListItem sx={{ py: 0 }}>
-              <SidebarLink href="/photographers">
+            <ListItem>
+              <SidebarLink href="/districts">
                 <ListItemIcon>
-                  <PersonOutline />
+                  <LocationCity />
                 </ListItemIcon>
-                <ListItemText>Photographers</ListItemText>
+                <ListItemText>Districts</ListItemText>
               </SidebarLink>
             </ListItem>
           </SidebarGroup>

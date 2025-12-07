@@ -3,12 +3,19 @@ import { DecimalPrecision } from "@/shared/helpers/calc.helper";
 import { formatErrWithStack } from "@/shared/helpers/format.helper";
 import { Logger, Provider } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { CamelCasePlugin, Kysely, PostgresDialect } from "kysely";
+import {
+  CamelCasePlugin,
+  DummyDriver,
+  Kysely,
+  PostgresAdapter,
+  PostgresDialect,
+  PostgresIntrospector,
+  PostgresQueryCompiler,
+} from "kysely";
 import { Pool } from "pg";
-import { TusssDb } from "../types/schemas.auto";
 import { DbClientProvider } from "./constants";
 import { setupDbParser } from "./parser";
-import { DbClient } from "./types";
+import { Db, DbClient } from "./types";
 
 const logger = new Logger("Kysely");
 
@@ -26,7 +33,7 @@ export const DbProvider = {
       port: config.getOrThrow("db.port"),
     });
     const dialect = new PostgresDialect({ pool });
-    const db = new Kysely<TusssDb>({
+    const db = new Kysely<Db>({
       dialect,
       plugins: [new CamelCasePlugin()],
       log(event) {
@@ -44,3 +51,12 @@ export const DbProvider = {
     return db;
   },
 } as const satisfies Provider;
+
+export const DbCold = new Kysely<Db>({
+  dialect: {
+    createAdapter: () => new PostgresAdapter(),
+    createDriver: () => new DummyDriver(),
+    createIntrospector: () => new PostgresIntrospector(DbCold),
+    createQueryCompiler: () => new PostgresQueryCompiler(),
+  },
+});

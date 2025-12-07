@@ -1,18 +1,17 @@
-import type { DbClient } from "@/db/modules/types";
-import { TusssDb } from "@/db/types/schemas.auto";
+import type { Db, DbClient, DbTable } from "@/db/modules/types";
 import { InsertObject, SelectQueryBuilder } from "kysely";
 import { HasPrimaryKey, Id } from "../types";
 import { UpdateObjBuilder } from "./updater.abstract";
 
-type SelectQuery = SelectQueryBuilder<TusssDb, keyof TusssDb, any>;
+type SelectQuery = SelectQueryBuilder<Db, DbTable, any>;
 
 /**
  * This interface provide a guideline to implement insertable repositories. It contains 2 actions,
  * inserting single record, and inserting multiple records.
  */
-export interface InsertPlugin<TBK extends keyof TusssDb, TID extends Id = number> {
-  insertOne(data: InsertObject<TusssDb, TBK>): Promise<HasPrimaryKey<TID> | undefined>;
-  insertMany(data: InsertObject<TusssDb, TBK>[]): Promise<TID[]>;
+export interface InsertPlugin<TBK extends DbTable, TID extends Id = number> {
+  insertOne(data: InsertObject<Db, TBK>): Promise<HasPrimaryKey<TID> | undefined>;
+  insertMany(data: InsertObject<Db, TBK>[]): Promise<TID[]>;
 }
 
 /**
@@ -51,7 +50,7 @@ export interface SoftDeletePlugin<TID extends Id = number> {
 
 export abstract class WriteRepository<
     T extends HasPrimaryKey<TID>,
-    TBK extends keyof TusssDb = keyof TusssDb,
+    TBK extends DbTable = DbTable,
     TID extends Id = number,
   >
   implements InsertPlugin<TBK, TID>, UpdatePlugin<T, TID>, DeletePlugin<TID>
@@ -64,8 +63,8 @@ export abstract class WriteRepository<
     return this.db.transaction();
   }
 
-  abstract insertOne(data: InsertObject<TusssDb, TBK>): Promise<HasPrimaryKey<TID> | undefined>;
-  abstract insertMany(data: InsertObject<TusssDb, TBK>[]): Promise<TID[]>;
+  abstract insertOne(data: InsertObject<Db, TBK>): Promise<HasPrimaryKey<TID> | undefined>;
+  abstract insertMany(data: InsertObject<Db, TBK>[]): Promise<TID[]>;
   abstract update(id: TID, builder: UpdateObjBuilder): Promise<boolean>;
   abstract updateAndReturn(id: TID, builder: UpdateObjBuilder): Promise<T | undefined>;
   abstract delete(id: TID): Promise<boolean>;
@@ -84,9 +83,9 @@ export abstract class ReadRepository<T extends HasPrimaryKey<TID>, TID extends I
   }
 }
 
-export abstract class JoinTableRepository<TBK extends keyof TusssDb> implements InsertPlugin<TBK> {
+export abstract class JoinTableRepository<TBK extends DbTable> implements InsertPlugin<TBK> {
   constructor(readonly db: DbClient) {}
 
-  abstract insertOne(data: InsertObject<TusssDb, TBK>): Promise<HasPrimaryKey | undefined>;
-  abstract insertMany(data: InsertObject<TusssDb, TBK>[]): Promise<number[]>;
+  abstract insertOne(data: InsertObject<Db, TBK>): Promise<HasPrimaryKey | undefined>;
+  abstract insertMany(data: InsertObject<Db, TBK>[]): Promise<number[]>;
 }

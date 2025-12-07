@@ -3,6 +3,7 @@ import { NestFactory } from "@nestjs/core";
 import { FastifyAdapter } from "@nestjs/platform-fastify";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import "dotenv/config";
+import qs from "qs";
 import { AppModule } from "./app.module";
 
 function setupOpenApi(app: INestApplication<any>) {
@@ -40,6 +41,7 @@ function setupFunctional(app: INestApplication<any>) {
 async function bootstrap() {
   const environment = process.env.NODE_ENV ?? "development";
   const fastify = new FastifyAdapter({
+    querystringParser: (str) => qs.parse(str) as Record<string, any>,
     logger:
       environment == "development"
         ? {
