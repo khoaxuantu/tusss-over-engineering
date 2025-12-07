@@ -227,6 +227,7 @@ export const themeOptions: ThemeOptions = {
         },
         cell: {
           borderTop: "none",
+          borderRadius: "inherit",
         },
         menu: {
           "& .MuiPaper-root": {

@@ -2,30 +2,34 @@
 
 import { BackendClient } from "@lib/apis/client";
 import { ServerActionResponse } from "@lib/apis/response";
-import { ResourceListParams } from "@lib/resource/types/params.type";
 import { PaginationModel } from "@lib/shared/models/pagination.model";
-import { CityFilterModel, CityListData, CityRowData, CitySortModel } from "../schemas";
+import {
+  DistrictFilterModel,
+  DistrictListData,
+  DistrictListParams,
+  DistrictSortModel,
+} from "../schemas";
 
-export async function filterCities(params: ResourceListParams<CityRowData>) {
+export async function filterDistricts(params: DistrictListParams) {
   const pagination = new PaginationModel({
     page: params.paginate?.page,
     pageSize: params.paginate?.pageSize,
   });
-  const filter = CityFilterModel.fromGridFilter(params.filter);
-  const sorts = CitySortModel.fromParams(params.sort);
+  const filter = DistrictFilterModel.fromFilterParams(params.filter);
+  const sorts = DistrictSortModel.fromSortParams(params.sort);
 
-  const res = await BackendClient.GET("/cities", {
+  const res = await BackendClient.GET("/districts", {
     params: {
       query: {
-        page: pagination.page,
-        perPage: pagination.perPage,
         and: filter,
         sorts: sorts,
+        page: pagination.page,
+        perPage: pagination.perPage,
       },
     },
   });
 
-  const data: CityListData = { rows: [], total: 0 };
+  const data: DistrictListData = { rows: [], total: 0 };
 
   if (res.error || !res.data) {
     return new ServerActionResponse({

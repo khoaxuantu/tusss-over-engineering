@@ -26,12 +26,12 @@ export const CityNewSchema = z.object({
   name: z.string().min(1, "Name is required"),
 });
 
-export class CityFilterSchema implements CityFilterField {
+export class CityFilterModel implements CityFilterField {
   id?: ResourceFilterString;
   name?: ResourceFilterString;
 
   static fromGridFilter(filters: ResourceListParams<CityRowData>["filter"]) {
-    const filter: CityFilterSchema = {};
+    const filter: CityFilterModel = {};
 
     filters?.forEach((item) => {
       const oper = FilterStringOperatorMap.get(item.operator);
@@ -52,7 +52,7 @@ export class CityFilterSchema implements CityFilterField {
   }
 }
 
-export class CitySortSchema implements CitySort {
+export class CitySortModel implements CitySort {
   readonly field: "name" = "name" as const;
   direction: "asc" | "desc";
 
@@ -64,7 +64,7 @@ export class CitySortSchema implements CitySort {
     const arr: CitySort[] = [];
 
     sorts?.forEach((item) => {
-      if (item.direction) arr.push(new CitySortSchema(item.direction));
+      if (item.direction) arr.push(new CitySortModel(item.direction));
     });
 
     return arr;

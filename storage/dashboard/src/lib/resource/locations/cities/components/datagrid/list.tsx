@@ -1,7 +1,9 @@
 "use client";
 
+import { GridGetRowAdapter } from "@lib/mui/adapters/get-row.adapter";
 import DataGrid from "@lib/mui/components/datagrid";
 import { ColumnDefHelper, FilterOperator } from "@lib/mui/helpers/data-grid.helper";
+import { ResourceId } from "@lib/resource/constants";
 import Link from "@lib/shared/components/links";
 import { VisibilityOutlined } from "@mui/icons-material";
 import { Button } from "@mui/material";
@@ -20,7 +22,7 @@ const columns: GridColDef<CityRowData>[] = [
     renderCell: (params) => {
       const id = params.row.id;
       return (
-        <Link href={`/cities/${id}`}>
+        <Link href={`/${ResourceId.city}/${id}`}>
           <Button startIcon={<VisibilityOutlined />}>View</Button>
         </Link>
       );
@@ -31,18 +33,8 @@ const columns: GridColDef<CityRowData>[] = [
 export default function CityDatagrid() {
   const dataSource: GridDataSource = {
     getRows: async (params) => {
-      const res = await filterCities({
-        paginate: params.paginationModel,
-        filter: params.filterModel.items.map((item) => ({
-          field: item.field,
-          operator: item.operator,
-          value: item.value,
-        })),
-        sort: params.sortModel.map((item) => ({
-          field: item.field,
-          direction: item.sort,
-        })),
-      });
+      const payload = new GridGetRowAdapter(params).parse();
+      const res = await filterCities(payload);
 
       if (res.error) throw res.error;
 

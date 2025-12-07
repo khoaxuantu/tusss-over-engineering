@@ -13,10 +13,16 @@ interface SidebarProps {
 export default function Sidebar(props: SidebarProps) {
   return (
     <Box component="nav" p={1} {...props.boxProps}>
-      <List>
+      <List
+        sx={{
+          "& .MuiListItem-root": {
+            py: 0,
+          },
+        }}
+      >
         <SidebarRoot>
           <SidebarGroup
-            activePaths={["/cities"]}
+            activePaths={["/cities", "/districts"]}
             trigger={
               <ListItemGroupTrigger>
                 <ListItemIcon>
@@ -26,12 +32,20 @@ export default function Sidebar(props: SidebarProps) {
               </ListItemGroupTrigger>
             }
           >
-            <ListItem sx={{ py: 0 }}>
+            <ListItem>
               <SidebarLink href="/cities">
                 <ListItemIcon>
                   <LocationCity />
                 </ListItemIcon>
                 <ListItemText>Cities</ListItemText>
+              </SidebarLink>
+            </ListItem>
+            <ListItem>
+              <SidebarLink href="/districts">
+                <ListItemIcon>
+                  <LocationCity />
+                </ListItemIcon>
+                <ListItemText>Districts</ListItemText>
               </SidebarLink>
             </ListItem>
           </SidebarGroup>
