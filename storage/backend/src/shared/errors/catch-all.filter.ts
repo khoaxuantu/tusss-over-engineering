@@ -9,8 +9,8 @@ import {
   Logger,
 } from "@nestjs/common";
 import { HttpAdapterHost } from "@nestjs/core";
+import { formatErrWithStack } from "@tusss/core";
 import { DatabaseError } from "pg";
-import { formatErrWithStack } from "../helpers/format.helper";
 import { TusssRequest } from "../types/common";
 
 @Catch()

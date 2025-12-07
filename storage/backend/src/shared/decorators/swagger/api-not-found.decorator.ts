@@ -1,10 +1,10 @@
-import { CommonMessage } from "@/shared/constants";
 import { applyDecorators, HttpStatus } from "@nestjs/common";
 import {
   ApiResponseOptions,
   ApiNotFoundResponse as SwaggerApiNotFoundResponse,
 } from "@nestjs/swagger";
 import { SchemaObject } from "@nestjs/swagger/dist/interfaces/open-api-spec.interface";
+import { CommonMessage } from "@tusss/core";
 import { ApiResponseCustomOpts } from "./types";
 
 interface CustomOpts extends ApiResponseCustomOpts {}

@@ -1,3 +1,4 @@
+import { describe, expect, test } from "bun:test";
 import { DecimalPrecision } from "../calc.helper";
 
 describe("CalcHelper", () => {
@@ -40,7 +41,7 @@ describe("CalcHelper", () => {
         const testNums = [9.13, 65.18, -2.26, -18.15];
         const expectNums = [9.13, 65.18, -2.26, -18.15];
         testNums.forEach((num, index) =>
-          expect(DecimalPrecision.ceil(num, 2)).toEqual(expectNums[index]),
+          expect(DecimalPrecision.ceil(num, 2)).toEqual(expectNums[index])
         );
       });
     });
@@ -59,7 +60,7 @@ describe("CalcHelper", () => {
         const testNums = [2.26, 18.15, -9.13, -65.18];
         const expectNums = [2.26, 18.15, -9.13, -65.18];
         testNums.forEach((num, index) =>
-          expect(DecimalPrecision.floor(num, 2)).toEqual(expectNums[index]),
+          expect(DecimalPrecision.floor(num, 2)).toEqual(expectNums[index])
         );
       });
     });
@@ -74,7 +75,7 @@ describe("CalcHelper", () => {
         const testNums = [2.26, 18.15, -2.26, -18.15];
         const expectNums = [2.26, 18.15, -2.26, -18.15];
         testNums.forEach((num, index) =>
-          expect(DecimalPrecision.trunc(num, 2)).toEqual(expectNums[index]),
+          expect(DecimalPrecision.trunc(num, 2)).toEqual(expectNums[index])
         );
       });
     });

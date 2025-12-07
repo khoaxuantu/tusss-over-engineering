@@ -1,10 +1,10 @@
-import { CommonMessage } from "@/shared/constants";
 import {
   BadRequestException,
   ConflictException,
   HttpException,
   InternalServerErrorException,
 } from "@nestjs/common";
+import { CommonMessage } from "@tusss/core";
 import { DatabaseError } from "pg";
 
 interface PgErrorItem {

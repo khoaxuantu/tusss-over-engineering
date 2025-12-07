@@ -1,5 +1,5 @@
-import { TestErrorMessage } from "@/shared/constants";
 import { InternalServerErrorException } from "@nestjs/common";
+import { TestErrorMessage } from "@tusss/core";
 import { DatabaseError } from "pg";
 import { DbErrorAdapter, PgError, PgErrorCode } from "../exceptions";
 

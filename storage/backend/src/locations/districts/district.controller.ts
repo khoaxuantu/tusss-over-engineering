@@ -1,4 +1,3 @@
-import { CommonMessage } from "@/shared/constants";
 import { ApiAuthRequired } from "@/shared/decorators/swagger/api-auth-required.decorator";
 import { ApiCommonResponse } from "@/shared/decorators/swagger/api-common-response.decorator";
 import { ApiConflictResponse } from "@/shared/decorators/swagger/api-conflict-error.decorator";
@@ -9,6 +8,7 @@ import { ApiSortsRequest } from "@/shared/decorators/swagger/api-sort-request.de
 import { Body, Controller, Get, HttpStatus, Param, Post, Query } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiResponse, ApiTags } from "@nestjs/swagger";
+import { CommonMessage } from "@tusss/core";
 import { DistrictCreateCommand } from "./commands/create.command";
 import { DistrictCreateRequest, DistrictFilterField, DistrictFilterRequest } from "./dtos/request";
 import { DistrictFilterResponse, DistrictResponse } from "./dtos/response";
