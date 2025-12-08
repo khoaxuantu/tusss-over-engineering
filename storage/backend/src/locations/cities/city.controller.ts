@@ -1,5 +1,4 @@
 import { ApiAuthRequired } from "@/shared/decorators/swagger/api-auth-required.decorator";
-import { ApiConflictResponse } from "@/shared/decorators/swagger/api-conflict-error.decorator";
 import { ApiInternalServerErrorResponse } from "@/shared/decorators/swagger/api-internal-error.decorator";
 import { ApiNotFoundResponse } from "@/shared/decorators/swagger/api-not-found.decorator";
 import { ApiQueryObject } from "@/shared/decorators/swagger/api-query-object.decorator";
@@ -8,6 +7,7 @@ import { Body, Controller, Get, HttpStatus, Param, Post, Query } from "@nestjs/c
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiResponse, ApiTags } from "@nestjs/swagger";
 import { CommonMessage } from "@tusss/core";
+import { ApiConflictResponse } from "@tusss/nestjs";
 import { CityCreateCommand } from "./commands/create.command";
 import { CityCreateRequest, CityFilterField, CityFilterRequest } from "./dtos/request";
 import { CityCreateResponse, CityFilterResponse, CityResponse } from "./dtos/response";
