@@ -1,5 +1,5 @@
 import { AuthService } from "@/auth/services/auth.service";
-import { User } from "@/users/models/user.model";
+import { User } from "@/domains/users/models/user.model";
 import { createMock } from "@golevelup/ts-jest";
 import { UnauthorizedException } from "@nestjs/common";
 import { Test } from "@nestjs/testing";

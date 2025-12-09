@@ -1,4 +1,4 @@
-import { CityFilterField } from "@/locations/cities/dtos/request";
+import { CityFilterField } from "@/domains/locations/cities/dtos/request";
 import { TransformArrParams } from "@/shared/decorators/transforms/arr-params.decorator";
 import { PaginationRequest } from "@/shared/dtos/request";
 import { Sort } from "@/shared/models/sort.model";

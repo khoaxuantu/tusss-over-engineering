@@ -6,9 +6,9 @@ import { AppService } from "./app.service";
 import { AuthModule } from "./auth/auth.module";
 import { TusssConfigModule } from "./configs/config.module";
 import { DatabaseModule } from "./db/modules/database.module";
-import { LocationsModule } from "./locations/locations.module";
+import { LocationsModule } from "./domains/locations/locations.module";
+import { UserModule } from "./domains/users/user.module";
 import { CatchEverythingFilter } from "./shared/errors/catch-all.filter";
-import { UserModule } from "./users/user.module";
 
 @Module({
   imports: [
