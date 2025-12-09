@@ -1,6 +1,6 @@
 import { Controller, Get } from "@nestjs/common";
+import { ApiAuthRequired } from "@tusss/nestjs";
 import { AppService } from "./app.service";
-import { ApiAuthRequired } from "./shared/decorators/swagger/api-auth-required.decorator";
 
 @Controller()
 export class AppController {

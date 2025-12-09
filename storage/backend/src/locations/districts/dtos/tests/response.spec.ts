@@ -1,4 +1,4 @@
-import { testModelCreate } from "@/shared/tests/shared-examples/model";
+import { testModelCreate } from "@tusss/jest/examples";
 import { DistrictFilterResponse, DistrictResponse } from "../response";
 
 describe(DistrictResponse.name, () => {

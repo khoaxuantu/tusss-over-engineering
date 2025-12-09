@@ -1,10 +1,10 @@
-# Package: Nestjs
+# Package: Jest
 
-Code name: @tusss/nestjs
+Code name: @tusss/jest
 
 ## Description
 
-This package is a wrapper for the Nestjs framework.
+This package is a wrapper for the Jest testing framework.
 
 ## Development
 

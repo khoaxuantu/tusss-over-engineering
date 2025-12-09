@@ -1,5 +1,5 @@
-import { testSuccess } from "@/shared/tests/shared-examples/success";
 import { createMock } from "@golevelup/ts-jest";
+import { testSuccess } from "@tusss/jest/examples";
 import { DistrictWriteRepository } from "../../district.repository";
 import { DistrictCreateRequest } from "../../dtos/request";
 import { DistrictCreateCommand, DistrictCreateCommandHandler } from "../create.command";

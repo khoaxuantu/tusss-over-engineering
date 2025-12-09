@@ -1,4 +1,4 @@
-import { testModelCreate } from "@/shared/tests/shared-examples/model";
+import { testModelCreate } from "@tusss/jest/examples";
 import { City } from "../../cities/city.model";
 
 describe(City.name, () => {
