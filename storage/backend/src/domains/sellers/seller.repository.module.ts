@@ -1,5 +1,9 @@
 import { Global, Module } from "@nestjs/common";
-import { SellerReadRepository, SellerRepository, SellerWriteRepository } from "./seller.repository";
+import {
+  SellerReadRepository,
+  SellerRepository,
+  SellerWriteRepository,
+} from "./repositories/seller.repository";
 
 @Global()
 @Module({

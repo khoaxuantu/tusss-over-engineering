@@ -49,10 +49,10 @@ export interface SoftDeletePlugin<TID extends Id = number> {
 }
 
 export abstract class WriteRepository<
-    T extends HasPrimaryKey<TID>,
-    TBK extends DbTable = DbTable,
-    TID extends Id = number,
-  >
+  T extends HasPrimaryKey<TID>,
+  TBK extends DbTable = DbTable,
+  TID extends Id = number,
+>
   implements InsertPlugin<TBK, TID>, UpdatePlugin<T, TID>, DeletePlugin<TID>
 {
   constructor(readonly db: DbClient) {}
