@@ -1,0 +1,4 @@
+{
+  "extends": "@tusss/tsconfig/base.json",
+  "include": ["index.ts", "eslint.config.ts"]
+}

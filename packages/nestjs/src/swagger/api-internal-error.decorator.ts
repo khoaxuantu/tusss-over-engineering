@@ -9,7 +9,7 @@ interface CustomProps extends ApiResponseCustomOpts {}
 
 export function ApiInternalServerErrorResponse(
   props?: ApiResponseNoStatusOptions,
-  custom?: CustomProps,
+  custom?: CustomProps
 ) {
   return applyDecorators(
     OpenApiError({
@@ -22,6 +22,6 @@ export function ApiInternalServerErrorResponse(
         required: ["message", "statusCode"],
       },
       ...props,
-    }),
+    })
   );
 }

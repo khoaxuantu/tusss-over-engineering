@@ -1,4 +1,4 @@
-import { ClassConstructor } from "@/shared/types/common";
+import { ClassConstructor } from "@tusss/core";
 
 interface TestModelCreateProps<T> {
   cls: ClassConstructor<T>;

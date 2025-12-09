@@ -1,4 +1,4 @@
-import { hookContext, JestHooks } from "../shared-contexts/hook";
+import { hookContext, JestHooks } from "../contexts/hook";
 
 interface TestSuccessProps {
   hooks?: JestHooks;

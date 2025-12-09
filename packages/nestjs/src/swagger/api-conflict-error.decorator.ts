@@ -26,6 +26,6 @@ export function ApiConflictResponse(opts?: ApiResponseNoStatusOptions, custom?: 
         required: ["message", "error", "statusCode"],
       },
       ...opts,
-    }),
+    })
   );
 }

@@ -1,5 +1,5 @@
-import { ClassConstructor } from "@/shared/types/common";
 import { ApiQuery } from "@nestjs/swagger";
+import { ClassConstructor } from "@tusss/core";
 
 interface ApiQueryObjOpts<T> {
   name: string;

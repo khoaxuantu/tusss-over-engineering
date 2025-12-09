@@ -29,6 +29,6 @@ export function ApiNotFoundResponse(opts?: ApiResponseOptions, custom?: CustomOp
       schema: defaultSchema,
       description: "Not Found",
       ...opts,
-    }),
+    })
   );
 }
