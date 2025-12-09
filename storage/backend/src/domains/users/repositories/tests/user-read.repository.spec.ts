@@ -1,7 +1,7 @@
 import { DbClientProvider } from "@/db/modules/constants";
 import { Db, DbClient, DbTable } from "@/db/modules/types";
+import { User } from "@/domains/users/models/user.model";
 import { ReadRepository } from "@/shared/repos/abstracts/repository.abstract";
-import { User } from "@/users/models/user.model";
 import { createMock } from "@golevelup/ts-jest";
 import { Test } from "@nestjs/testing";
 import { SelectQueryBuilder } from "kysely";

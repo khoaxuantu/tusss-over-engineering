@@ -1,6 +1,6 @@
 import { DbClientProvider } from "@/db/modules/constants";
 import { MockDbClient } from "@/db/tests/shared-contexts/db";
-import { Seller, SellerInsert } from "@/sellers/models/seller.model";
+import { Seller, SellerInsert } from "@/domains/sellers/models/seller.model";
 import { Test } from "@nestjs/testing";
 import { SellerWriteRepository } from "../seller.repository";
 
