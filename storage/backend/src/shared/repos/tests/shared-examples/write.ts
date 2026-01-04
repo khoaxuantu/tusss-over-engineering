@@ -1,4 +1,4 @@
-import { MockDbClient } from "@/db/tests/shared-contexts/db";
+import { MockDbClient } from "@/shared/db/tests/shared-contexts/db";
 import { DeleteResult, UpdateResult } from "kysely";
 import { WriteRepository } from "../../abstracts/repository.abstract";
 import { HasPrimaryKey } from "../../types";

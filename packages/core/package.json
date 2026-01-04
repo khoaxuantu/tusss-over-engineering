@@ -6,7 +6,7 @@
   "packageManager": "pnpm@10.23.0",
   "private": true,
   "scripts": {
-    "build": "bun build index.ts --outdir dist",
+    "build": "bun build index.ts --outdir dist && bun run build:types",
     "build:types": "tsc --emitDeclarationOnly",
     "check:types": "tsc --noEmit"
   },

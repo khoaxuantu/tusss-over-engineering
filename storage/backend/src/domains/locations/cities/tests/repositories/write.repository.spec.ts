@@ -1,6 +1,6 @@
-import { DbClientProvider } from "@/db/modules/constants";
-import { MockDbClient } from "@/db/tests/shared-contexts/db";
-import { CityInsert } from "@/locations/cities/city.model";
+import { CityInsert } from "@/domains/locations/cities/city.model";
+import { DbClientProvider } from "@/shared/db/modules/constants";
+import { MockDbClient } from "@/shared/db/tests/shared-contexts/db";
 import { HasPrimaryKey } from "@/shared/repos/types";
 import { Test } from "@nestjs/testing";
 import { CityWriteRepository } from "../../city.repository";

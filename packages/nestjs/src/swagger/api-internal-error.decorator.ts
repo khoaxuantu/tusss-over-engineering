@@ -16,7 +16,11 @@ export function ApiInternalServerErrorResponse(
       description: "Internal Server Error",
       schema: {
         properties: {
-          message: { type: "string", example: "Internal Server Error", enum: custom?.messages },
+          message: {
+            type: "string",
+            example: custom?.messages?.at(0) || "Internal Server Error",
+            enum: custom?.messages,
+          },
           statusCode: { type: "integer", default: HttpStatus.INTERNAL_SERVER_ERROR },
         },
         required: ["message", "statusCode"],

@@ -1,5 +1,5 @@
-import { MockExpression } from "@/db/tests/shared-contexts/expression";
-import { isBinaryOperationNode, isOperatorNode } from "@/db/types/guards";
+import { MockExpression } from "@/shared/db/tests/shared-contexts/expression";
+import { isBinaryOperationNode, isOperatorNode } from "@/shared/db/types/guards";
 import assert from "node:assert";
 import { FilterToEbAdapter } from "../filter-to-eb.adapter";
 
