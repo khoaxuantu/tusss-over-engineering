@@ -1,7 +1,7 @@
-import { Seller, SellerInsert } from "@/domains/sellers/models/seller.model";
 import { DbClientProvider } from "@/shared/db/modules/constants";
 import { MockDbClient } from "@/shared/db/tests/shared-contexts/db";
 import { Test } from "@nestjs/testing";
+import { Seller, SellerInsert } from "../../models/seller.model";
 import { SellerWriteRepository } from "../seller.repository";
 
 describe(SellerWriteRepository.name, () => {

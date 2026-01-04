@@ -2,6 +2,7 @@ import { SellerExternalEnum } from "@/providers/sellers/constants";
 import { SellerType } from "@/shared/db/types/enums.auto";
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { enumToArray } from "@tusss/core";
+import { PaginationRequest } from "@tusss/nestjs";
 import { IsEnum, IsNotEmpty, IsString } from "class-validator";
 
 export class SellerCreateRequest {
@@ -35,3 +36,5 @@ export class SellerCreateRequest {
   @IsNotEmpty()
   district_id: string = "";
 }
+
+export class SellerFilterRequest extends PaginationRequest {}

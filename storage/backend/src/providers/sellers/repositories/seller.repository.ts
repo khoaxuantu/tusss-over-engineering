@@ -2,9 +2,11 @@ import { InjectDbClient } from "@/shared/db/decorators/inject-client.decorator";
 import type { Db, DbClient } from "@/shared/db/modules/types";
 import { ReadRepository, WriteRepository } from "@/shared/repos/abstracts/repository.abstract";
 import { UpdateObjBuilder } from "@/shared/repos/abstracts/updater.abstract";
+import { PaginationHelper } from "@/shared/repos/helpers/pagination.helper";
 import { HasPrimaryKey } from "@/shared/repos/types";
 import { Injectable } from "@nestjs/common";
-import { InsertObject } from "kysely";
+import { Paginable, Pagination, PaginationResult, Sort } from "@tusss/core";
+import { expressionBuilder, InsertObject, SelectQueryBuilder } from "kysely";
 import { Seller } from "../models/seller.model";
 import { SellerUpdateBuilder } from "./builders/update-obj.builder";
 
@@ -79,6 +81,33 @@ export class SellerReadRepository extends ReadRepository<Seller> {
     const raw = await super.findById(id);
     if (!raw) return undefined;
     return new Seller(raw);
+  }
+}
+
+@Injectable()
+export class SellerFilterRepository {
+  constructor(
+    @InjectDbClient()
+    private readonly db: DbClient,
+    private readonly pagination: PaginationHelper,
+  ) {}
+
+  newQb() {
+    return this.db.selectFrom("sellers");
+  }
+
+  newEb() {
+    return expressionBuilder<Db, "sellers">();
+  }
+
+  async paginate(
+    query: SelectQueryBuilder<Db, "sellers", {}>,
+    pagination: Pagination,
+    sorts: Sort[],
+  ) {
+    const total = await this.pagination.count(query);
+    const data = await this.pagination.fetch(query.selectAll(), pagination, sorts);
+    return new Paginable(data, new PaginationResult(pagination, total));
   }
 }
 

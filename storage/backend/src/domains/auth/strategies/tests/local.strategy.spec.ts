@@ -1,8 +1,8 @@
-import { AuthService } from "@/auth/services/auth.service";
 import { User } from "@/providers/users/models/user.model";
 import { createMock } from "@golevelup/ts-jest";
 import { UnauthorizedException } from "@nestjs/common";
 import { Test } from "@nestjs/testing";
+import { AuthService } from "../../services/auth.service";
 import { LocalStrategy } from "../local.strategy";
 
 describe(LocalStrategy.name, () => {

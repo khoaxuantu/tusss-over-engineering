@@ -3,25 +3,28 @@ import type { DbClient } from "@/shared/db/modules/types";
 import { IQueryHandler, Query, QueryHandler } from "@nestjs/cqrs";
 import { SellerLocation, SellerLocationRecordFlat } from "../models/seller-location.model";
 
-export class SellerLocationGetOneQuery extends Query<SellerLocation | undefined> {
-  constructor(readonly id: number) {
+export class SellerLocationGetMapQuery extends Query<Map<number, SellerLocation>> {
+  constructor(readonly sellerIds: number[]) {
     super();
   }
 }
 
-@QueryHandler(SellerLocationGetOneQuery)
-export class SellerLocationGetOneQueryHandler implements IQueryHandler<SellerLocationGetOneQuery> {
+@QueryHandler(SellerLocationGetMapQuery)
+export class SellerLocationGetMapQueryHandler implements IQueryHandler<SellerLocationGetMapQuery> {
   constructor(
     @InjectDbClient()
     private readonly db: DbClient,
   ) {}
 
-  async execute(query: SellerLocationGetOneQuery): Promise<SellerLocation | undefined> {
+  async execute(query: SellerLocationGetMapQuery): Promise<Map<number, SellerLocation>> {
+    const map = new Map<number, SellerLocation>();
+    if (!query.sellerIds.length) return map;
+
     const q = this.db
       .selectFrom("sellersLocations as sl")
       .leftJoin("cities", "sl.cityId", "cities.id")
       .leftJoin("districts", "sl.districtId", "districts.id")
-      .where("sl.sellerId", "=", query.id)
+      .where("sl.sellerId", "in", query.sellerIds)
       .select([
         "sl.cityId as cityId",
         "sl.districtId as districtId",
@@ -32,11 +35,12 @@ export class SellerLocationGetOneQueryHandler implements IQueryHandler<SellerLoc
         "districts.name as district.name",
       ]);
 
-    const data: SellerLocationRecordFlat | undefined = await q.executeTakeFirst();
-    if (!data) return undefined;
+    const data: SellerLocationRecordFlat[] = await q.execute();
 
-    const sl = SellerLocation.fromFlat(data);
+    data.forEach((item) => {
+      map.set(item.sellerId, SellerLocation.fromFlat(item));
+    });
 
-    return sl;
+    return map;
   }
 }

@@ -1,12 +1,19 @@
-import { CityRecordModel } from "@/domains/locations/cities/city.model";
-import { DistrictRecordModel } from "@/domains/locations/districts/district.model";
+import { City, CityRecordModel } from "@/domains/locations/cities/city.model";
+import { District, DistrictRecordModel } from "@/domains/locations/districts/district.model";
 import { SellerLocationTable } from "@/shared/db/types/schemas.auto";
+import { toOptional } from "@tusss/core";
 import { Insertable, Selectable } from "kysely";
 
 export type SellerLocationInsertModel = Insertable<SellerLocationTable>;
 export type SellerLocationRecordModel = Selectable<SellerLocationTable> & {
   city?: CityRecordModel;
   district?: DistrictRecordModel;
+};
+export type SellerLocationRecordFlat = Selectable<SellerLocationTable> & {
+  "city.id": string | null;
+  "city.name": string | null;
+  "district.id": string | null;
+  "district.name": string | null;
 };
 
 export class SellerLocation implements SellerLocationRecordModel {
@@ -27,6 +34,30 @@ export class SellerLocation implements SellerLocationRecordModel {
 
   static create(data?: SellerLocationRecordModel) {
     return new SellerLocation(data);
+  }
+
+  static fromFlat(data: SellerLocationRecordFlat) {
+    const obj = new SellerLocation({
+      sellerId: data.sellerId,
+      cityId: data.cityId,
+      districtId: data.districtId,
+    });
+
+    if (data["city.id"]) {
+      obj.city = new City({
+        id: data["city.id"],
+        name: toOptional(data["city.name"]),
+      });
+    }
+
+    if (data["district.id"]) {
+      obj.district = new District({
+        id: data["district.id"],
+        name: toOptional(data["district.name"]),
+      });
+    }
+
+    return obj;
   }
 }
 
