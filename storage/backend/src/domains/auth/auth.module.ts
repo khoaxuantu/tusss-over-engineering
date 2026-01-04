@@ -1,4 +1,5 @@
 import { TokenModule } from "@/providers/tokens/token.module";
+import { ProviderUserModule } from "@/providers/users/user.module";
 import { Module } from "@nestjs/common";
 import { APP_GUARD } from "@nestjs/core";
 import { PassportModule } from "@nestjs/passport";
@@ -11,7 +12,7 @@ import { JwtStrategy } from "./strategies/jwt.strategy";
 import { LocalStrategy } from "./strategies/local.strategy";
 
 @Module({
-  imports: [PassportModule, TokenModule],
+  imports: [PassportModule, TokenModule, ProviderUserModule],
   providers: [
     AuthService,
     LocalStrategy,

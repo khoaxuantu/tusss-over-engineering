@@ -1,5 +1,5 @@
-import { UserExternalEnum } from "@/domains/users/constants";
-import { User } from "@/domains/users/models/user.model";
+import { UserExternalEnum } from "@/providers/users/constants";
+import { User } from "@/providers/users/models/user.model";
 import { Role } from "@/shared/db/types/enums.auto";
 import { ApiProperty } from "@nestjs/swagger";
 import { enumToArray } from "@tusss/core";

@@ -1,4 +1,4 @@
-import { User } from "@/domains/users/models/user.model";
+import { User } from "@/providers/users/models/user.model";
 import { DbClientProvider } from "@/shared/db/modules/constants";
 import { Db, DbClient, DbTable } from "@/shared/db/modules/types";
 import { ReadRepository } from "@/shared/repos/abstracts/repository.abstract";

@@ -1,6 +1,6 @@
-import { UserRepository } from "@/domains/users/repositories/user.repository";
 import { UserIdentifier } from "@/providers/tokens/dtos/jwt.dto";
 import { TokenService } from "@/providers/tokens/services/token.service";
+import { UserRepository } from "@/providers/users/repositories/user.repository";
 import { Injectable } from "@nestjs/common";
 
 @Injectable()

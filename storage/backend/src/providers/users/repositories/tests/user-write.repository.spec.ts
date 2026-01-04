@@ -1,5 +1,5 @@
-import { User } from "@/domains/users/models/user.model";
 import { TokenService } from "@/providers/tokens/services/token.service";
+import { User } from "@/providers/users/models/user.model";
 import { DbClientProvider } from "@/shared/db/modules/constants";
 import { MockDbClient } from "@/shared/db/tests/shared-contexts/db";
 import { createMock } from "@golevelup/ts-jest";
