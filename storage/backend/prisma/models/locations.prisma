@@ -2,7 +2,7 @@ model CityTable {
   id   String @id @db.VarChar(32)
   name String @db.VarChar(32)
 
-  sellers SellerLocationTable[]
+  stores StoreLocationTable[]
 
   @@map("cities")
 }
@@ -11,7 +11,7 @@ model DistrictTable {
   id   String @id @db.VarChar(32)
   name String @db.VarChar(32)
 
-  sellers SellerLocationTable[]
+  stores StoreLocationTable[]
 
   @@map("districts")
 }

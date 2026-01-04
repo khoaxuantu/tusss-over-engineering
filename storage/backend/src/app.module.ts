@@ -5,7 +5,7 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { AuthModule } from "./domains/auth/auth.module";
 import { LocationsModule } from "./domains/locations/locations.module";
-import { SellersModule } from "./domains/sellers/sellers.module";
+import { StoresModule } from "./domains/stores/stores.module";
 import { UserModule } from "./domains/users/user.module";
 import { TusssConfigModule } from "./shared/configs/config.module";
 import { DatabaseModule } from "./shared/db/modules/database.module";
@@ -19,7 +19,7 @@ import { CatchEverythingFilter } from "./shared/errors/catch-all.filter";
     UserModule,
     AuthModule,
     LocationsModule,
-    SellersModule,
+    StoresModule,
   ],
   controllers: [AppController],
   providers: [AppService, { provide: APP_FILTER, useClass: CatchEverythingFilter }],

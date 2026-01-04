@@ -1,84 +1,85 @@
 import type { ColumnType } from "kysely";
-export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
-  ? ColumnType<S, I | undefined, U>
-  : ColumnType<T, T | undefined, T>;
+export type Generated<T> =
+  T extends ColumnType<infer S, infer I, infer U>
+    ? ColumnType<S, I | undefined, U>
+    : ColumnType<T, T | undefined, T>;
 export type Timestamp = ColumnType<Date, Date | string, Date | string>;
 
-import type { SellerType, Role } from "./enums.auto";
+import type { Role, StoreType } from "./enums.auto";
 
 export type CityTable = {
-    id: string;
-    name: string;
+  id: string;
+  name: string;
 };
 export type DistrictTable = {
-    id: string;
-    name: string;
+  id: string;
+  name: string;
 };
 export type ItemsItemsTable = {
-    parentId: number;
-    childId: number;
+  parentId: number;
+  childId: number;
 };
 export type ItemTable = {
-    id: Generated<number>;
-    name: string;
-    price: number;
-    description: string | null;
-    href: string | null;
-    archived: boolean | null;
-    retailerId: number;
-    brandId: number;
+  id: Generated<number>;
+  name: string;
+  price: number;
+  description: string | null;
+  href: string | null;
+  archived: boolean | null;
+  retailerId: number;
+  brandId: number;
 };
 export type PurchaseLogTable = {
-    date: Generated<Timestamp>;
-    buyerId: number;
-    itemId: number;
+  date: Generated<Timestamp>;
+  buyerId: number;
+  itemId: number;
 };
-export type SellerLocationTable = {
-    sellerId: number;
-    cityId: string;
-    districtId: string;
+export type StoreLocationTable = {
+  storeId: number;
+  cityId: string;
+  districtId: string;
 };
-export type SellerTable = {
-    id: Generated<number>;
-    name: string;
-    type: SellerType;
-    href: string | null;
+export type StoreTable = {
+  id: Generated<number>;
+  name: string;
+  type: StoreType;
+  href: string | null;
 };
 export type TagTable = {
-    id: Generated<number>;
-    name: string;
-    description: string | null;
-    color: string | null;
-    createdAt: Generated<Timestamp>;
+  id: Generated<number>;
+  name: string;
+  description: string | null;
+  color: string | null;
+  createdAt: Generated<Timestamp>;
 };
 export type UsersOwningItemsTable = {
-    createdAt: Generated<Timestamp>;
-    userId: number;
-    itemId: number;
+  createdAt: Generated<Timestamp>;
+  userId: number;
+  itemId: number;
 };
 export type UsersWatchingItemsTable = {
-    createdAt: Generated<Timestamp>;
-    userId: number;
-    itemId: number;
+  createdAt: Generated<Timestamp>;
+  userId: number;
+  itemId: number;
 };
 export type UserTable = {
-    id: Generated<number>;
-    name: string;
-    password: string;
-    roles: Role[];
-    createdAt: Generated<Timestamp>;
-    updatedAt: Generated<Timestamp>;
+  id: Generated<number>;
+  name: string;
+  password: string;
+  roles: Role[];
+  createdAt: Generated<Timestamp>;
+  updatedAt: Generated<Timestamp>;
 };
 export type TusssDb = {
-    cities: CityTable;
-    districts: DistrictTable;
-    items: ItemTable;
-    itemsItems: ItemsItemsTable;
-    purchaseLogs: PurchaseLogTable;
-    sellers: SellerTable;
-    sellersLocations: SellerLocationTable;
-    tags: TagTable;
-    users: UserTable;
-    usersOwningItems: UsersOwningItemsTable;
-    usersWatchingItems: UsersWatchingItemsTable;
+  cities: CityTable;
+  districts: DistrictTable;
+  items: ItemTable;
+  itemsItems: ItemsItemsTable;
+  purchaseLogs: PurchaseLogTable;
+  stores: StoreTable;
+  storesLocations: StoreLocationTable;
+  tags: TagTable;
+  users: UserTable;
+  usersOwningItems: UsersOwningItemsTable;
+  usersWatchingItems: UsersWatchingItemsTable;
 };
