@@ -1,8 +1,9 @@
 import { PaginationHelper } from "../../pagination.helper";
 
-export class MockPaginationHelper<O extends Record<string, any>>
-  implements Record<keyof PaginationHelper, any>
-{
+export class MockPaginationHelper<O extends Record<string, any>> implements Record<
+  keyof PaginationHelper,
+  any
+> {
   cls = PaginationHelper;
   count = jest.fn().mockResolvedValue(0) as jest.Mock<Promise<number>>;
   fetch = jest.fn().mockResolvedValue([]) as jest.Mock<Promise<O[]>>;

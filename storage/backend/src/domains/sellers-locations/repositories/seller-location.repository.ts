@@ -10,7 +10,7 @@ export class SellerLocationWriteRepository {
     private readonly db: DbClient,
   ) {}
 
-  async createOne(data: SellerLocationInsertModel) {
+  async insertOne(data: SellerLocationInsertModel) {
     await this.db.insertInto("sellersLocations").values(data).executeTakeFirst();
   }
 }

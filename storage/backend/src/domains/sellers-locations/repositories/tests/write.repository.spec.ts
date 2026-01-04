@@ -16,10 +16,10 @@ describe(SellerLocationWriteRepository.name, () => {
     repository = moduleRef.get(SellerLocationWriteRepository);
   });
 
-  describe("createOne", () => {
+  describe("insertOne", () => {
     it("should call insertInto", async () => {
       const spyInsert = db.insertInto.mockClear();
-      await repository.createOne(SellerLocationInsert.create());
+      await repository.insertOne(SellerLocationInsert.create());
       expect(spyInsert).toHaveBeenCalledTimes(1);
     });
   });

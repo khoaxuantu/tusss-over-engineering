@@ -1,11 +1,11 @@
 import { InjectDbClient } from "@/db/decorators/inject-client.decorator";
 import type { Db, DbClient } from "@/db/modules/types";
-import { Paginable, Pagination, PaginationResult } from "@/shared/models/pagination.model";
 import { Sort } from "@/shared/models/sort.model";
 import { InsertPlugin } from "@/shared/repos/abstracts/repository.abstract";
 import { PaginationHelper } from "@/shared/repos/helpers/pagination.helper";
 import { HasPrimaryKey } from "@/shared/repos/types";
 import { Injectable } from "@nestjs/common";
+import { Paginable, Pagination, PaginationResult } from "@tusss/core";
 import { InsertObject, SelectQueryBuilder } from "kysely";
 import { City } from "./city.model";
 

@@ -8,6 +8,6 @@ import {
 @Global()
 @Module({
   providers: [SellerRepository, SellerReadRepository, SellerWriteRepository],
-  exports: [SellerRepository],
+  exports: [SellerRepository, SellerWriteRepository, SellerReadRepository],
 })
 export class SellerRepositoryModule {}
