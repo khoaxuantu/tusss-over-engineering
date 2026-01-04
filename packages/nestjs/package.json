@@ -38,6 +38,11 @@
       "types": "./dist/swagger/index.d.ts",
       "require": "./dist/swagger/index.js",
       "import": "./dist/swagger/index.js"
+    },
+    "./dtos": {
+      "types": "./dist/dtos/index.d.ts",
+      "require": "./dist/dtos/index.js",
+      "import": "./dist/dtos/index.js"
     }
   }
 }
