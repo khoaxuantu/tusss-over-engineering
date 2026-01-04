@@ -1,4 +1,4 @@
-import { SellerType } from "@/db/types/enums.auto";
+import { SellerType } from "@/shared/db/types/enums.auto";
 import { SellerUpdateBuilder } from "../update-obj.builder";
 
 describe(SellerUpdateBuilder.name, () => {

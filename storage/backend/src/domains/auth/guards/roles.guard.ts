@@ -1,4 +1,4 @@
-import { Role } from "@/db/types/enums.auto";
+import { Role } from "@/shared/db/types/enums.auto";
 import { TusssRequest } from "@/shared/types/common";
 import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";

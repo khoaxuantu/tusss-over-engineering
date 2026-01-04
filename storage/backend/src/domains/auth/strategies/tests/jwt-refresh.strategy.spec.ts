@@ -1,5 +1,5 @@
-import { Role } from "@/db/types/enums.auto";
 import { TusssConfigModule } from "@/shared/configs/config.module";
+import { Role } from "@/shared/db/types/enums.auto";
 import { UserIdentifier } from "@/shared/tokens/dtos/jwt.dto";
 import { UnauthorizedException } from "@nestjs/common";
 import { Test } from "@nestjs/testing";

@@ -1,4 +1,4 @@
-import { SellerLocationTable } from "@/db/types/schemas.auto";
+import { SellerLocationTable } from "@/shared/db/types/schemas.auto";
 import { Insertable, Selectable } from "kysely";
 
 export type SellerLocationInsertModel = Insertable<SellerLocationTable>;

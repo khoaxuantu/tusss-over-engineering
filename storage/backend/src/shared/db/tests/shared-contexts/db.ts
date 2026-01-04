@@ -1,5 +1,5 @@
-import { DbClientProvider } from "@/db/modules/constants";
-import { DbClient } from "@/db/modules/types";
+import { DbClientProvider } from "@/shared/db/modules/constants";
+import { DbClient } from "@/shared/db/modules/types";
 import {
   DeleteQueryBuilder,
   DeleteResult,

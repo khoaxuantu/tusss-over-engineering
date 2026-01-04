@@ -1,5 +1,5 @@
-import { Role } from "@/db/types/enums.auto";
-import { UserTable } from "@/db/types/schemas.auto";
+import { Role } from "@/shared/db/types/enums.auto";
+import { UserTable } from "@/shared/db/types/schemas.auto";
 import { Expose, instanceToPlain, plainToInstance } from "class-transformer";
 import { Selectable, Updateable } from "kysely";
 

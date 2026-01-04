@@ -1,5 +1,5 @@
-import { InjectDbClient } from "@/db/decorators/inject-client.decorator";
-import type { DbClient } from "@/db/modules/types";
+import { InjectDbClient } from "@/shared/db/decorators/inject-client.decorator";
+import type { DbClient } from "@/shared/db/modules/types";
 import { Injectable } from "@nestjs/common";
 import { SellerLocationInsertModel } from "../models/seller-location.model";
 

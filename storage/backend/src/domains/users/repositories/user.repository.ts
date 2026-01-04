@@ -1,6 +1,6 @@
-import { DbClientProvider } from "@/db/modules/constants";
-import type { DbClient } from "@/db/modules/types";
-import { UserTable } from "@/db/types/schemas.auto";
+import { DbClientProvider } from "@/shared/db/modules/constants";
+import type { DbClient } from "@/shared/db/modules/types";
+import { UserTable } from "@/shared/db/types/schemas.auto";
 import { ReadRepository, WriteRepository } from "@/shared/repos/abstracts/repository.abstract";
 import { UpdateObjBuilder } from "@/shared/repos/abstracts/updater.abstract";
 import { TokenService } from "@/shared/tokens/services/token.service";

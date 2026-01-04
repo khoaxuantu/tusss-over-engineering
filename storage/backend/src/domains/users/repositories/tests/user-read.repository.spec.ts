@@ -1,6 +1,6 @@
-import { DbClientProvider } from "@/db/modules/constants";
-import { Db, DbClient, DbTable } from "@/db/modules/types";
 import { User } from "@/domains/users/models/user.model";
+import { DbClientProvider } from "@/shared/db/modules/constants";
+import { Db, DbClient, DbTable } from "@/shared/db/modules/types";
 import { ReadRepository } from "@/shared/repos/abstracts/repository.abstract";
 import { createMock } from "@golevelup/ts-jest";
 import { Test } from "@nestjs/testing";

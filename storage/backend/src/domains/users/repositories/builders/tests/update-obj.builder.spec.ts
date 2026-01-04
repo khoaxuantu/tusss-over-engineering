@@ -1,4 +1,4 @@
-import { Role } from "@/db/types/enums.auto";
+import { Role } from "@/shared/db/types/enums.auto";
 import { PasswordService } from "@/shared/tokens/services/password.service";
 import { TokenService } from "@/shared/tokens/services/token.service";
 import { createMock } from "@golevelup/ts-jest";

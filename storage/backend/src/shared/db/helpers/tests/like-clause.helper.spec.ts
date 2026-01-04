@@ -1,4 +1,4 @@
-import { DbCold } from "@/db/modules/database.provider";
+import { DbCold } from "@/shared/db/modules/database.provider";
 import { LikeClause } from "../like-clause.helper";
 
 describe(LikeClause.name, () => {

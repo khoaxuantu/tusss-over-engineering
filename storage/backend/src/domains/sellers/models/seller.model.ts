@@ -1,5 +1,5 @@
-import { SellerType } from "@/db/types/enums.auto";
-import { SellerTable } from "@/db/types/schemas.auto";
+import { SellerType } from "@/shared/db/types/enums.auto";
+import { SellerTable } from "@/shared/db/types/schemas.auto";
 import { Insertable, Selectable, Updateable } from "kysely";
 
 export type SellerRecordModel = Selectable<SellerTable>;

@@ -1,4 +1,4 @@
-import { MockDbClient } from "@/db/tests/shared-contexts/db";
+import { MockDbClient } from "@/shared/db/tests/shared-contexts/db";
 import { Test } from "@nestjs/testing";
 import { SellerLocationInsert } from "../../models/seller-location.model";
 import { SellerLocationWriteRepository } from "../seller-location.repository";

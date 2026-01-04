@@ -1,4 +1,4 @@
-import { SellerType } from "@/db/types/enums.auto";
+import { SellerType } from "@/shared/db/types/enums.auto";
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { enumToArray } from "@tusss/core";
 import { IsEnum, IsNotEmpty, IsString } from "class-validator";

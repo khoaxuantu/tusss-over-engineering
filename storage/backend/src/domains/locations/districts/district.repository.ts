@@ -1,5 +1,5 @@
-import { InjectDbClient } from "@/db/decorators/inject-client.decorator";
-import type { Db, DbClient } from "@/db/modules/types";
+import { InjectDbClient } from "@/shared/db/decorators/inject-client.decorator";
+import type { Db, DbClient } from "@/shared/db/modules/types";
 import { Paginable, Pagination, PaginationResult } from "@/shared/models/pagination.model";
 import { Sort } from "@/shared/models/sort.model";
 import { PaginationHelper } from "@/shared/repos/helpers/pagination.helper";

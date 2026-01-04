@@ -1,6 +1,6 @@
-import { Role } from "@/db/types/enums.auto";
 import { UserExternalEnum } from "@/domains/users/constants";
 import { User } from "@/domains/users/models/user.model";
+import { Role } from "@/shared/db/types/enums.auto";
 import { ApiProperty } from "@nestjs/swagger";
 import { enumToArray } from "@tusss/core";
 import { Expose, instanceToPlain, plainToInstance } from "class-transformer";
