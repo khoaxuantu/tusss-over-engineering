@@ -1,11 +1,11 @@
-export const SellerType = {
-    AUTH: "AUTH",
-    RETAIL: "RETAIL"
+export const StoreType = {
+  AUTH: "AUTH",
+  RETAIL: "RETAIL",
 } as const;
-export type SellerType = (typeof SellerType)[keyof typeof SellerType];
+export type StoreType = (typeof StoreType)[keyof typeof StoreType];
 export const Role = {
-    ADMIN: "ADMIN",
-    EDITOR: "EDITOR",
-    VIEWER: "VIEWER"
+  ADMIN: "ADMIN",
+  EDITOR: "EDITOR",
+  VIEWER: "VIEWER",
 } as const;
 export type Role = (typeof Role)[keyof typeof Role];

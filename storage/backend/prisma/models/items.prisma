@@ -6,9 +6,9 @@ model ItemTable {
   href        String?
   archived    Boolean?
 
-  retailer    SellerTable               @relation(name: "retailer_items", fields: [retailer_id], references: [id])
+  retailer    StoreTable                @relation(name: "retailer_items", fields: [retailer_id], references: [id])
   retailer_id Int
-  brand       SellerTable               @relation(name: "brand_items", fields: [brand_id], references: [id])
+  brand       StoreTable                @relation(name: "brand_items", fields: [brand_id], references: [id])
   brand_id    Int
   owner       UsersOwningItemsTable?
   watchers    UsersWatchingItemsTable[]
