@@ -1,6 +1,6 @@
-import { User } from "@/domains/users/models/user.model";
 import { createMock } from "@golevelup/ts-jest";
 import { ExecutionContext } from "@nestjs/common";
+import { User } from "../../models/user.model";
 import { extractUserContext } from "../current-user.decorator";
 
 describe("extractCurrentUser", () => {
