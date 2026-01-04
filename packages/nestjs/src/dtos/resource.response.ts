@@ -17,3 +17,12 @@ export class ResourceCreateResponse {
     this.new_id = { as_str: newIdStr, as_num: newIdNum };
   }
 }
+
+export class ResourceDetailResponse {
+  @ApiProperty({ description: "The id of the resource, representing as a number", example: 1 })
+  id: number;
+
+  constructor(data?: Partial<ResourceDetailResponse>) {
+    this.id = data?.id ?? 0;
+  }
+}
