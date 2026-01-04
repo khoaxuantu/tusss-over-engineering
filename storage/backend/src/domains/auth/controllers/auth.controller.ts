@@ -1,5 +1,5 @@
 import { CurrentUser } from "@/domains/users/decorators/current-user.decorator";
-import { UserIdentifier } from "@/shared/tokens/dtos/jwt.dto";
+import { UserIdentifier } from "@/providers/tokens/dtos/jwt.dto";
 import { Controller, Post, UseGuards } from "@nestjs/common";
 import { ApiBody, ApiResponse } from "@nestjs/swagger";
 import { Public } from "../decorators/public.decorator";

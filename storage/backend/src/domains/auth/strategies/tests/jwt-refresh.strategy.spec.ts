@@ -1,6 +1,6 @@
+import { UserIdentifier } from "@/providers/tokens/dtos/jwt.dto";
 import { TusssConfigModule } from "@/shared/configs/config.module";
 import { Role } from "@/shared/db/types/enums.auto";
-import { UserIdentifier } from "@/shared/tokens/dtos/jwt.dto";
 import { UnauthorizedException } from "@nestjs/common";
 import { Test } from "@nestjs/testing";
 import { JwtRefreshStrategy } from "../jwt-refresh.strategy";

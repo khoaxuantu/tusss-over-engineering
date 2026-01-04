@@ -1,4 +1,4 @@
-import { UserIdentifier } from "@/shared/tokens/dtos/jwt.dto";
+import { UserIdentifier } from "@/providers/tokens/dtos/jwt.dto";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, IsNotEmpty, IsString } from "class-validator";
 

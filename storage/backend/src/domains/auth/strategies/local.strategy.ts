@@ -1,4 +1,4 @@
-import { UserIdentifier } from "@/shared/tokens/dtos/jwt.dto";
+import { UserIdentifier } from "@/providers/tokens/dtos/jwt.dto";
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";
 import { Strategy } from "passport-local";

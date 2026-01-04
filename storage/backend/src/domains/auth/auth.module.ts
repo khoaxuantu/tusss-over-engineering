@@ -1,4 +1,4 @@
-import { TokenModule } from "@/shared/tokens/token.module";
+import { TokenModule } from "@/providers/tokens/token.module";
 import { Module } from "@nestjs/common";
 import { APP_GUARD } from "@nestjs/core";
 import { PassportModule } from "@nestjs/passport";

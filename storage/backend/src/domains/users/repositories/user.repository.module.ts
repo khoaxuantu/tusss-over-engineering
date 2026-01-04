@@ -1,4 +1,4 @@
-import { TokenModule } from "@/shared/tokens/token.module";
+import { TokenModule } from "@/providers/tokens/token.module";
 import { Global, Module } from "@nestjs/common";
 import { UserReadRepository, UserRepository, UserWriteRepository } from "./user.repository";
 

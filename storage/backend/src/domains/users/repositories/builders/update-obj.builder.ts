@@ -1,7 +1,7 @@
+import { TokenService } from "@/providers/tokens/services/token.service";
 import { Role } from "@/shared/db/types/enums.auto";
 import { UserTable } from "@/shared/db/types/schemas.auto";
 import { UpdateObjBuilder } from "@/shared/repos/abstracts/updater.abstract";
-import { TokenService } from "@/shared/tokens/services/token.service";
 import { Updateable } from "kysely";
 
 export class UserUpdateObjBuilder extends UpdateObjBuilder<Updateable<UserTable>> {

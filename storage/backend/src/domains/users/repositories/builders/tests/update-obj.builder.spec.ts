@@ -1,6 +1,6 @@
+import { PasswordService } from "@/providers/tokens/services/password.service";
+import { TokenService } from "@/providers/tokens/services/token.service";
 import { Role } from "@/shared/db/types/enums.auto";
-import { PasswordService } from "@/shared/tokens/services/password.service";
-import { TokenService } from "@/shared/tokens/services/token.service";
 import { createMock } from "@golevelup/ts-jest";
 import { Test } from "@nestjs/testing";
 import { UserUpdateObjBuilder } from "../update-obj.builder";

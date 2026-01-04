@@ -1,5 +1,5 @@
+import { UserIdentifier } from "@/providers/tokens/dtos/jwt.dto";
 import { TusssConfigService } from "@/shared/configs/config.service";
-import { UserIdentifier } from "@/shared/tokens/dtos/jwt.dto";
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";
 import { validate } from "class-validator";
