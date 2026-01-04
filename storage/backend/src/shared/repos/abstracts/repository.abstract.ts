@@ -1,4 +1,4 @@
-import type { Db, DbClient, DbTable } from "@/db/modules/types";
+import type { Db, DbClient, DbTable } from "@/shared/db/modules/types";
 import { InsertObject, SelectQueryBuilder } from "kysely";
 import { HasPrimaryKey, Id } from "../types";
 import { UpdateObjBuilder } from "./updater.abstract";

@@ -1,4 +1,4 @@
-import { DbErrorAdapter } from "@/db/modules/exceptions";
+import { DbErrorAdapter } from "@/shared/db/modules/exceptions";
 import {
   ArgumentsHost,
   Catch,

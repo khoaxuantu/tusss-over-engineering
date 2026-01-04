@@ -1,5 +1,5 @@
-import { DbClientProvider } from "@/db/modules/constants";
-import { MockDbClient } from "@/db/tests/shared-contexts/db";
+import { DbClientProvider } from "@/shared/db/modules/constants";
+import { MockDbClient } from "@/shared/db/tests/shared-contexts/db";
 import { Test } from "@nestjs/testing";
 import { DistrictInsert } from "../../district.model";
 import { DistrictWriteRepository } from "../../district.repository";

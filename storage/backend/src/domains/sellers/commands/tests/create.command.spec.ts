@@ -1,10 +1,10 @@
-import { SellerLocationWriteRepository } from "@/domains/sellers-locations/repositories/seller-location.repository";
+import { SellerLocationWriteRepository } from "@/providers/sellers-locations/repositories/seller-location.repository";
+import { SellerWriteRepository } from "@/providers/sellers/repositories/seller.repository";
 import { createMock } from "@golevelup/ts-jest";
 import { InternalServerErrorException } from "@nestjs/common";
 import { Test } from "@nestjs/testing";
 import { TestErrorMessage } from "@tusss/core";
 import { SellerCreateRequest } from "../../dtos/request";
-import { SellerWriteRepository } from "../../repositories/seller.repository";
 import { SellerCreateCommand, SellerCreateCommandHandler } from "../create.command";
 
 describe(SellerCreateCommand.name, () => {
