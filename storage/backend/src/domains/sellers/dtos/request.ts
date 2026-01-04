@@ -1,8 +1,8 @@
+import { SellerExternalEnum } from "@/providers/sellers/constants";
 import { SellerType } from "@/shared/db/types/enums.auto";
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { enumToArray } from "@tusss/core";
 import { IsEnum, IsNotEmpty, IsString } from "class-validator";
-import { SellerExternalEnum } from "../constants";
 
 export class SellerCreateRequest {
   @ApiProperty({ example: "Burger Store" })

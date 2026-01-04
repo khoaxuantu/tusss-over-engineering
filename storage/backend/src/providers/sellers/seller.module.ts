@@ -1,13 +1,12 @@
-import { Global, Module } from "@nestjs/common";
+import { Module } from "@nestjs/common";
 import {
   SellerReadRepository,
   SellerRepository,
   SellerWriteRepository,
 } from "./repositories/seller.repository";
 
-@Global()
 @Module({
-  providers: [SellerRepository, SellerReadRepository, SellerWriteRepository],
+  providers: [SellerRepository, SellerWriteRepository, SellerReadRepository],
   exports: [SellerRepository, SellerWriteRepository, SellerReadRepository],
 })
-export class SellerRepositoryModule {}
+export class ProviderSellerModule {}
