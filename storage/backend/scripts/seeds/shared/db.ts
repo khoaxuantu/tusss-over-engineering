@@ -1,5 +1,5 @@
-import loadConfig from "@/configs/loader";
 import { Db } from "@/db/modules/types";
+import loadConfig from "@/shared/configs/loader";
 import { Kysely, PostgresDialect } from "kysely";
 import { Pool } from "pg";
 

@@ -1,4 +1,4 @@
-import { TusssConfigModule } from "@/configs/config.module";
+import { TusssConfigModule } from "@/shared/configs/config.module";
 import { JwtModule } from "@nestjs/jwt";
 import { Test } from "@nestjs/testing";
 import { UserIdentifier } from "../../dtos/jwt.dto";

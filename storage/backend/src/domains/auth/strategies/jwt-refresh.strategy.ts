@@ -1,4 +1,4 @@
-import { TusssConfigService } from "@/configs/config.service";
+import { TusssConfigService } from "@/shared/configs/config.service";
 import { UserIdentifier } from "@/shared/tokens/dtos/jwt.dto";
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";

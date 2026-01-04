@@ -1,4 +1,4 @@
-import { TusssConfigService } from "@/configs/config.service";
+import { TusssConfigService } from "@/shared/configs/config.service";
 import { Logger, Provider } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { DecimalPrecision, formatErrWithStack } from "@tusss/core";
