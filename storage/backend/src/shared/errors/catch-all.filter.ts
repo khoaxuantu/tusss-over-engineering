@@ -15,7 +15,7 @@ import { TusssRequest } from "../types/common";
 
 @Catch()
 export class CatchEverythingFilter implements ExceptionFilter {
-  private logger = new Logger(CatchEverythingFilter.name);
+  private logger = new Logger("CatchAll");
   private fallback = new InternalServerErrorException();
 
   constructor(private readonly httpAdapterHost: HttpAdapterHost) {}

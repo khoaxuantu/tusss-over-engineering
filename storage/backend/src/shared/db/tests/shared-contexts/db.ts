@@ -42,6 +42,11 @@ export class MockSelectQuery implements MockSelectQueryProps {
   distinct = jest.fn().mockReturnThis();
   selectAll = jest.fn().mockReturnThis();
   select = jest.fn().mockReturnThis();
+  leftJoin = jest.fn().mockReturnThis();
+  innerJoin = jest.fn().mockReturnThis();
+  rightJoin = jest.fn().mockReturnThis();
+  fullJoin = jest.fn().mockReturnThis();
+  crossJoin = jest.fn().mockReturnThis();
   executeTakeFirst = jest.fn();
   execute = jest.fn();
 
