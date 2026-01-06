@@ -3,7 +3,7 @@ import { StoreType } from "@/shared/db/types/enums.auto";
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { enumToArray } from "@tusss/core";
 import { PaginationRequest } from "@tusss/nestjs";
-import { IsEnum, IsNotEmpty, IsString } from "class-validator";
+import { IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 export class StoreCreateRequest {
   @ApiProperty({ example: "Burger Store" })
@@ -23,7 +23,7 @@ export class StoreCreateRequest {
 
   @ApiPropertyOptional()
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   href?: string;
 
   @ApiProperty({ example: "hanoi" })

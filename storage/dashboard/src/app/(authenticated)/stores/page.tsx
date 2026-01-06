@@ -1,21 +1,21 @@
 import { ToNewButton } from "@lib/resource/components/buttons/to-new";
 import ResourceHeader from "@lib/resource/components/header";
-import CityDatagrid from "@lib/resource/locations/cities/components/datagrid/list";
+import StoreDatagrid from "@lib/resource/stores/components/datagrid/list";
 import { Box } from "@mui/material";
 
 export default function Page() {
   return (
     <>
       <ResourceHeader
-        title="Cities"
+        title="Stores"
         breadcrumbs={[
           { label: "Home", href: "/" },
-          { label: "Cities", isCurrent: true },
+          { label: "Stores", isCurrent: true },
         ]}
-        actions={<ToNewButton href="/cities/new" />}
+        actions={<ToNewButton href="/stores/new" />}
       />
       <Box>
-        <CityDatagrid />
+        <StoreDatagrid />
       </Box>
     </>
   );
