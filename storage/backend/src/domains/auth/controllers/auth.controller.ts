@@ -34,6 +34,7 @@ export class AuthController {
       session: res.payload,
       refresh_token: res.tokens.refreshToken,
       access_token: res.tokens.accessToken,
+      refresh_after: res.refreshAfter,
     });
   }
 
@@ -47,6 +48,7 @@ export class AuthController {
     return new RefreshTokenResponse({
       access_token: res.tokens.accessToken,
       refresh_token: res.tokens.refreshToken,
+      refresh_after: res.refreshAfter,
     });
   }
 }

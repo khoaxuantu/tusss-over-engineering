@@ -1,35 +1,35 @@
 import { defaultConfig } from "./default";
 import { Config } from "./types";
 
-const localConfig: Config = {
+const localConfig = (): Config => ({
   environment: "development",
-  ...defaultConfig,
-};
+  ...defaultConfig(),
+});
 
-const prodConfig: Config = {
+const prodConfig = (): Config => ({
   environment: "production",
-  ...defaultConfig,
-};
+  ...defaultConfig(),
+});
 
-const testConfig: Config = {
+const testConfig = (): Config => ({
   environment: "test",
-  ...defaultConfig,
-};
+  ...defaultConfig(),
+});
 
 export default function loadConfig() {
   const env = process.env.NODE_ENV;
 
   switch (env) {
     case "development":
-      return localConfig;
+      return localConfig();
 
     case "production":
-      return prodConfig;
+      return prodConfig();
 
     case "test":
-      return testConfig;
+      return testConfig();
 
     default:
-      return localConfig;
+      return localConfig();
   }
 }

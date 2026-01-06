@@ -31,14 +31,14 @@ export async function login(
         id: res.data.session.id,
         roles: res.data.session.roles,
       },
-      ts: Date.now(),
+      refreshAfter: res.data.refresh_after,
     });
 
     const cookieStore = await cookies();
-    cookieStore.set(session.cookieName, sessionToken.token, {
+    cookieStore.set(session.cookie.name, sessionToken, {
       httpOnly: true,
       secure: true,
-      expires: new Date(sessionToken.exp),
+      maxAge: session.cookie.maxAge,
       sameSite: "lax",
       path: "/",
     });

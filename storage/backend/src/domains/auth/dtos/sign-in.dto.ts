@@ -16,19 +16,21 @@ export class SignInRequest {
 
 export class SignInResponse {
   @ApiProperty({ type: UserIdentifier })
-  session: UserIdentifier = new UserIdentifier();
+  session: UserIdentifier;
 
   @ApiProperty()
-  access_token: string = "";
+  access_token: string;
 
   @ApiProperty()
-  refresh_token: string = "";
+  refresh_token: string;
+
+  @ApiProperty()
+  refresh_after: Date;
 
   constructor(data?: SignInResponse) {
-    if (data) {
-      this.session = data.session;
-      this.access_token = data.access_token;
-      this.refresh_token = data.refresh_token;
-    }
+    this.session = data?.session || new UserIdentifier();
+    this.access_token = data?.access_token || "";
+    this.refresh_token = data?.refresh_token || "";
+    this.refresh_after = data?.refresh_after ?? new Date();
   }
 }

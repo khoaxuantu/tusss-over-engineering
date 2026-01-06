@@ -1,13 +1,16 @@
 import { UserIdentifier } from "@/providers/tokens/dtos/jwt.dto";
 import { TokenService } from "@/providers/tokens/services/token.service";
 import { UserRepository } from "@/providers/users/repositories/user.repository";
+import { TusssConfigService } from "@/shared/configs/config.service";
 import { Injectable } from "@nestjs/common";
+import { addMilliseconds } from "date-fns";
 
 @Injectable()
 export class AuthService {
   constructor(
     private adminRepo: UserRepository,
     private tokenService: TokenService,
+    private configService: TusssConfigService,
   ) {}
 
   async login(username: string, password: string) {
@@ -21,8 +24,10 @@ export class AuthService {
   }
 
   sign(user: UserIdentifier) {
+    const refreshAfterMs = this.configService.getOrThrow("auth.timer.refresh_after");
+    const refreshAfter = addMilliseconds(new Date(), refreshAfterMs);
     const tokens = this.tokenService.jwt.signUser(user);
 
-    return { payload: user, tokens };
+    return { payload: user, tokens, refreshAfter };
   }
 }

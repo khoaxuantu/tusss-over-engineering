@@ -1,6 +1,6 @@
 import { CommonConfig } from "./types";
 
-export const defaultConfig: CommonConfig = {
+export const defaultConfig = (): CommonConfig => ({
   db: {
     name: process.env.DB_NAME ?? "tusss",
     host: process.env.DB_HOST ?? "localhost",
@@ -16,5 +16,8 @@ export const defaultConfig: CommonConfig = {
       login: "1h",
       refresh: "30d",
     },
+    timer: {
+      refresh_after: 45 * 60 * 1000, // 45 minutes
+    },
   },
-};
+});

@@ -1,3 +1,5 @@
+import { JwtSignOptions } from "@nestjs/jwt";
+
 export interface CommonConfig {
   db: {
     name: string;
@@ -11,8 +13,14 @@ export interface CommonConfig {
       default: string;
     };
     jwt_expiry: {
-      login: string;
-      refresh: string;
+      login: JwtSignOptions["expiresIn"];
+      refresh: JwtSignOptions["expiresIn"];
+    };
+    timer: {
+      /**
+       * milliseconds
+       */
+      refresh_after: number;
     };
   };
 }

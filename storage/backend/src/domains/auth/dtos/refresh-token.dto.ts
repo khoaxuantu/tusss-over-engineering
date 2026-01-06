@@ -13,13 +13,13 @@ export class RefreshTokenRequest {
 export class RefreshTokenResponse extends PickType(SignInResponse, [
   "access_token",
   "refresh_token",
+  "refresh_after",
 ]) {
   constructor(data?: RefreshTokenResponse) {
     super();
 
-    if (data) {
-      this.access_token = data.access_token;
-      this.refresh_token = data.refresh_token;
-    }
+    this.access_token = data?.access_token || "";
+    this.refresh_token = data?.refresh_token || "";
+    this.refresh_after = data?.refresh_after ?? new Date();
   }
 }
