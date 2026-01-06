@@ -1,4 +1,4 @@
-import { ItemTable } from "@/db/types/schemas.auto";
+import { ItemTable } from "@/shared/db/types/schemas.auto";
 import { instanceToPlain, plainToInstance } from "class-transformer";
 import { Insertable, Selectable, Updateable } from "kysely";
 

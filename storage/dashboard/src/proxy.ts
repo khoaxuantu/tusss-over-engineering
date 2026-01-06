@@ -7,12 +7,12 @@ export async function proxy(req: NextRequest) {
   const sessionProvider = SessionProvider.getInstance();
   const session = await sessionProvider.read(req.cookies);
   if (session?.canRefresh) {
-    const refreshRes = await sessionProvider.refresh(session.session);
-    if (refreshRes) {
+    const refreshToken = await sessionProvider.refresh(session.session);
+    if (refreshToken) {
       res.cookies.set({
-        name: sessionProvider.cookieName,
-        value: refreshRes.token,
-        maxAge: sessionProvider.maxAge,
+        name: sessionProvider.cookie.name,
+        value: refreshToken,
+        maxAge: sessionProvider.cookie.maxAge,
         httpOnly: true,
         secure: true,
         sameSite: "lax",
@@ -26,7 +26,7 @@ export async function proxy(req: NextRequest) {
 
 export const config = {
   // Match all pathnames except for
-  // - … if they start with `/api`, `/trpc`, `/_next` or `/_vercel`
+  // - … if they start with `/login`, `/api`, `/trpc`, `/_next` or `/_vercel`
   // - … the ones containing a dot (e.g. `favicon.ico`)
-  matcher: ["/((?!api|trpc|_next|_vercel|.*\\..*).*)"],
+  matcher: ["/((?!login|api|trpc|_next|_vercel|.*\\..*).*)"],
 };

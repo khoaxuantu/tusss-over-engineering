@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import chalk from "chalk";
 import { InspectOptions, inspect } from "util";
 

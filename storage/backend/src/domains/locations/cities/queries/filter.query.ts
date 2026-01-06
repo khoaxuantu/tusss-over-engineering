@@ -1,4 +1,4 @@
-import { Db } from "@/db/modules/types";
+import { Db } from "@/shared/db/modules/types";
 import { PaginationResponse } from "@/shared/dtos/response";
 import { Pagination } from "@/shared/models/pagination.model";
 import { FilterToEbAdapter } from "@/shared/repos/adapters/filter-to-eb.adapter";

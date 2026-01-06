@@ -1,4 +1,4 @@
-import { Role } from "@/db/types/enums.auto";
+import { Role } from "@/shared/db/types/enums.auto";
 import bcrypt from "bcrypt";
 import { DbClient } from "./shared/db";
 

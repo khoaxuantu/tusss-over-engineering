@@ -1,4 +1,4 @@
-import { CityTable } from "@/db/types/schemas.auto";
+import { CityTable } from "@/shared/db/types/schemas.auto";
 import { Insertable, Selectable } from "kysely";
 
 export type CityRecordModel = Selectable<CityTable>;

@@ -1,4 +1,4 @@
-import { LocationCity, LocationPin } from "@mui/icons-material";
+import { LocationCity, LocationPin, Store } from "@mui/icons-material";
 import { Box, BoxProps, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import ListItemGroupTrigger from "../lists/group/trigger";
 import SidebarGroup from "./group";
@@ -49,6 +49,14 @@ export default function Sidebar(props: SidebarProps) {
               </SidebarLink>
             </ListItem>
           </SidebarGroup>
+          <ListItem sx={{ p: 0 }}>
+            <SidebarLink href="/stores">
+              <ListItemIcon>
+                <Store />
+              </ListItemIcon>
+              <ListItemText>Stores</ListItemText>
+            </SidebarLink>
+          </ListItem>
         </SidebarRoot>
       </List>
     </Box>

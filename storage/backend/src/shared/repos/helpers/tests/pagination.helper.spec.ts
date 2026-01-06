@@ -1,4 +1,4 @@
-import { Db, DbTable } from "@/db/modules/types";
+import { Db, DbTable } from "@/shared/db/modules/types";
 import { Pagination } from "@/shared/models/pagination.model";
 import { Sort } from "@/shared/models/sort.model";
 import { createMock } from "@golevelup/ts-jest";

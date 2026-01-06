@@ -80,3 +80,8 @@ export function transformArrLikeObjToArr<T>(obj: Record<string, T>): T[] {
     .map((key) => obj[key])
     .filter((item) => !!item);
 }
+
+export function toOptional<T>(obj: T): Exclude<T, null> | undefined {
+  if (obj === null) return undefined;
+  return obj as Exclude<T, null>;
+}

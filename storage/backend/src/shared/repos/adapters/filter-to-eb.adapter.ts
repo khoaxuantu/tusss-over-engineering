@@ -1,5 +1,5 @@
-import { LikeClause } from "@/db/helpers/like-clause.helper";
-import { Db } from "@/db/modules/types";
+import { LikeClause } from "@/shared/db/helpers/like-clause.helper";
+import { Db } from "@/shared/db/modules/types";
 import { FilterString } from "@/shared/models/filter.model";
 import { Expression, expressionBuilder, SqlBool } from "kysely";
 

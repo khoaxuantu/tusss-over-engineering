@@ -1,6 +1,7 @@
 "use client";
 
-import { Button, Stack, TextField } from "@mui/material";
+import SubmitButton from "@lib/resource/components/buttons/submit";
+import { Stack, TextField } from "@mui/material";
 import { useContext } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { CityNewContext } from "../../providers/new.provider";
@@ -44,9 +45,7 @@ export default function CityNewForm() {
           )}
         />
       </Stack>
-      <Button type="submit" variant="contained">
-        Submit
-      </Button>
+      <SubmitButton />
     </form>
   );
 }

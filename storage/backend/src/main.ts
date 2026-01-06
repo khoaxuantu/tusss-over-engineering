@@ -41,7 +41,9 @@ function setupFunctional(app: INestApplication<any>) {
 async function bootstrap() {
   const environment = process.env.NODE_ENV ?? "development";
   const fastify = new FastifyAdapter({
-    querystringParser: (str) => qs.parse(str) as Record<string, any>,
+    routerOptions: {
+      querystringParser: (str) => qs.parse(str) as Record<string, any>,
+    },
     logger:
       environment == "development"
         ? {

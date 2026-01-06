@@ -1,7 +1,9 @@
 import { BackendClient } from "@lib/apis/client";
 import { BackendSchemas } from "@lib/apis/types";
-import { JwtSecret } from "@lib/shared/configs/server";
-import jwt from "jsonwebtoken";
+import { JweSecret } from "@lib/shared/configs/server";
+import { DecimalPrecision } from "@lib/shared/helpers/calc.helper";
+import { compareAsc } from "date-fns";
+import { EncryptJWT, jwtDecrypt, JWTPayload } from "jose";
 import { cookies } from "next/headers";
 import "server-only";
 
@@ -12,7 +14,7 @@ export interface Session {
   };
   accessToken: string;
   refreshToken: string;
-  ts: number;
+  refreshAfter: Date;
 }
 
 interface SessionReadResult {
@@ -20,12 +22,20 @@ interface SessionReadResult {
   canRefresh: boolean;
 }
 
+class SessionCookieProvider {
+  readonly name = "session" as const;
+  readonly maxAge = 3600 * 24 * 30; // 30 days in seconds
+
+  toExpiry(date: Date) {
+    return new Date(date.getTime() + this.maxAge * 1000);
+  }
+}
+
 export class SessionProvider {
   private static instance: SessionProvider;
 
-  private expiryDays = 7;
-  private refreshRate = 0.8;
-  cookieName = "session";
+  readonly tokenMaxAge = 3600 * 24 * 30; // seconds
+  readonly cookie = new SessionCookieProvider();
 
   private constructor() {}
 
@@ -36,14 +46,13 @@ export class SessionProvider {
     return SessionProvider.instance;
   }
 
-  get maxAge() {
-    return this.expiryDays * 24 * 60 * 60 * 1000;
-  }
-
-  async create(session: Session) {
-    const exp = this.toExpiryTs();
-    const token = jwt.sign(session, JwtSecret, { expiresIn: exp });
-    return { token, exp };
+  async create(session: Session & JWTPayload) {
+    const token = await new EncryptJWT(session)
+      .setExpirationTime(this.toExp())
+      .setIssuedAt()
+      .setProtectedHeader({ alg: "dir", enc: "A256GCM" })
+      .encrypt(JweSecret);
+    return token;
   }
 
   async refresh(session: Session) {
@@ -57,21 +66,19 @@ export class SessionProvider {
       accessToken: res.data.access_token,
       refreshToken: res.data.refresh_token,
       user: session.user,
-      ts: Date.now(),
+      refreshAfter: res.data.refresh_after,
     });
   }
 
   async read(cookieStore: { get: (name: string) => { value: string } | undefined }) {
-    const token = cookieStore.get(this.cookieName)?.value;
+    const token = cookieStore.get(this.cookie.name)?.value;
     if (!token) return null;
 
     try {
-      const payload = jwt.verify(token, JwtSecret) as Session & jwt.JwtPayload;
+      const decrypted = await jwtDecrypt(token, JweSecret);
+      const payload = decrypted.payload as Session & JWTPayload;
 
-      let canRefresh = false;
-      if (payload.exp) {
-        canRefresh = (Date.now() - payload.ts) / (payload.exp - payload.ts) >= this.refreshRate;
-      }
+      const canRefresh = compareAsc(new Date(), payload.refreshAfter) >= 0;
 
       return {
         canRefresh,
@@ -88,10 +95,10 @@ export class SessionProvider {
 
   async clean() {
     const cookieStore = await cookies();
-    cookieStore.delete(this.cookieName);
+    cookieStore.delete(this.cookie.name);
   }
 
-  private toExpiryTs() {
-    return Date.now() + this.maxAge;
+  private toExp() {
+    return DecimalPrecision.round((Date.now() + this.tokenMaxAge * 1000) / 1000);
   }
 }

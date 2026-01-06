@@ -1,5 +1,5 @@
-import { DbClientProvider } from "@/db/modules/constants";
-import { MockDbClient } from "@/db/tests/shared-contexts/db";
+import { DbClientProvider } from "@/shared/db/modules/constants";
+import { MockDbClient } from "@/shared/db/tests/shared-contexts/db";
 import { Pagination } from "@/shared/models/pagination.model";
 import { PaginationHelper } from "@/shared/repos/helpers/pagination.helper";
 import { MockPaginationHelper } from "@/shared/repos/helpers/tests/mocks/pagination.helper";

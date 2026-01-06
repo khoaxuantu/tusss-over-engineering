@@ -28,8 +28,6 @@ const config: Config = {
     "main.ts",
     "test",
     "config",
-    "src/admin-panel",
-    "src/command",
     "module-definition",
     "schema-factory",
     "schema.helper.ts",

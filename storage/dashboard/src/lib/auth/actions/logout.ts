@@ -5,5 +5,5 @@ import { SessionProvider } from "../sessions/server.provider";
 
 export async function logout() {
   const cookieStore = await cookies();
-  cookieStore.delete(SessionProvider.getInstance().cookieName);
+  cookieStore.delete(SessionProvider.getInstance().cookie.name);
 }

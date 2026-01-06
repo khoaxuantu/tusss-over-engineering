@@ -1,4 +1,4 @@
-import { DistrictTable } from "@/db/types/schemas.auto";
+import { DistrictTable } from "@/shared/db/types/schemas.auto";
 import { Insertable, Selectable } from "kysely";
 
 export type DistrictRecordModel = Selectable<DistrictTable>;

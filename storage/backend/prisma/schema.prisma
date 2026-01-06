@@ -5,7 +5,7 @@ datasource db {
 
 generator kysely {
   provider     = "prisma-kysely"
-  output       = "../src/db/types"
+  output       = "../src/shared/db/types"
   fileName     = "schemas.auto.ts"
   enumFileName = "enums.auto.ts"
   dbTypeName   = "TusssDb"

@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { UserIdentifier } from "../tokens/dtos/jwt.dto";
+import { UserIdentifier } from "../../providers/tokens/dtos/jwt.dto";
 
 export declare type ClassConstructor<T> = {
   new (...args: any[]): T;
