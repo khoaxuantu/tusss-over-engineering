@@ -1,16 +1,16 @@
 import { applyDecorators, HttpStatus } from "@nestjs/common";
 import {
   ApiResponseOptions,
+  ApiResponseSchemaHost,
   ApiNotFoundResponse as SwaggerApiNotFoundResponse,
 } from "@nestjs/swagger";
-import { SchemaObject } from "@nestjs/swagger/dist/interfaces/open-api-spec.interface";
 import { CommonMessage } from "@tusss/core";
 import { ApiResponseCustomOpts } from "./types";
 
 interface CustomOpts extends ApiResponseCustomOpts {}
 
 export function ApiNotFoundResponse(opts?: ApiResponseOptions, custom?: CustomOpts) {
-  const defaultSchema: SchemaObject = {
+  const defaultSchema: ApiResponseSchemaHost["schema"] = {
     type: "object",
     properties: {
       message: {
@@ -29,6 +29,6 @@ export function ApiNotFoundResponse(opts?: ApiResponseOptions, custom?: CustomOp
       schema: defaultSchema,
       description: "Not Found",
       ...opts,
-    })
+    }),
   );
 }
