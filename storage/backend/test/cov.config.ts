@@ -18,6 +18,7 @@ const config: Config = {
       },
     ],
   },
+  transformIgnorePatterns: ["<rootDir>/node_modules/(?!(kysely)/)"],
   testEnvironment: "node",
   testEnvironmentOptions: {
     globalsCleanup: "on",

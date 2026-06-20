@@ -1,6 +1,7 @@
 import { TokenService } from "@/providers/tokens/services/token.service";
 import { User } from "@/providers/users/models/user.model";
 import { UserRepository } from "@/providers/users/repositories/user.repository";
+import { TusssConfigModule } from "@/shared/configs/config.module";
 import { createMock } from "@golevelup/ts-jest";
 import { Test } from "@nestjs/testing";
 import { AuthService } from "../auth.service";
@@ -21,6 +22,7 @@ describe(AuthService.name, () => {
           useValue: createMock<UserRepository>(),
         },
       ],
+      imports: [TusssConfigModule],
     }).compile();
 
     service = moduleRef.get<AuthService>(AuthService);
