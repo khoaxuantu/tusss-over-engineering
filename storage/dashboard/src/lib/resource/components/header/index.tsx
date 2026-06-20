@@ -16,9 +16,9 @@ interface ResourceHeaderProps {
 
 export default function ResourceHeader(props: ResourceHeaderProps) {
   return (
-    <Box component="header" mb={4}>
+    <Box component="header" sx={{ mb: 4 }}>
       <BreadcrumbBlock breadcrumbs={props.breadcrumbs} />
-      <Stack direction="row" justifyContent="space-between">
+      <Stack direction="row" sx={{ justifyContent: "space-between" }}>
         <Typography variant="h2" component="h2">
           {props.title}
         </Typography>

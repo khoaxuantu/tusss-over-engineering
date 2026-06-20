@@ -11,10 +11,10 @@ export default function TemplateShow(props: TemplateShowProps) {
   return (
     <Stack
       component={props.component}
-      my={props.my}
-      gap={props.gap}
       direction="column"
       sx={{
+        gap: props.gap,
+        my: props.my,
         "& .data-group > .body": { p: 2, borderRadius: "var(--mui-shape-radius-4)" },
       }}
     >
