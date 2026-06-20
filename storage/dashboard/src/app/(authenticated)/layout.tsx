@@ -25,10 +25,10 @@ export default async function Layout({ children }: { children: React.ReactNode }
         }}
       >
         <Grid
-          display={{ xs: "none", md: "block" }}
           size={{ md: 4, lg: 2 }}
           component="section"
           sx={{
+            display: { xs: "none", md: "block" },
             bgcolor: "var(--mui-palette-surface-medium)",
             borderTopRightRadius: "var(--mui-shape-radius-5)",
             borderBottomRightRadius: "var(--mui-shape-radius-5)",

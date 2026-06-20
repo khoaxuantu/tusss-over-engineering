@@ -20,8 +20,10 @@ export default function DrawerSidebar() {
       <DrawerContent>
         <Sidebar
           boxProps={{
-            width: "100dvw",
-            maxWidth: 400,
+            sx: {
+              width: "100dvw",
+              maxWidth: 400,
+            },
           }}
         />
       </DrawerContent>

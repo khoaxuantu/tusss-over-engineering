@@ -35,7 +35,7 @@ export default function DataBox(props: Props) {
 
   return (
     <Box {...props.boxProps}>
-      <Typography variant="h6" component="dt" mb={0.5}>
+      <Typography variant="h6" component="dt" sx={{ mb: 0.5 }}>
         {props.label}
       </Typography>
       <Box component="dd">
@@ -48,12 +48,15 @@ export default function DataBox(props: Props) {
 function DataBoxInline(props: Props) {
   return (
     <Box
-      display="inline-flex"
-      alignItems="center"
-      flexWrap="wrap"
-      gap={1}
-      overflow="auto"
       {...props.boxProps}
+      sx={{
+        display: "inline-flex",
+        alignItems: "center",
+        flexWrap: "wrap",
+        gap: 1,
+        overflow: "auto",
+        ...props.boxProps?.sx,
+      }}
     >
       <dt>
         <b>{props.label}:</b>

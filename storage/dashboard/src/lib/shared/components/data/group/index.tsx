@@ -17,7 +17,13 @@ export default function DataGroup({
 }: DataGroupProps) {
   return (
     <Box {...boxProps} className="data-group">
-      <Typography mb={1} {...labelProps}>
+      <Typography
+        {...labelProps}
+        sx={{
+          mb: 1,
+          ...labelProps?.sx,
+        }}
+      >
         <b>{label}</b>
       </Typography>
       <Paper

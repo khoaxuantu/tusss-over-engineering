@@ -15,11 +15,11 @@ export default async function Login() {
           bgcolor: "primary.light",
         }}
       >
-        <Box px={4} py={4}>
-          <Typography component="h3" variant="h4" mb={2}>
+        <Box sx={{ px: 4, py: 4 }}>
+          <Typography component="h3" variant="h4" sx={{ mb: 2 }}>
             💩 Tusss Storage Admin
           </Typography>
-          <Typography component="h2" variant="h3" mb={4}>
+          <Typography component="h2" variant="h3" sx={{ mb: 4 }}>
             <mark>Sign in to your account</mark>
           </Typography>
           <LoginFormProvider>
