@@ -15,6 +15,7 @@ const config: Config = {
   testEnvironmentOptions: {
     globalsCleanup: "on",
   },
+  transformIgnorePatterns: ["<rootDir>/node_modules/(?!(kysely)/)"],
 };
 
 export default config;
