@@ -1,4 +1,5 @@
 import { JwtSignOptions } from "@nestjs/jwt";
+import { Config as TusssConfig } from "@tusss/ood";
 
 export interface CommonConfig {
   db: {
@@ -25,6 +26,4 @@ export interface CommonConfig {
   };
 }
 
-export interface Config extends CommonConfig {
-  environment: "development" | "production" | "test";
-}
+export interface Config extends TusssConfig<CommonConfig> {}

@@ -37,6 +37,7 @@
     "@nestjs/swagger": "^11.4.4",
     "@tusss/core": "workspace:*",
     "@tusss/nestjs": "workspace:*",
+    "@tusss/ood": "^1.0.2",
     "bcrypt": "^6.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.15.1",
