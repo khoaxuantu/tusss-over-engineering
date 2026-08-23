@@ -1,0 +1,42 @@
+import { Config } from "jest";
+
+const config: Config = {
+  moduleFileExtensions: ["js", "json", "ts"],
+  rootDir: "../src",
+  moduleNameMapper: {
+    "@/(.*)": "<rootDir>/$1",
+  },
+  testRegex: ".*\\.spec\\.ts$",
+  transform: {
+    "^.+\\.(t|j)s$": [
+      "@swc/jest",
+      {
+        jsc: {
+          target: "es2021",
+        },
+      },
+    ],
+  },
+  transformIgnorePatterns: ["<rootDir>/node_modules/(?!(kysely)/)"],
+  testEnvironment: "node",
+  testEnvironmentOptions: {
+    globalsCleanup: "on",
+  },
+  collectCoverageFrom: ["**/*.(t|j)s"],
+  coveragePathIgnorePatterns: [
+    ".module.ts",
+    "main.ts",
+    "test",
+    "config",
+    "module-definition",
+    "schema-factory",
+    "schema.helper.ts",
+    "print.helper.ts",
+    "coverage",
+    "mock",
+  ],
+  coverageDirectory: "../coverage",
+  coverageReporters: ["clover", "json", "lcov", "text-summary"],
+};
+
+export default config;

@@ -2,13 +2,6 @@ import { JwtSignOptions } from "@nestjs/jwt";
 import { Config as TusssConfig } from "@tusss/ood";
 
 export interface CommonConfig {
-  db: {
-    name: string;
-    host: string;
-    user: string;
-    password: string;
-    port: number;
-  };
   auth: {
     secret: {
       default: string;

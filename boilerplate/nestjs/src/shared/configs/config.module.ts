@@ -5,7 +5,16 @@ import ConfigLoader from "./loader";
 
 @Global()
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true, load: [ConfigLoader] })],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [
+        async () => {
+          return await ConfigLoader.load();
+        },
+      ],
+    }),
+  ],
   providers: [TusssConfigService],
   exports: [TusssConfigService],
 })

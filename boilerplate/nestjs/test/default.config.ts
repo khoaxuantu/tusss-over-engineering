@@ -1,0 +1,20 @@
+import { Config } from "jest";
+
+const config: Config = {
+  moduleFileExtensions: ["js", "json", "ts"],
+  rootDir: "../src",
+  moduleNameMapper: {
+    "@/(.*)": "<rootDir>/$1",
+  },
+  testRegex: ".*\\.spec\\.ts$",
+  transform: {
+    "^.+\\.(t|j)s$": "@swc/jest",
+  },
+  testEnvironment: "node",
+  testEnvironmentOptions: {
+    globalsCleanup: "on",
+  },
+  transformIgnorePatterns: ["<rootDir>/node_modules/(?!(kysely)/)"],
+};
+
+export default config;
