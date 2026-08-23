@@ -1,31 +1,10 @@
 import { INestApplication, ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import { FastifyAdapter } from "@nestjs/platform-fastify";
-import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import "dotenv/config";
 import qs from "qs";
 import { AppModule } from "./app.module";
-
-function setupOpenApi(app: INestApplication<any>) {
-  const config = new DocumentBuilder()
-    .setTitle("Tusss Storage")
-    .setDescription("The Tusss Storage (or Inventory) API descriptions.")
-    .setVersion("0.0.1")
-    .addBearerAuth()
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-
-  SwaggerModule.setup("api", app, document, {
-    swaggerOptions: {
-      persistAuthorization: true,
-      tagsSorter: "alpha",
-      operationsSorter: "alpha",
-      syntaxHighlight: {
-        theme: "nord",
-      },
-    },
-  });
-}
+import { createOpenApi } from "./openapi";
 
 function setupFunctional(app: INestApplication<any>) {
   app.useGlobalPipes(
@@ -64,7 +43,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, fastify);
 
   setupFunctional(app);
-  setupOpenApi(app);
+  createOpenApi(app);
 
   await app.listen(process.env.PORT ?? 5000);
 }
