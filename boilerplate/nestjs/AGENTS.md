@@ -118,4 +118,3 @@ Write these modules in `/providers` if it only means to be used by domain module
   most correct implementation
 - When writing unit tests, use `.agents/skills/testing` to know how to write correct test conventions
 - When have to refactor something, use `.agents/skills/refactor` to know how to refactor correctly
-- When writing repository-pattern classes, use `write-repository-pattern` skill
