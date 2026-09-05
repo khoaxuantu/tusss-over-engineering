@@ -198,6 +198,12 @@ importers:
         specifier: ^8.67.0
         version: 8.67.0(@types/eslint@9.6.1)(eslint@10.9.0(@types/eslint@9.6.1)(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@6.0.3)
 
+  boilerplate/nextjs:
+    dependencies:
+      '@tusss/ood':
+        specifier: ^1.0.2
+        version: 1.0.2
+
   packages/core:
     dependencies:
       object-sizeof:
@@ -12376,7 +12382,7 @@ snapshots:
 
   '@jest/pattern@30.4.0':
     dependencies:
-      '@types/node': 24.13.3
+      '@types/node': 26.2.0
       jest-regex-util: 30.4.0
 
   '@jest/reporters@30.1.3(@types/node-notifier@8.0.5)(supports-color@10.2.2)':
@@ -12574,7 +12580,7 @@ snapshots:
       '@jest/schemas': 30.4.1
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 24.13.3
+      '@types/node': 26.2.0
       '@types/yargs': 17.0.35
       chalk: 4.1.2
 
@@ -14363,7 +14369,7 @@ snapshots:
 
   '@types/better-sqlite3@9.6.0':
     dependencies:
-      '@types/node': 24.13.3
+      '@types/node': 26.2.0
 
   '@types/body-parser@1.19.6':
     dependencies:
@@ -14468,7 +14474,7 @@ snapshots:
 
   '@types/fb-watchman@2.0.6':
     dependencies:
-      '@types/node': 24.13.3
+      '@types/node': 26.2.0
 
   '@types/find-cache-dir@3.2.1': {}
 
@@ -14496,7 +14502,7 @@ snapshots:
 
   '@types/graceful-fs@4.1.9':
     dependencies:
-      '@types/node': 24.13.3
+      '@types/node': 26.2.0
 
   '@types/has-property-descriptors@1.0.3': {}
 
@@ -14610,11 +14616,11 @@ snapshots:
 
   '@types/merge-stream@1.1.5':
     dependencies:
-      '@types/node': 24.13.3
+      '@types/node': 26.2.0
 
   '@types/merge-stream@2.0.0':
     dependencies:
-      '@types/node': 24.13.3
+      '@types/node': 26.2.0
 
   '@types/merge2@1.4.4':
     dependencies:
@@ -14648,7 +14654,7 @@ snapshots:
 
   '@types/node-notifier@8.0.5':
     dependencies:
-      '@types/node': 24.13.3
+      '@types/node': 26.2.0
 
   '@types/node@24.13.2':
     dependencies:
@@ -14911,13 +14917,13 @@ snapshots:
 
   '@types/webpack-sources@3.2.3':
     dependencies:
-      '@types/node': 24.13.3
+      '@types/node': 26.2.0
       '@types/source-list-map': 0.1.6
       source-map: 0.7.6
 
   '@types/webpack@4.41.40':
     dependencies:
-      '@types/node': 24.13.3
+      '@types/node': 26.2.0
       '@types/tapable': 1.0.12
       '@types/uglify-js': 3.17.5
       '@types/webpack-sources': 3.2.3
@@ -14932,7 +14938,7 @@ snapshots:
 
   '@types/write-file-atomic@4.0.3':
     dependencies:
-      '@types/node': 24.13.3
+      '@types/node': 26.2.0
 
   '@types/ws@8.18.1':
     dependencies:
@@ -18916,7 +18922,7 @@ snapshots:
       '@jest/types': 30.4.1
       '@types/fb-watchman': 2.0.6
       '@types/graceful-fs': 4.1.9
-      '@types/node': 24.13.3
+      '@types/node': 26.2.0
       '@types/picomatch': 4.0.3
       anymatch: 3.1.3
       fb-watchman: 2.0.2
@@ -19229,7 +19235,7 @@ snapshots:
     dependencies:
       '@jest/types': 30.4.1
       '@types/graceful-fs': 4.1.9
-      '@types/node': 24.13.3
+      '@types/node': 26.2.0
       '@types/picomatch': 4.0.3
       chalk: 4.1.2
       ci-info: 4.4.0
@@ -19279,7 +19285,7 @@ snapshots:
   jest-worker@27.5.1:
     dependencies:
       '@types/merge-stream': 1.1.5
-      '@types/node': 24.13.3
+      '@types/node': 26.2.0
       '@types/supports-color': 8.1.3
       merge-stream: 2.0.0
       supports-color: 8.1.1
@@ -19297,7 +19303,7 @@ snapshots:
   jest-worker@30.4.1:
     dependencies:
       '@types/merge-stream': 2.0.0
-      '@types/node': 24.13.3
+      '@types/node': 26.2.0
       '@types/supports-color': 8.1.3
       '@ungap/structured-clone': 1.3.1
       jest-util: 30.4.1
