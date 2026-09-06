@@ -3,7 +3,6 @@ import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 
 export function createOpenApi(app: INestApplication) {
   createMainDocument(app);
-  createEventDocument(app);
   createAdminDocument(app);
   createJsonForFrontend(app);
   createJsonForMobile(app);
@@ -34,33 +33,6 @@ function createMainDocument(app: INestApplication) {
   });
 
   SwaggerModule.setup("apis", app, document, {
-    swaggerOptions: {
-      persistAuthorization: true,
-      tagsSorter: "alpha",
-      operationsSorter: "alpha",
-      syntaxHighlight: {
-        theme: "nord",
-      },
-    },
-  });
-
-  return document;
-}
-
-function createEventDocument(app: INestApplication) {
-  const config = new DocumentBuilder()
-    .setTitle("Event APIs")
-    .setExternalDoc("Sign in", "/apis#/Auth")
-    .setVersion("1.0")
-    .addBearerAuth()
-    .build();
-
-  const document = SwaggerModule.createDocument(app, config, {
-    include: [],
-    deepScanRoutes: true,
-  });
-
-  SwaggerModule.setup("apis/events", app, document, {
     swaggerOptions: {
       persistAuthorization: true,
       tagsSorter: "alpha",
